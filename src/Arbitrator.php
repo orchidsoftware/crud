@@ -2,16 +2,16 @@
 
 namespace Orchid\Crud;
 
-use Orchid\Crud\Screens\EditScreen;
-use Orchid\Crud\Screens\ListScreen;
 use Illuminate\Support\Collection;
-use Tabuna\Breadcrumbs\Breadcrumbs;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
+use Orchid\Crud\Screens\EditScreen;
+use Orchid\Crud\Screens\ListScreen;
 use Orchid\Platform\ItemMenu;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\Menu;
 use Orchid\Support\Facades\Dashboard;
+use Tabuna\Breadcrumbs\Breadcrumbs;
 
 class Arbitrator
 {
@@ -109,7 +109,7 @@ class Arbitrator
             ->prefix(Dashboard::prefix('/'))
             ->as('platform.')
             ->middleware(config('platform.middleware.private'))
-            ->group(function ($route) use($resource) {
+            ->group(function ($route) use ($resource) {
                 $route->screen('/crud/{resource?}/{id}', EditScreen::class)
                     ->name("{$resource::uriKey()}.edit");
 
@@ -128,7 +128,8 @@ class Arbitrator
     private function registerMenu(Resource $resource): Arbitrator
     {
         View::composer('platform::dashboard', function () use ($resource) {
-            Dashboard::menu()->add(Menu::MAIN,
+            Dashboard::menu()->add(
+                Menu::MAIN,
                 ItemMenu::label($resource::label())
                     ->route("platform.{$resource::uriKey()}.list", [$resource::uriKey()])
                     ->sort(2000)
@@ -165,7 +166,7 @@ class Arbitrator
                 ->push('List');
         });
 
-        Breadcrumbs::for("platform.{$resource::uriKey()}.edit", static function ($trail)  use ($resource) {
+        Breadcrumbs::for("platform.{$resource::uriKey()}.edit", static function ($trail) use ($resource) {
             $trail->parent("platform.{$resource::uriKey()}.list")
                 ->push('Edit');
         });
