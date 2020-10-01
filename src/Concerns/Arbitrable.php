@@ -16,5 +16,4 @@ trait Arbitrable
     {
         return app(Arbitrator::class)->findOrFail($key);
     }
-
 }

@@ -114,5 +114,4 @@ abstract class Resource
     {
         return __('Update :resource', ['resource' => static::singularLabel()]);
     }
-
 }

@@ -2,14 +2,14 @@
 
 namespace Orchid\Crud\Screens;
 
+use Illuminate\Database\Eloquent\Model;
 use Orchid\Crud\Concerns\Arbitrable;
 use Orchid\Crud\Resource;
-use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Layout;
 use Orchid\Screen\TD;
+use Orchid\Support\Facades\Layout;
 
 class ListScreen extends Screen
 {
@@ -49,7 +49,7 @@ class ListScreen extends Screen
         $this->resource = $this->arbitrationFindOrFail($resourceKey);
 
         return [
-            'model' => $this->resource->getModel()->filters()->paginate()
+            'model' => $this->resource->getModel()->filters()->paginate(),
         ];
     }
 
@@ -63,7 +63,7 @@ class ListScreen extends Screen
         return [
             Link::make($this->resource::createButtonLabel())
                 ->href('#')
-                ->icon('plus')
+                ->icon('plus'),
         ];
     }
 
@@ -87,7 +87,7 @@ class ListScreen extends Screen
             });
 
         return [
-            Layout::table('model', $grid)
+            Layout::table('model', $grid),
         ];
     }
 }

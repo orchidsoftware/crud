@@ -2,12 +2,12 @@
 
 namespace Orchid\Crud\Screens;
 
+use Orchid\Crud\Concerns\Arbitrable;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Action;
 use Orchid\Screen\Field;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
-use Orchid\Crud\Concerns\Arbitrable;
 
 class EditScreen extends Screen
 {
@@ -46,7 +46,7 @@ class EditScreen extends Screen
         $this->resource = $this->arbitrationFindOrFail($resourceKey);
 
         return [
-            'model' => $this->resource->getModel()->findOrFail($primary)
+            'model' => $this->resource->getModel()->findOrFail($primary),
         ];
     }
 
@@ -74,7 +74,7 @@ class EditScreen extends Screen
         }, $this->resource->fields());
 
         return [
-            Layout::rows($fields)
+            Layout::rows($fields),
         ];
     }
 }
