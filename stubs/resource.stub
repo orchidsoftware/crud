@@ -1,0 +1,56 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Http\Request;
+use Orchid\Crud\Resource;
+use Orchid\Screen\TD;
+
+class {{ class }} extends Resource
+{
+    /**
+     * The model the resource corresponds to.
+     *
+     * @var string
+     */
+    public static $model = \{{ namespacedModel }}::class;
+
+    /**
+     * The single value that should be used to represent the resource when being displayed.
+     *
+     * @var string
+     */
+    public static $title = 'id';
+
+    /**
+     * Get the fields displayed by the resource.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return array
+     */
+    public function fields(Request $request)
+    {
+        return [];
+    }
+
+    /**
+     * Get the fields displayed by the resource.
+     *
+     * @return TD[]
+     */
+    public function grid(): array;
+    {
+        return [];
+    }
+
+    /**
+     * Get the filters available for the resource.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return array
+     */
+    public function filters(Request $request)
+    {
+        return [];
+    }
+}
