@@ -100,7 +100,8 @@ class Arbitrator
     private function registerMenu(Resource $resource): Arbitrator
     {
         View::composer('platform::dashboard', function () use ($resource) {
-            Dashboard::menu()->add(Menu::MAIN,
+            Dashboard::menu()->add(
+                Menu::MAIN,
                 ItemMenu::label($resource::label())
                     ->icon($resource::icon())
                     ->route('platform.resource.list', [$resource::uriKey()])
