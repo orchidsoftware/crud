@@ -3,7 +3,10 @@
 ![Tests](https://github.com/orchidsoftware/crud/workflows/Tests/badge.svg)
 
 
-Build CRUD apps in fewer lines of code for Laravel Orchid.
+## Introduction
+
+The package is for Laravel developers who want to quickly build a user interface for eloquent models with features like create, read, update, and delete.
+
 
 ## Installation
 
