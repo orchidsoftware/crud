@@ -3,8 +3,8 @@
 namespace Orchid\Crud\Screens;
 
 use Illuminate\Database\Eloquent\Model;
-use Orchid\Crud\ResourceRequest;
 use Orchid\Crud\Resource;
+use Orchid\Crud\ResourceRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
