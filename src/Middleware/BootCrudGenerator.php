@@ -40,8 +40,8 @@ class BootCrudGenerator
     public function handle($request, $next)
     {
         $resources = $this->finder
-            ->setNamespace(app()->getNamespace() . 'Orchid\\Resource')
-            ->find(app_path('Orchid/Resource'));
+            ->setNamespace(app()->getNamespace() . 'Orchid\\Resources')
+            ->find(app_path('Orchid/Resources'));
 
         $this->arbitrator
             ->resources($resources)

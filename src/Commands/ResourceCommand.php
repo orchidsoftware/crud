@@ -46,6 +46,6 @@ class ResourceCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\Orchid\Resource';
+        return $rootNamespace.'\Orchid\Resources';
     }
 }
