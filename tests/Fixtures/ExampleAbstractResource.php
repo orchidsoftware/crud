@@ -6,6 +6,4 @@ use Orchid\Crud\Resource;
 
 abstract class ExampleAbstractResource extends Resource
 {
-
 }
-
