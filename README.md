@@ -1,5 +1,8 @@
 # Build CRUD apps in fewer lines of code for Laravel Orchid.
 
+![Tests](https://github.com/orchidsoftware/crud/workflows/Tests/badge.svg)
+
+
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
 ## Installation
