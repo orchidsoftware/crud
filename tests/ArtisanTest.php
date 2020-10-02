@@ -3,7 +3,6 @@
 
 namespace Orchid\Crud\Tests;
 
-
 class ArtisanTest extends TestCase
 {
     public function testArtisanMakeResource(): void
