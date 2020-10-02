@@ -60,7 +60,6 @@ class CrudServiceProvider extends ServiceProvider
                 $route->screen('/resources/{resource?}', ListScreen::class)
                     ->name('resource.list');
             });
-
     }
 
     /**

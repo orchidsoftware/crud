@@ -3,10 +3,7 @@
 namespace Orchid\Crud;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
-use Orchid\Crud\Screens\EditScreen;
-use Orchid\Crud\Screens\ListScreen;
 use Orchid\Platform\ItemMenu;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\Menu;
@@ -106,7 +103,8 @@ class Arbitrator
     private function registerMenu(Resource $resource): Arbitrator
     {
         View::composer('platform::dashboard', function () use ($resource) {
-            Dashboard::menu()->add(Menu::MAIN,
+            Dashboard::menu()->add(
+                Menu::MAIN,
                 ItemMenu::label($resource::label())
                     ->icon($resource::icon())
                     ->route('platform.resource.list', [$resource::uriKey()])
