@@ -76,10 +76,10 @@ class ListScreen extends Screen
     {
         $grid = $this->resource->grid();
         $grid[] = TD::set()
-            ->align(TD::ALIGN_CENTER)
+            ->align(TD::ALIGN_RIGHT)
             ->render(function (Model $model) {
                 return Link::make(__('Edit'))
-                    ->route("platform.{$this->resource::uriKey()}.edit", [
+                    ->route('platform.resource.edit', [
                         $this->resource::uriKey(),
                         $model->getAttribute($model->getKeyName()),
                     ])

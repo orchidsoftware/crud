@@ -92,32 +92,10 @@ class Arbitrator
     private function register(Resource $resource): Arbitrator
     {
         return $this
-            ->registerRoute($resource)
-            ->registerBreadcrumb($resource)
+            //->registerRoute($resource)
+            //->registerBreadcrumb($resource)
             ->registerMenu($resource)
             ->registerPermission($resource);
-    }
-
-    /**
-     * @param Resource $resource
-     *
-     * @return Arbitrator
-     */
-    private function registerRoute(Resource $resource): Arbitrator
-    {
-        Route::domain((string)config('platform.domain'))
-            ->prefix(Dashboard::prefix('/'))
-            ->as('platform.')
-            ->middleware(config('platform.middleware.private'))
-            ->group(function ($route) use ($resource) {
-                $route->screen('/crud/{resource?}/{id}', EditScreen::class)
-                    ->name("{$resource::uriKey()}.edit");
-
-                $route->screen('/crud/{resource?}', ListScreen::class)
-                    ->name("{$resource::uriKey()}.list");
-            });
-
-        return $this;
     }
 
     /**
@@ -128,10 +106,9 @@ class Arbitrator
     private function registerMenu(Resource $resource): Arbitrator
     {
         View::composer('platform::dashboard', function () use ($resource) {
-            Dashboard::menu()->add(
-                Menu::MAIN,
+            Dashboard::menu()->add(Menu::MAIN,
                 ItemMenu::label($resource::label())
-                    ->route("platform.{$resource::uriKey()}.list", [$resource::uriKey()])
+                    ->route('platform.resource.list', [$resource::uriKey()])
                     ->sort(2000)
             );
         });
@@ -162,8 +139,7 @@ class Arbitrator
     private function registerBreadcrumb(Resource $resource): Arbitrator
     {
         Breadcrumbs::for("platform.{$resource::uriKey()}.list", static function ($trail) {
-            $trail->parent('platform.index')
-                ->push('List');
+            $trail->push('List');
         });
 
         Breadcrumbs::for("platform.{$resource::uriKey()}.edit", static function ($trail) use ($resource) {

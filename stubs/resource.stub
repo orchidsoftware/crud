@@ -13,7 +13,7 @@ class {{ class }} extends Resource
      *
      * @var string
      */
-    public static $model = \{{ namespacedModel }}::class;
+    public static $model = '';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -28,7 +28,7 @@ class {{ class }} extends Resource
      * @param  \Illuminate\Http\Request $request
      * @return array
      */
-    public function fields(Request $request)
+    public function fields(Request $request): array;
     {
         return [];
     }
@@ -38,7 +38,7 @@ class {{ class }} extends Resource
      *
      * @return TD[]
      */
-    public function grid(): array;
+    public function grid(): array
     {
         return [];
     }
