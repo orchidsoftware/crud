@@ -54,7 +54,7 @@ abstract class Resource
      */
     public static function label(): string
     {
-        return Str::plural(class_basename(static::class));
+        return Str::plural(static::nameWithoutResource());
     }
 
     /**
@@ -118,7 +118,15 @@ abstract class Resource
      */
     public static function singularLabel(): string
     {
-        return __(Str::singular(Str::title(Str::snake(class_basename(static::class), ' '))));
+        return __(Str::singular(Str::title(Str::snake(static::nameWithoutResource(), ' '))));
+    }
+
+    /**
+     * @return string
+     */
+    public static function nameWithoutResource():string
+    {
+        return str_replace('Resource', '', class_basename(static::class));
     }
 
     /**
@@ -139,5 +147,15 @@ abstract class Resource
     public static function updateButtonLabel(): string
     {
         return __('Update :resource', ['resource' => static::singularLabel()]);
+    }
+
+    /**
+     * Get the text for the delete resource button.
+     *
+     * @return string
+     */
+    public static function deleteButtonLabel(): string
+    {
+        return __('Delete :resource', ['resource' => static::singularLabel()]);
     }
 }

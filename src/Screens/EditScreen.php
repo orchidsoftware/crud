@@ -5,10 +5,11 @@ namespace Orchid\Crud\Screens;
 use Orchid\Crud\Resource;
 use Orchid\Crud\ResourceRequest;
 use Orchid\Screen\Action;
-use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Field;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class EditScreen extends Screen
 {
@@ -42,12 +43,12 @@ class EditScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Link::make($this->resource::updateButtonLabel())
-                ->href('#')
+            Button::make($this->resource::updateButtonLabel())
+                ->method('update')
                 ->icon('check'),
 
-            Link::make('test')
-                ->href('#')
+            Button::make($this->resource::deleteButtonLabel())
+                ->method('delete')
                 ->icon('trash'),
         ];
     }
@@ -66,5 +67,38 @@ class EditScreen extends Screen
         return [
             Layout::rows($fields),
         ];
+    }
+
+    /**
+     * @param ResourceRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(ResourceRequest $request)
+    {
+        $model = $request->findModelOrFail();
+
+        $model->forceFill($request->input('model'))->save()
+            ? Toast::info('You have successfully deleted the post.')
+            : Toast::warning('An error has occurred');
+
+        return redirect()->route('platform.resource.list', $request->resource);
+    }
+
+    /**
+     * @param ResourceRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function delete(ResourceRequest $request)
+    {
+        $model = $request->findModelOrFail();
+
+        $model->delete()
+            ? Toast::info('You have successfully deleted the post.')
+            : Toast::warning('An error has occurred');
+
+        return redirect()->route('platform.resource.list', $request->resource);
     }
 }

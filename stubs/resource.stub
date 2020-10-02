@@ -2,7 +2,6 @@
 
 namespace {{ namespace }};
 
-use Illuminate\Http\Request;
 use Orchid\Crud\Resource;
 use Orchid\Screen\TD;
 
@@ -25,10 +24,9 @@ class {{ class }} extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return array
      */
-    public function fields(Request $request): array;
+    public function fields(): array
     {
         return [];
     }
