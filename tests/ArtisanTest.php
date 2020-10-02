@@ -13,7 +13,7 @@ class ArtisanTest extends TestCase
             ->expectsOutput('Resource created successfully.')
             ->assertExitCode(0);
 
-        $this->assertFileExists(app_path('Orchid/Resource/' . $name . '.php'));
+        $this->assertFileExists(app_path('Orchid/Resources/' . $name . '.php'));
 
         $this->artisan('orchid:resource', ['name' => $name])
             ->expectsOutput('Resource already exists!')
