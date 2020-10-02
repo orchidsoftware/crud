@@ -70,7 +70,7 @@ class ResourceFinder
             })
             ->filter(function (string $class) {
                 return is_subclass_of($class, Resource::class)
-                    && !(new \ReflectionClass($class))->isAbstract();
+                    && ! (new \ReflectionClass($class))->isAbstract();
             })
             ->toArray();
     }
@@ -85,9 +85,9 @@ class ResourceFinder
     private function resolveFileToClass(string $directory, SplFileInfo $file): string
     {
         return $this->namespace . str_replace(
-                [$directory, '/', '.php'],
-                ['', '\\', ''],
-                $file->getPathname()
-            );
+            [$directory, '/', '.php'],
+            ['', '\\', ''],
+            $file->getPathname()
+        );
     }
 }
