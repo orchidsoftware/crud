@@ -3,15 +3,11 @@
 namespace Orchid\Crud;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
-use Orchid\Crud\Screens\EditScreen;
-use Orchid\Crud\Screens\ListScreen;
 use Orchid\Platform\ItemMenu;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\Menu;
 use Orchid\Support\Facades\Dashboard;
-use Tabuna\Breadcrumbs\Breadcrumbs;
 
 class Arbitrator
 {
@@ -92,8 +88,6 @@ class Arbitrator
     private function register(Resource $resource): Arbitrator
     {
         return $this
-            //->registerRoute($resource)
-            //->registerBreadcrumb($resource)
             ->registerMenu($resource)
             ->registerPermission($resource);
     }
@@ -128,25 +122,6 @@ class Arbitrator
             ItemPermission::group('CRUD')
                 ->addPermission($resource::uriKey(), $resource::label())
         );
-
-        return $this;
-    }
-
-    /**
-     * @param Resource $resource
-     *
-     * @return Arbitrator
-     */
-    private function registerBreadcrumb(Resource $resource): Arbitrator
-    {
-        Breadcrumbs::for("platform.{$resource::uriKey()}.list", static function ($trail) {
-            $trail->push('List');
-        });
-
-        Breadcrumbs::for("platform.{$resource::uriKey()}.edit", static function ($trail) use ($resource) {
-            $trail->parent("platform.{$resource::uriKey()}.list")
-                ->push('Edit');
-        });
 
         return $this;
     }

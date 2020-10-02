@@ -2,7 +2,7 @@
 
 namespace Orchid\Crud\Screens;
 
-use Orchid\Crud\Concerns\Arbitrable;
+use Orchid\Crud\ResourceRequest;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
@@ -12,29 +12,25 @@ use Orchid\Support\Facades\Layout;
 
 class EditScreen extends Screen
 {
-    use Arbitrable;
-
     /**
      * @var Resource
      */
-    private $resource;
+    protected $resource;
 
     /**
      * Query data.
      *
-     * @param string     $resourceKey
-     * @param string     $primary
+     * @param ResourceRequest $request
      *
      * @return array
      */
-    public function query(string $resourceKey, string $primary): array
+    public function query(ResourceRequest $request): array
     {
-        /** @var Resource $resource */
-        $this->resource = $this->arbitrationFindOrFail($resourceKey);
+        $this->resource = $request->resource();
         $this->name = $this->resource::label();
 
         return [
-            'model' => $this->resource->getModel()->findOrFail($primary),
+            'model' => $request->findModelOrFail(),
         ];
     }
 
@@ -49,6 +45,10 @@ class EditScreen extends Screen
             Link::make($this->resource::updateButtonLabel())
                 ->href('#')
                 ->icon('check'),
+
+            Link::make('test')
+                ->href('#')
+                ->icon('trash'),
         ];
     }
 

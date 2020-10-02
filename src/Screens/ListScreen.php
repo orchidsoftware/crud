@@ -3,7 +3,7 @@
 namespace Orchid\Crud\Screens;
 
 use Illuminate\Database\Eloquent\Model;
-use Orchid\Crud\Concerns\Arbitrable;
+use Orchid\Crud\ResourceRequest;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
@@ -13,30 +13,25 @@ use Orchid\Support\Facades\Layout;
 
 class ListScreen extends Screen
 {
-    use Arbitrable;
-
     /**
-     * The resource associated with the model.
-     *
      * @var Resource
      */
-    private $resource;
+    protected $resource;
 
     /**
      * Query data.
      *
-     * @param string     $resourceKey
+     * @param ResourceRequest $request
      *
      * @return array
      */
-    public function query(string $resourceKey): array
+    public function query(ResourceRequest $request): array
     {
-        /** @var Resource $resource */
-        $this->resource = $this->arbitrationFindOrFail($resourceKey);
+        $this->resource = $request->resource();
         $this->name = $this->resource::label();
 
         return [
-            'model' => $this->resource->getModel()->filters()->paginate(),
+            'model' => $request->model()->filters()->paginate(),
         ];
     }
 
