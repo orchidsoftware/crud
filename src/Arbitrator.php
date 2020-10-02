@@ -108,8 +108,9 @@ class Arbitrator
         View::composer('platform::dashboard', function () use ($resource) {
             Dashboard::menu()->add(Menu::MAIN,
                 ItemMenu::label($resource::label())
+                    ->icon($resource::icon())
                     ->route('platform.resource.list', [$resource::uriKey()])
-                    ->sort(2000)
+                    ->sort($resource::sort())
             );
         });
 

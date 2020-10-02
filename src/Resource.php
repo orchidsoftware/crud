@@ -57,6 +57,25 @@ abstract class Resource
         return Str::plural(class_basename(static::class));
     }
 
+    /**
+     * Get the displayable icon of the resource.
+     *
+     * @return string
+     */
+    public static function icon(): string
+    {
+        return 'folder';
+    }
+
+    /**
+     * Get the displayable sort of the resource.
+     *
+     * @return string
+     */
+    public static function sort(): string
+    {
+        return 2000;
+    }
 
     /**
      * Get the fields displayed by the resource.
