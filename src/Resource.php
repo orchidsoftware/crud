@@ -31,6 +31,13 @@ abstract class Resource
     public static $with = [];
 
     /**
+     * Indicates if the resource should be displayed in the sidebar.
+     *
+     * @var bool
+     */
+    public static $displayInNavigation = true;
+
+    /**
      * Get the value that should be displayed to represent the resource.
      *
      * @return string

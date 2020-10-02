@@ -4,6 +4,7 @@ namespace Orchid\Crud\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 use Orchid\Crud\CrudServiceProvider;
+use Orchid\Crud\ResourceFinder;
 use Orchid\Platform\Providers\FoundationServiceProvider;
 
 class TestCase extends Orchestra
@@ -40,5 +41,13 @@ class TestCase extends Orchestra
             'database' => ':memory:',
             'prefix' => '',
         ]);
+    }
+
+    /**
+     * @return ResourceFinder
+     */
+    protected function getResourceFinder(): ResourceFinder
+    {
+        return app(ResourceFinder::class);
     }
 }

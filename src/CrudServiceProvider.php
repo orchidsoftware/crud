@@ -35,6 +35,7 @@ class CrudServiceProvider extends ServiceProvider
         /** @var Arbitrator $arbitrator */
         $arbitrator = app(Arbitrator::class);
 
+
         $arbitrator->resources([
             // ... UserResource::class
         ])->boot();
