@@ -5,7 +5,7 @@
 
 ## Introduction
 
-The package is for Laravel developers who want to quickly build a user interface for eloquent models with features like create, read, update, and delete.
+Laravel Orchid has provided a unique experience for writing applications, but sometimes a simple CRUD needs to be done when it might seem overkill. Therefore, we have created a new package aimed at developers who want to quickly create a user interface for eloquent models with functions such as create, read, update, and delete.
 
 
 ## Installation
@@ -47,4 +47,4 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+Please see [License File](LICENSE.md) for more information.
