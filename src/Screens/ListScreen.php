@@ -16,20 +16,6 @@ class ListScreen extends Screen
     use Arbitrable;
 
     /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'CrudScreen';
-
-    /**
-     * Display header description.
-     *
-     * @var string
-     */
-    public $description = 'CrudScreen';
-
-    /**
      * The resource associated with the model.
      *
      * @var Resource
@@ -47,6 +33,7 @@ class ListScreen extends Screen
     {
         /** @var Resource $resource */
         $this->resource = $this->arbitrationFindOrFail($resourceKey);
+        $this->name = $this->resource::label();
 
         return [
             'model' => $this->resource->getModel()->filters()->paginate(),
@@ -77,6 +64,7 @@ class ListScreen extends Screen
         $grid = $this->resource->grid();
         $grid[] = TD::set()
             ->align(TD::ALIGN_RIGHT)
+            ->cantHide()
             ->render(function (Model $model) {
                 return Link::make(__('Edit'))
                     ->route('platform.resource.edit', [

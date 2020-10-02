@@ -5,6 +5,7 @@ namespace Orchid\Crud\Screens;
 use Orchid\Crud\Concerns\Arbitrable;
 use Orchid\Crud\Resource;
 use Orchid\Screen\Action;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Field;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
@@ -12,20 +13,6 @@ use Orchid\Support\Facades\Layout;
 class EditScreen extends Screen
 {
     use Arbitrable;
-
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'CrudScreen';
-
-    /**
-     * Display header description.
-     *
-     * @var string
-     */
-    public $description = 'CrudScreen';
 
     /**
      * @var Resource
@@ -44,6 +31,7 @@ class EditScreen extends Screen
     {
         /** @var Resource $resource */
         $this->resource = $this->arbitrationFindOrFail($resourceKey);
+        $this->name = $this->resource::label();
 
         return [
             'model' => $this->resource->getModel()->findOrFail($primary),
@@ -58,7 +46,9 @@ class EditScreen extends Screen
     public function commandBar(): array
     {
         return [
-
+            Link::make($this->resource::updateButtonLabel())
+                ->href('#')
+                ->icon('check'),
         ];
     }
 
