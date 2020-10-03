@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Orchid\Crud\Commands\ResourceCommand;
 use Orchid\Crud\Middleware\BootCrudGenerator;
+use Orchid\Crud\Screens\CreateScreen;
 use Orchid\Crud\Screens\EditScreen;
 use Orchid\Crud\Screens\ListScreen;
 use Orchid\Platform\Providers\FoundationServiceProvider;
@@ -38,6 +39,9 @@ class CrudServiceProvider extends ServiceProvider
             ->as('platform.')
             ->middleware(config('platform.middleware.private'))
             ->group(function ($route) {
+                $route->screen('/crud/{resource?}/create', CreateScreen::class)
+                    ->name('resource.create');
+
                 $route->screen('/crud/{resource?}/{id}', EditScreen::class)
                     ->name('resource.edit');
 

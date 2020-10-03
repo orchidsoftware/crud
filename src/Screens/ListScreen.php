@@ -44,7 +44,7 @@ class ListScreen extends Screen
     {
         return [
             Link::make($this->resource::createButtonLabel())
-                ->href('#')
+                ->route('platform.resource.create', $this->resource::uriKey())
                 ->icon('plus'),
         ];
     }

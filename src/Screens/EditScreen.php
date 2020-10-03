@@ -79,7 +79,7 @@ class EditScreen extends Screen
         $model = $request->findModelOrFail();
 
         $model->forceFill($request->input('model'))->save()
-            ? Toast::info('You have successfully deleted the post.')
+            ? Toast::info('You have successfully updated the post.')
             : Toast::warning('An error has occurred');
 
         return redirect()->route('platform.resource.list', $request->resource);

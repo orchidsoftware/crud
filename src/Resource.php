@@ -158,4 +158,14 @@ abstract class Resource
     {
         return __('Delete :resource', ['resource' => static::singularLabel()]);
     }
+
+    /**
+     * Get the text for the save resource button.
+     *
+     * @return string
+     */
+    public static function saveButtonLabel(): string
+    {
+        return __('Save :resource', ['resource' => static::singularLabel()]);
+    }
 }
