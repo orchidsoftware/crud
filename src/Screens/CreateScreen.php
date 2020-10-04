@@ -2,13 +2,9 @@
 
 namespace Orchid\Crud\Screens;
 
-use Orchid\Crud\Resource;
 use Orchid\Crud\ResourceRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Field;
-use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
 class CreateScreen extends EditScreen
@@ -60,5 +56,4 @@ class CreateScreen extends EditScreen
 
         return redirect()->route('platform.resource.list', $request->resource);
     }
-
 }
