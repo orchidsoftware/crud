@@ -88,8 +88,8 @@ class Arbitrator
     private function register(Resource $resource): Arbitrator
     {
         return $this
-            ->registerMenu($resource)
-            ->registerPermission($resource);
+            ->registerPermission($resource)
+            ->registerMenu($resource);
     }
 
     /**
@@ -105,6 +105,7 @@ class Arbitrator
                 ItemMenu::label($resource::label())
                     ->icon($resource::icon())
                     ->route('platform.resource.list', [$resource::uriKey()])
+                    ->permission($resource::uriKey())
                     ->sort($resource::sort())
             );
         });

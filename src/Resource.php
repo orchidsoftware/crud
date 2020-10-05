@@ -24,20 +24,6 @@ abstract class Resource
     public static $title = '';
 
     /**
-     * The relationships that should be eager loaded when performing an index query.
-     *
-     * @var array
-     */
-    public static $with = [];
-
-    /**
-     * Indicates if the resource should be displayed in the sidebar.
-     *
-     * @var bool
-     */
-    public static $displayInNavigation = true;
-
-    /**
      * Get the value that should be displayed to represent the resource.
      *
      * @return string
@@ -168,4 +154,35 @@ abstract class Resource
     {
         return __('Save :resource', ['resource' => static::singularLabel()]);
     }
+
+    /**
+     * Get the validation rules that apply to save/update.
+     *
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [];
+    }
+
+    /**
+     * Get the filters available for the resource.
+     *
+     * @return array
+     */
+    public function filters(): array
+    {
+        return [];
+    }
+
+    /**
+     * Get relationships that should be eager loaded when performing an index query.
+     *
+     * @return array
+     */
+    public function with(): array
+    {
+        return [];
+    }
+
 }

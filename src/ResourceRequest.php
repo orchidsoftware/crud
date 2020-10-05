@@ -4,6 +4,7 @@ namespace Orchid\Crud;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class ResourceRequest extends FormRequest
 {
@@ -12,7 +13,16 @@ class ResourceRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+        if($this->method() === 'GET' || Str::endsWith($this->url(),'delete')){
+            return [];
+        }
+
+        $rulesForResource = $this->resource()->rules();
+
+        return collect($rulesForResource)
+            ->mapWithKeys(function ($item, $key) {
+                return ['model.' . $key => $item];
+            })->toArray();
     }
 
     /**

@@ -7,17 +7,12 @@ use Orchid\Crud\ResourceRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Field;
-use Orchid\Screen\Screen;
+use Orchid\Crud\CrudScreen;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
-class EditScreen extends Screen
+class EditScreen extends CrudScreen
 {
-    /**
-     * @var Resource
-     */
-    protected $resource;
-
     /**
      * Query data.
      *
@@ -27,9 +22,6 @@ class EditScreen extends Screen
      */
     public function query(ResourceRequest $request): array
     {
-        $this->resource = $request->resource();
-        $this->name = $this->resource::label();
-
         return [
             'model' => $request->findModelOrFail(),
         ];

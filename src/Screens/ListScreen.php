@@ -3,21 +3,15 @@
 namespace Orchid\Crud\Screens;
 
 use Illuminate\Database\Eloquent\Model;
-use Orchid\Crud\Resource;
 use Orchid\Crud\ResourceRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Screen;
+use Orchid\Crud\CrudScreen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
 
-class ListScreen extends Screen
+class ListScreen extends CrudScreen
 {
-    /**
-     * @var Resource
-     */
-    protected $resource;
-
     /**
      * Query data.
      *
@@ -27,11 +21,12 @@ class ListScreen extends Screen
      */
     public function query(ResourceRequest $request): array
     {
-        $this->resource = $request->resource();
-        $this->name = $this->resource::label();
-
         return [
-            'model' => $request->model()->filters()->paginate(),
+            'model' => $request->model()
+                ->with($this->resource->with())
+                ->filters()
+                ->filtersApply($this->resource->filters())
+                ->paginate(),
         ];
     }
 
@@ -70,6 +65,7 @@ class ListScreen extends Screen
             });
 
         return [
+            Layout::selection($this->resource->filters()),
             Layout::table('model', $grid),
         ];
     }

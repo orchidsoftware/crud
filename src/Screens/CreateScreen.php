@@ -9,7 +9,6 @@ use Orchid\Support\Facades\Toast;
 
 class CreateScreen extends EditScreen
 {
-
     /**
      * Query data.
      *
@@ -19,9 +18,6 @@ class CreateScreen extends EditScreen
      */
     public function query(ResourceRequest $request): array
     {
-        $this->resource = $request->resource();
-        $this->name = $this->resource::label();
-
         return [
             'model' => $request->model(),
         ];
@@ -35,12 +31,11 @@ class CreateScreen extends EditScreen
     public function commandBar(): array
     {
         return [
-            Button::make($this->resource::saveButtonLabel())
+            Button::make($this->resource::createButtonLabel())
                 ->method('save')
                 ->icon('check'),
         ];
     }
-
 
     /**
      * @param ResourceRequest $request
