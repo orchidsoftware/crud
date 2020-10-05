@@ -40,8 +40,7 @@ This property tells the generator which Eloquent model the resource corresponds 
 public static $model = 'App\Models\Post';
 ```
 
-Freshly created Nova resources only contain an `ID` field definition. Don't worry, we'll add more fields to our resource soon.
-
+Freshly created resources contain nothing. Don't worry, we'll add more fields to our resource soon.
 
 ## Registering Resources
 
