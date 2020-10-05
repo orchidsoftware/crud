@@ -19,6 +19,36 @@ You can install the package via composer:
 composer require orchid/crud
 ```
 
+## Defining Resources
+
+Resources are stored are stored in the `app/Orchid/Resources` directory of your application.
+You may generate a new resource using the `orchid:resource` Artisan command:
+
+```bash
+php artisan orchid:resource Post
+```
+
+The most basic and fundamental property of a resource is its `model` property. 
+This property tells the generator which Eloquent model the resource corresponds to:
+
+```php
+/**
+ * The model the resource corresponds to.
+ *
+ * @var string
+ */
+public static $model = 'App\Models\Post';
+```
+
+Freshly created Nova resources only contain an `ID` field definition. Don't worry, we'll add more fields to our resource soon.
+
+
+## Registering Resources
+
+By default, all resources within the `app/Orchid/Resources` directory will automatically be registered.
+You are not required to manually register them.
+
+
 ## Usage
 
 ``` php
