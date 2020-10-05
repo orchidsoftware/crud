@@ -48,6 +48,13 @@ By default, all resources within the `app/Orchid/Resources` directory will autom
 You are not required to manually register them.
 
 
+## Permissions Resources
+
+For each registered resource, a new permission is created. It is necessary to give the right to manage it to the user.
+To click on the profile in the left column and go to the system page, and then to the page with users, 
+where you can issue them a mandate or assign a role. After that, they will be displayed in the left menu.
+
+
 ## Usage
 
 ``` php
