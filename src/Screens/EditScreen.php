@@ -2,12 +2,11 @@
 
 namespace Orchid\Crud\Screens;
 
-use Orchid\Crud\Resource;
+use Orchid\Crud\CrudScreen;
 use Orchid\Crud\ResourceRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Field;
-use Orchid\Crud\CrudScreen;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 

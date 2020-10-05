@@ -184,5 +184,4 @@ abstract class Resource
     {
         return [];
     }
-
 }
