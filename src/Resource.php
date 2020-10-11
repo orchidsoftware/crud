@@ -126,6 +126,16 @@ abstract class Resource
     }
 
     /**
+     * Get the text for the create resource toast.
+     *
+     * @return string
+     */
+    public static function createToastMessage(): string
+    {
+        return __('The :resource was created!', ['resource' => static::singularLabel()]);
+    }
+
+    /**
      * Get the text for the update resource button.
      *
      * @return string
@@ -136,6 +146,16 @@ abstract class Resource
     }
 
     /**
+     * Get the text for the update resource toast.
+     *
+     * @return string
+     */
+    public static function updateToastMessage(): string
+    {
+        return __('The :resource was updated!', ['resource' => static::singularLabel()]);
+    }
+
+    /**
      * Get the text for the delete resource button.
      *
      * @return string
@@ -143,6 +163,26 @@ abstract class Resource
     public static function deleteButtonLabel(): string
     {
         return __('Delete :resource', ['resource' => static::singularLabel()]);
+    }
+
+    /**
+     * Get the text for the delete resource toast.
+     *
+     * @return string
+     */
+    public static function deleteToastMessage(): string
+    {
+        return __('The :resource was deleted!', ['resource' => static::singularLabel()]);
+    }
+
+    /**
+     * Get the text for the error resource toast.
+     *
+     * @return string
+     */
+    public static function errorToastMessage(): string
+    {
+        return __('An error has occurred. Action not taken.');
     }
 
     /**
