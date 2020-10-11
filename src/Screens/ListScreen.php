@@ -3,10 +3,10 @@
 namespace Orchid\Crud\Screens;
 
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Crud\CrudScreen;
 use Orchid\Crud\ResourceRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
-use Orchid\Crud\CrudScreen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
 

@@ -13,7 +13,7 @@ class ResourceRequest extends FormRequest
      */
     public function rules()
     {
-        if($this->method() === 'GET' || Str::endsWith($this->url(),'delete')){
+        if ($this->method() === 'GET' || Str::endsWith($this->url(), 'delete')) {
             return [];
         }
 
