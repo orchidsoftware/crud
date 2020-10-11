@@ -7,7 +7,7 @@
 
 ## Introduction
 
-Laravel Orchid has provided a unique experience for writing applications, but sometimes a simple CRUD needs to be done when it might seem overkill. Therefore, we have created a new package aimed at developers who want to quickly create a user interface for eloquent models with functions such as create, read, update, and delete.
+<a href="https://orchid.software/" target="blank">Laravel Orchid</a> has provided a unique experience for writing applications, but sometimes a simple CRUD needs to be done when it might seem overkill. Therefore, we have created a new package aimed at developers who want to quickly create a user interface for eloquent models with functions such as create, read, update, and delete.
 
 
 You can describe the entire process using one file. And when you need more options, it's easy to switch to using the platform.
