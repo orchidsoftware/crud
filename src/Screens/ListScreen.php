@@ -52,17 +52,18 @@ class ListScreen extends CrudScreen
     public function layout(): array
     {
         $grid = $this->resource->grid();
-        $grid[] = TD::set()
+        $grid[] = TD::set(__('Actions'))
             ->align(TD::ALIGN_RIGHT)
             ->cantHide()
             ->render(function (Model $model) {
                 return Link::make(__('Edit'))
+                    ->icon('pencil')
                     ->route('platform.resource.edit', [
                         $this->resource::uriKey(),
                         $model->getAttribute($model->getKeyName()),
-                    ])
-                    ->icon('pencil');
+                    ]);
             });
+
 
         return [
             Layout::selection($this->resource->filters()),

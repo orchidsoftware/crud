@@ -34,22 +34,22 @@ class CrudServiceProvider extends ServiceProvider
             return new Arbitrator();
         });
 
+        Route::pushMiddlewareToGroup('platform', BootCrudGenerator::class);
+
         Route::domain((string)config('platform.domain'))
             ->prefix(Dashboard::prefix('/'))
             ->as('platform.')
             ->middleware(config('platform.middleware.private'))
             ->group(function ($route) {
-                $route->screen('/crud/{resource?}/create', CreateScreen::class)
+                $route->screen('/crud/create/{resource?}', CreateScreen::class)
                     ->name('resource.create');
 
-                $route->screen('/crud/{resource?}/{id}', EditScreen::class)
+                $route->screen('/crud/edit/{resource?}/{id}', EditScreen::class)
                     ->name('resource.edit');
 
-                $route->screen('/crud/{resource?}', ListScreen::class)
+                $route->screen('/crud/list/{resource?}', ListScreen::class)
                     ->name('resource.list');
             });
-
-        Route::pushMiddlewareToGroup('platform', BootCrudGenerator::class);
     }
 
     /**

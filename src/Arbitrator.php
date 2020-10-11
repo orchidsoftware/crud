@@ -49,8 +49,14 @@ class Arbitrator
      */
     public function boot(): void
     {
-        $this->resources->each(function (Resource $resource) {
-            $this->register($resource);
+        $this->resources->sort(function (Resource $resource){
+            return [$resource::sort(), $resource::label()];
+        })
+            ->values()
+            ->each(function (Resource $resource, $key) {
+            $this
+                ->registerPermission($resource)
+                ->registerMenu($resource, $key);
         });
     }
 
@@ -82,31 +88,20 @@ class Arbitrator
 
     /**
      * @param Resource $resource
+     * @param int      $key
      *
      * @return Arbitrator
      */
-    private function register(Resource $resource): Arbitrator
+    private function registerMenu(Resource $resource, int $key): Arbitrator
     {
-        return $this
-            ->registerPermission($resource)
-            ->registerMenu($resource);
-    }
-
-    /**
-     * @param Resource $resource
-     *
-     * @return Arbitrator
-     */
-    private function registerMenu(Resource $resource): Arbitrator
-    {
-        View::composer('platform::dashboard', function () use ($resource) {
-            Dashboard::menu()->add(
-                Menu::MAIN,
+        View::composer('platform::dashboard', function () use ($resource, $key) {
+            Dashboard::menu()->add(Menu::MAIN,
                 ItemMenu::label($resource::label())
                     ->icon($resource::icon())
                     ->route('platform.resource.list', [$resource::uriKey()])
                     ->permission($resource::uriKey())
                     ->sort($resource::sort())
+                    ->title($key === 0 ? __('Resources') : null)
             );
         });
 
