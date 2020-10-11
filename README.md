@@ -1,7 +1,9 @@
 # Laravel Orchid CRUD
 
 ![Tests](https://github.com/orchidsoftware/crud/workflows/Tests/badge.svg)
-![https://opencollective.com/orchid/backers/badge.svg](https://opencollective.com/orchid)
+![Open Collective sponsors](https://opencollective.com/orchid/backers/badge.svg)
+
+
 
 ## Introduction
 
