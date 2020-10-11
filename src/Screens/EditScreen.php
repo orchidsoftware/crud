@@ -70,7 +70,7 @@ class EditScreen extends CrudScreen
         $model = $request->findModelOrFail();
 
         $model->forceFill($request->input('model'))->save()
-            ? Toast::info(__('You have successfully updated the :resource.', ['resource' => $this->resource::singularLabel()] ))
+            ? Toast::info(__('You have successfully updated the :resource.', ['resource' => $this->resource::singularLabel()]))
             : Toast::warning(__('An error has occurred'));
 
         return redirect()->route('platform.resource.list', $request->resource);
