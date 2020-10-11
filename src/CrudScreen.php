@@ -3,7 +3,6 @@
 
 namespace Orchid\Crud;
 
-use Orchid\Crud\Middleware\BootCrudGenerator;
 use Orchid\Screen\Screen;
 
 abstract class CrudScreen extends Screen
@@ -47,6 +46,5 @@ abstract class CrudScreen extends Screen
 
             return $next($request);
         });
-
     }
 }
