@@ -15,6 +15,13 @@ use Orchid\Support\Facades\Dashboard;
 class CrudServiceProvider extends ServiceProvider
 {
     /**
+     * Path to crud dir
+     *
+     * @var string
+     */
+    protected $path;
+
+    /**
      * The available command shortname.
      *
      * @var array
@@ -59,7 +66,10 @@ class CrudServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->path = dirname(__DIR__, 1);
+
         $this->commands($this->commands);
+        $this->loadJsonTranslationsFrom($this->path.'/resources/lang/');
         $this->app->register(FoundationServiceProvider::class, true);
     }
 }

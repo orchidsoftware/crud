@@ -1,0 +1,6 @@
+{
+    "Create :resource": "Создать :resource",
+    "Update :resource": "Обновить :resource",
+    "Delete :resource": "Удалить :resource",
+    "Save :resource":   "Сохранить :resource"
+}
