@@ -1,7 +1,7 @@
 # Laravel Orchid CRUD
 
 ![Tests](https://github.com/orchidsoftware/crud/workflows/Tests/badge.svg)
-
+![https://opencollective.com/orchid/backers/badge.svg](https://opencollective.com/orchid)
 
 ## Introduction
 
@@ -79,11 +79,6 @@ Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
-## Credits
-
-- [Alexandr Chernyaev](https://github.com/tabuna)
-- [All Contributors](../../contributors)
-
 ## License
 
-Please see [License File](LICENSE.md) for more information.
+Please see [License File](LICENSE) for more information.
