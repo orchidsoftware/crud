@@ -70,8 +70,8 @@ class EditScreen extends CrudScreen
         $model = $request->findModelOrFail();
 
         $model->forceFill($request->input('model'))->save()
-            ? Toast::info('You have successfully updated the post.')
-            : Toast::warning('An error has occurred');
+            ? Toast::info(__('You have successfully updated the :resource.', ['resource' => $this->resource::singularLabel()] ))
+            : Toast::warning(__('An error has occurred'));
 
         return redirect()->route('platform.resource.list', $request->resource);
     }
@@ -87,8 +87,8 @@ class EditScreen extends CrudScreen
         $model = $request->findModelOrFail();
 
         $model->delete()
-            ? Toast::info('You have successfully deleted the post.')
-            : Toast::warning('An error has occurred');
+            ? Toast::info(__('You have successfully deleted the :resource.', ['resource' => $this->resource::singularLabel()]))
+            : Toast::warning(__('An error has occurred'));
 
         return redirect()->route('platform.resource.list', $request->resource);
     }

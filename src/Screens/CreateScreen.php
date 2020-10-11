@@ -46,8 +46,8 @@ class CreateScreen extends EditScreen
     {
         $model = $request->model();
         $model->forceFill($request->input('model'))->save()
-            ? Toast::info('You have successfully saved the post.')
-            : Toast::warning('An error has occurred');
+            ? Toast::info(__('You have successfully saved the :resource.', ['resource' => $this->resource::singularLabel()] ))
+            : Toast::warning(__('An error has occurred'));
 
         return redirect()->route('platform.resource.list', $request->resource);
     }

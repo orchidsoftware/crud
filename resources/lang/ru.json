@@ -2,5 +2,9 @@
     "Create :resource": "Создать :resource",
     "Update :resource": "Обновить :resource",
     "Delete :resource": "Удалить :resource",
-    "Save :resource":   "Сохранить :resource"
+    "Save :resource":   "Сохранить :resource",
+    "You have successfully updated the :resource.": "Обновление :resource прошло успешно.",
+    "You have successfully saved the :resource.": "Сохранение :resource прошло успешно.",
+    "You have successfully deleted the :resource.": "Удаление :resource прошло успешно.",
+    "An error has occurred": "Произошла ошибка"
 }
