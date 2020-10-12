@@ -15,10 +15,45 @@ All fields, filters, and traits are compatible.
 
 ## Installation
 
-You can install the package via composer:
+You can install the package using the Сomposer.
+To do this, you need to install a new Composer repository in the composer.json file of your Laravel application.
+
+```json
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/orchidsoftware/crud.git"
+    }
+],
+```
+
+Next, add personal token to the config section of your `composer.json` file:
+
+```json
+"config": {
+    "github-oauth": {
+        "github.com": "XXXXXXXXXXXXXXXXXXXXXX"
+    }
+},
+```
+
+No token? Head to [settings page](https://github.com/settings/tokens/new?scopes=repo&description=Orchid+CRUD) to retrieve a token.
+
+> If you don't want to store the token in your composer file, you can skip this step. When installing, Composer will ask for it on its own and save it to ".composer/auth.json".
+
+
+Next, add `orchid/crud` to the require section of your `composer.json` file:
+
+```json
+"require": {
+    "orchid/crud": "*"
+},
+```
+
+After your `composer.json` file has been updated, run the composer update command in your console terminal:
 
 ```bash
-composer require orchid/crud
+composer update
 ```
 
 ## Defining Resources
