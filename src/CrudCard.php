@@ -5,8 +5,8 @@ namespace Orchid\Crud;
 use Orchid\Screen\Contracts\Cardable;
 use Orchid\Support\Color;
 
-class CrudCard implements Cardable {
-
+class CrudCard implements Cardable
+{
     public $title;
     public $description;
     public $image;

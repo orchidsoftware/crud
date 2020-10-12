@@ -2,24 +2,20 @@
 
 namespace Orchid\Crud\Screens;
 
+use Illuminate\Support\Arr;
 use Orchid\Crud\CrudCard;
 use Orchid\Crud\CrudScreen;
 use Orchid\Crud\ResourceRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Field;
-use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
-use Illuminate\Support\Arr;
-use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Fields\Picture;
 use Orchid\Screen\Fields\Quill;
-
-
+use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Card;
+
+
 use Orchid\Screen\Layouts\Compendium;
-
-
+use Orchid\Support\Facades\Layout;
 
 class ViewScreen extends CrudScreen
 {
@@ -32,7 +28,7 @@ class ViewScreen extends CrudScreen
      */
     public function query(ResourceRequest $request): array
     {
-        $cardCompendium =  new CrudCard();
+        $cardCompendium = new CrudCard();
         $cardText = new CrudCard();
 
         $model = Arr::dot($request->findModelOrFail()->toArray());
@@ -49,15 +45,16 @@ class ViewScreen extends CrudScreen
             if ($field instanceof Quill) {
                 $cardText->title = $field->get('title');
                 $cardText->description = $model[$field->get('name')];
+
                 continue;
             }
-            $cardDescription[$field->get('title')]  = $model[$field->get('name')];
+            $cardDescription[$field->get('title')] = $model[$field->get('name')];
         };
         $cardCompendium->description = new Compendium($cardDescription);
 
         return [
             'cardCompendium' => $cardCompendium,
-            'cardText' => $cardText
+            'cardText' => $cardText,
         ];
     }
 
@@ -83,5 +80,4 @@ class ViewScreen extends CrudScreen
             new Card('cardText'),
         ];
     }
-
 }

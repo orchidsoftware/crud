@@ -8,8 +8,8 @@ use Orchid\Crud\Commands\ResourceCommand;
 use Orchid\Crud\Middleware\BootCrudGenerator;
 use Orchid\Crud\Screens\CreateScreen;
 use Orchid\Crud\Screens\EditScreen;
-use Orchid\Crud\Screens\ViewScreen;
 use Orchid\Crud\Screens\ListScreen;
+use Orchid\Crud\Screens\ViewScreen;
 use Orchid\Platform\Providers\FoundationServiceProvider;
 use Orchid\Support\Facades\Dashboard;
 
