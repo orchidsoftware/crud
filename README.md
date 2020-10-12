@@ -39,9 +39,8 @@ Next, add personal token to the config section of your `composer.json` file:
 
 No token? Head to [settings page](https://github.com/settings/tokens/new?scopes=repo&description=Orchid+CRUD) to retrieve a token.
 
-> If you don't want to store the token in your composer file, you can skip this step. When installing, Composer will ask for it on its own and save it to ".composer/auth.json".
-
-
+> If you don't want to store the token in your composer file, you can skip this step. When installing, Composer will ask for it on its own and save it to ".composer/auth.json". Or you can specify it yourself by running: `composer config -g github-oauth.github.com XXXXXXXXXXXXXXXXXXXXXXX`
+ 
 Next, add `orchid/crud` to the require section of your `composer.json` file:
 
 ```json
