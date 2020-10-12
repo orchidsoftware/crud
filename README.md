@@ -59,6 +59,85 @@ To click on the profile in the left column and go to the system page, and then t
 where you can issue them a mandate or assign a role. After that, they will be displayed in the left menu.
 
 
+## Eager Loading
+
+If you routinely need to access a resource's relationships within your fields, it may be a good idea to add the relationship to the `with` property of your resource. This property instructs Nova to always eager load the listed relationships when retrieving the resource.
+
+For example, if you access a `Post` resource's `user` relationship within the `Post` resource's `subtitle` method, you should add the `user` relationship to the `Post` resource's `with` property:
+
+```php
+ /**
+ * Get relationships that should be eager loaded when performing an index query.
+ *
+ * @return array
+ */
+public function with(): array
+{
+    return ['user'];
+}
+```
+
+## Resource Events
+
+All Nova operations use the typical `save`, `delete`, `forceDelete`, `restore` Eloquent methods you are familiar with. Therefore, it is easy to listen for model events triggered by Nova and react to them. The easiest approach is to simply attach a [model observer](https://laravel.com/docs/eloquent#observers) to a model:
+
+```php
+namespace App\Providers;
+
+use App\Models\User;
+use App\Observers\UserObserver;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        User::observe(UserObserver::class);
+    }
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}
+```
+
+## Defining Fields
+
+Each resource contains a `fields` method. This method returns an array of fields, which generally extend the `Orchid\Screen\Field` class. 
+
+To add a field to a resource, we can simply add it to the resource's `fields` method. Typically, fields may be created using their static `make` method. This method accepts several arguments; however, you usually only need to pass the name of the field.
+
+
+```php
+use Orchid\Screen\Fields\Input;
+
+/**
+ * Get the fields displayed by the resource.
+ *
+ * @return array
+ */
+public function fields(): array
+{
+    return [
+        Input::make('title')
+            ->title('Title')
+            ->placeholder('Enter title here'),
+    ];
+}
+```
+In the package to generate CRUD, you can use the fields Orchid platform. Review [all available fields on the documentation site](https://orchid.software/en/docs/field/).
+
 ## Usage
 
 ``` php
