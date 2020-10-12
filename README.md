@@ -141,38 +141,11 @@ public function with(): array
 
 ## Resource Events
 
-All Nova operations use the typical `save`, `delete`, `forceDelete`, `restore` Eloquent methods you are familiar with. Therefore, it is easy to listen for model events triggered by Nova and react to them. The easiest approach is to simply attach a [model observer](https://laravel.com/docs/eloquent#observers) to a model:
-
-```php
-namespace App\Providers;
-
-use App\Models\User;
-use App\Observers\UserObserver;
-use Illuminate\Support\ServiceProvider;
-
-class AppServiceProvider extends ServiceProvider
-{
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        User::observe(UserObserver::class);
-    }
-
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-}
+TODO:
+``` php
+// ...
 ```
+
 
 ## Testing
 
