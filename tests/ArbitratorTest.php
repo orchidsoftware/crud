@@ -2,10 +2,10 @@
 
 namespace Orchid\Crud\Tests;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Support\Str;
 use Orchid\Crud\Arbitrator;
 use Orchid\Crud\Tests\Fixtures\PostResource;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ArbitratorTest extends TestCase
 {
