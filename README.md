@@ -146,6 +146,12 @@ TODO:
 // ...
 ```
 
+## Localization
+
+TODO:
+``` php
+// ...
+```
 
 ## Testing
 
