@@ -80,6 +80,24 @@ public static $model = Post::class;
 
 Freshly created resources contain nothing. Don't worry, we'll add more fields to our resource soon.
 
+## Expanding of Model
+
+Many features of the Orchid platform relies on model customization. You can add or remove traits depending on your goals. But we will assume that you have set these for your model:
+
+```php
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Orchid\Attachment\Attachable;
+use Orchid\Filters\Filterable;
+use Orchid\Screen\AsSource;
+
+class Post extends Model
+{
+    use HasFactory, AsSource, Filterable, Attachable;
+}
+````
+
+
 ## Registering Resources
 
 By default, all resources within the `app/Orchid/Resources` directory will automatically be registered.
