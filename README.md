@@ -34,12 +34,14 @@ The most basic and fundamental property of a resource is its `model` property.
 This property tells the generator which Eloquent model the resource corresponds to:
 
 ```php
+use App\Models\Post;
+
 /**
  * The model the resource corresponds to.
  *
  * @var string
  */
-public static $model = 'App\Models\Post';
+public static $model = Post::class;
 ```
 
 Freshly created resources contain nothing. Don't worry, we'll add more fields to our resource soon.
