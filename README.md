@@ -16,7 +16,7 @@ All fields, filters, and traits are compatible.
 ## Installation
 
 You can install the package using the Сomposer.
-To do this, you need to install a new Composer repository in the composer.json file of your Laravel application.
+To do this, you need to install a new Composer repository in the `composer.json` file of your Laravel application.
 
 ```json
 "repositories": [
