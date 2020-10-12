@@ -84,6 +84,29 @@ public function fields(): array
 ```
 In the package to generate CRUD, you can use the fields Orchid platform. Review [all available fields on the documentation site](https://orchid.software/en/docs/field/).
 
+
+## Defining Сolumns
+
+Each resource contains a `сolumns` method. To add a column to a resource, we can simply add it to the resource's `column` method. Typically, columns may be created using their static `make` method. 
+
+```php
+use Orchid\Screen\TD;
+
+/**
+ * Get the columns displayed by the resource.
+ *
+ * @return TD[]
+ */
+public function columns(): array
+{
+    return [
+        TD::set('id'),
+        TD::set('title'),
+    ];
+}
+```
+The CRUD generation package is entirely based on the table layer. You can [read more about this on the documentation page](https://orchid.software/en/docs/layouts/table/).
+
 ## Eager Loading
 
 If you routinely need to access a resource's relationships within your fields, it may be a good idea to add the relationship to the `with` property of your resource. This property instructs Nova to always eager load the listed relationships when retrieving the resource.
