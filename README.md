@@ -107,6 +107,20 @@ public function columns(): array
 ```
 The CRUD generation package is entirely based on the table layer. You can [read more about this on the documentation page](https://orchid.software/en/docs/layouts/table/).
 
+## Defining Rules
+
+TODO:
+``` php
+// ...
+```
+
+## Defining Filters
+
+TODO:
+``` php
+// ...
+```
+
 ## Eager Loading
 
 If you routinely need to access a resource's relationships within your fields, it may be a good idea to add the relationship to the `with` property of your resource. This property instructs Nova to always eager load the listed relationships when retrieving the resource.
@@ -158,13 +172,6 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 }
-```
-
-
-## Usage
-
-``` php
-// ...
 ```
 
 ## Testing
