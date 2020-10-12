@@ -9,7 +9,7 @@ class ExampleResource extends Resource
     /**
      * @return array
      */
-    public function grid(): array
+    public function columns(): array
     {
         return [];
     }

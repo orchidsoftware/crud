@@ -16,7 +16,7 @@ class Arbitrator
      *
      * @var Collection
      */
-    public $resources;
+    protected $resources;
 
     /**
      * Arbitrator constructor.

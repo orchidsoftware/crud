@@ -60,6 +60,8 @@ class ResourceRequest extends FormRequest
      */
     public function findModelOrFail()
     {
-        return $this->model()->findOrFail($this->route('id'));
+        return $this->model()
+            ->with($this->resource()->with())
+            ->findOrFail($this->route('id'));
     }
 }
