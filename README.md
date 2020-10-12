@@ -58,6 +58,31 @@ For each registered resource, a new permission is created. It is necessary to gi
 To click on the profile in the left column and go to the system page, and then to the page with users, 
 where you can issue them a mandate or assign a role. After that, they will be displayed in the left menu.
 
+## Defining Fields
+
+Each resource contains a `fields` method. This method returns an array of fields, which generally extend the `Orchid\Screen\Field` class. 
+
+To add a field to a resource, we can simply add it to the resource's `fields` method. Typically, fields may be created using their static `make` method. This method accepts several arguments; however, you usually only need to pass the name of the field.
+
+
+```php
+use Orchid\Screen\Fields\Input;
+
+/**
+ * Get the fields displayed by the resource.
+ *
+ * @return array
+ */
+public function fields(): array
+{
+    return [
+        Input::make('title')
+            ->title('Title')
+            ->placeholder('Enter title here'),
+    ];
+}
+```
+In the package to generate CRUD, you can use the fields Orchid platform. Review [all available fields on the documentation site](https://orchid.software/en/docs/field/).
 
 ## Eager Loading
 
@@ -112,31 +137,6 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-## Defining Fields
-
-Each resource contains a `fields` method. This method returns an array of fields, which generally extend the `Orchid\Screen\Field` class. 
-
-To add a field to a resource, we can simply add it to the resource's `fields` method. Typically, fields may be created using their static `make` method. This method accepts several arguments; however, you usually only need to pass the name of the field.
-
-
-```php
-use Orchid\Screen\Fields\Input;
-
-/**
- * Get the fields displayed by the resource.
- *
- * @return array
- */
-public function fields(): array
-{
-    return [
-        Input::make('title')
-            ->title('Title')
-            ->placeholder('Enter title here'),
-    ];
-}
-```
-In the package to generate CRUD, you can use the fields Orchid platform. Review [all available fields on the documentation site](https://orchid.software/en/docs/field/).
 
 ## Usage
 
