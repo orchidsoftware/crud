@@ -8,6 +8,7 @@ use Orchid\Crud\Commands\ResourceCommand;
 use Orchid\Crud\Middleware\BootCrudGenerator;
 use Orchid\Crud\Screens\CreateScreen;
 use Orchid\Crud\Screens\EditScreen;
+use Orchid\Crud\Screens\ViewScreen;
 use Orchid\Crud\Screens\ListScreen;
 use Orchid\Platform\Providers\FoundationServiceProvider;
 use Orchid\Support\Facades\Dashboard;
@@ -53,6 +54,9 @@ class CrudServiceProvider extends ServiceProvider
 
                 $route->screen('/crud/edit/{resource?}/{id}', EditScreen::class)
                     ->name('resource.edit');
+
+                $route->screen('/crud/view/{resource?}/{id}', ViewScreen::class)
+                    ->name('resource.view');
 
                 $route->screen('/crud/list/{resource?}', ListScreen::class)
                     ->name('resource.list');
