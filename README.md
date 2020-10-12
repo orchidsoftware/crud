@@ -153,11 +153,12 @@ TODO:
 // ...
 ```
 
-## Testing
 
-``` bash
-composer test
-```
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/orchid#backer)]
+
+<a href="https://opencollective.com/colly#backers" target="_blank"><img src="https://opencollective.com/orchid/backers.svg?width=838"></a>
 
 ## Changelog
 
