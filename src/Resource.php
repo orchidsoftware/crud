@@ -64,11 +64,11 @@ abstract class Resource
     }
 
     /**
-     * Get the fields displayed by the resource.
+     * Get the columns displayed by the resource.
      *
      * @return TD[]
      */
-    abstract public function grid(): array;
+    abstract public function columns(): array;
 
     /**
      * Get the fields displayed by the resource.

@@ -51,7 +51,7 @@ class ListScreen extends CrudScreen
      */
     public function layout(): array
     {
-        $grid = $this->resource->grid();
+        $grid = $this->resource->columns();
         $grid[] = TD::set(__('Actions'))
             ->align(TD::ALIGN_RIGHT)
             ->cantHide()
