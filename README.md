@@ -15,10 +15,44 @@ All fields, filters, and traits are compatible.
 
 ## Installation
 
-You can install the package via composer:
+You can install the package using the Сomposer.
+To do this, you need to install a new Composer repository in the `composer.json` file of your Laravel application.
+
+```json
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/orchidsoftware/crud.git"
+    }
+],
+```
+
+Next, add personal token to the config section of your `composer.json` file:
+
+```json
+"config": {
+    "github-oauth": {
+        "github.com": "XXXXXXXXXXXXXXXXXXXXXX"
+    }
+},
+```
+
+No token? Head to [settings page](https://github.com/settings/tokens/new?scopes=repo&description=Orchid+CRUD) to retrieve a token.
+
+> If you don't want to store the token in your composer file, you can skip this step. When installing, Composer will ask for it on its own and save it to ".composer/auth.json". Or you can specify it yourself by running: `composer config -g github-oauth.github.com XXXXXXXXXXXXXXXXXXXXXXX`
+ 
+Next, add `orchid/crud` to the require section of your `composer.json` file:
+
+```json
+"require": {
+    "orchid/crud": "*"
+},
+```
+
+After your `composer.json` file has been updated, run the composer update command in your console terminal:
 
 ```bash
-composer require orchid/crud
+composer update
 ```
 
 ## Defining Resources
@@ -45,6 +79,24 @@ public static $model = Post::class;
 ```
 
 Freshly created resources contain nothing. Don't worry, we'll add more fields to our resource soon.
+
+## Expanding of Model
+
+Many features of the Orchid platform relies on model customization. You can add or remove traits depending on your goals. But we will assume that you have set these for your model:
+
+```php
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Orchid\Attachment\Attachable;
+use Orchid\Filters\Filterable;
+use Orchid\Screen\AsSource;
+
+class Post extends Model
+{
+    use HasFactory, AsSource, Filterable, Attachable;
+}
+````
+
 
 ## Registering Resources
 
@@ -153,11 +205,12 @@ TODO:
 // ...
 ```
 
-## Testing
 
-``` bash
-composer test
-```
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/orchid#backer)]
+
+<a href="https://opencollective.com/colly#backers" target="_blank"><img src="https://opencollective.com/orchid/backers.svg?width=838"></a>
 
 ## Changelog
 
