@@ -37,7 +37,7 @@ class TestCase extends Orchestra
             ->setNamespace('Orchid\Crud\Tests\Fixtures')
             ->find(__DIR__ . '/Fixtures');
 
-         app(Arbitrator::class)->resources($resources);
+        app(Arbitrator::class)->resources($resources);
     }
 
     /**
@@ -101,10 +101,10 @@ class TestCase extends Orchestra
     protected function getPackageAliases($app): array
     {
         return [
-            'Alert'       => Alert::class,
-            'Active'      => Active::class,
+            'Alert' => Alert::class,
+            'Active' => Active::class,
             'Breadcrumbs' => Breadcrumbs::class,
-            'Dashboard'   => Dashboard::class,
+            'Dashboard' => Dashboard::class,
         ];
     }
 }

@@ -2,13 +2,11 @@
 
 namespace Orchid\Crud\Tests;
 
-use Orchid\Crud\Tests\Fixtures\ExampleAbstractResource;
 use Orchid\Crud\Arbitrator;
 use Orchid\Crud\Tests\Fixtures\PostResource;
 
 class CrudTest extends TestCase
 {
-
     public function setUp(): void
     {
         parent::setUp();
@@ -22,9 +20,9 @@ class CrudTest extends TestCase
             'resource' => PostResource::uriKey(),
         ]))
             ->assertOk();
-            //->assertSee('Resources')
-            //->assertSee('Posts')
-            //->assertSee('Create Post');
+        //->assertSee('Resources')
+        //->assertSee('Posts')
+        //->assertSee('Create Post');
 
 
         //$this->assertTrue(true);
@@ -32,5 +30,4 @@ class CrudTest extends TestCase
         file_put_contents(__DIR__. '/test.html', $test->getContent());
         //dd($test);
     }
-
 }

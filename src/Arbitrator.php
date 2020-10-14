@@ -3,7 +3,6 @@
 namespace Orchid\Crud;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\View;
 use Orchid\Platform\ItemMenu;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\Menu;
