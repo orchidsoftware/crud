@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 class ProviderTest extends TestCase
 {
-
-
     public function testRouteRegister():void
     {
         $this->assertTrue(Route::has('platform.resource.create'));
