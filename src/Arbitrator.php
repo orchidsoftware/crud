@@ -94,17 +94,15 @@ class Arbitrator
      */
     private function registerMenu(Resource $resource, int $key): Arbitrator
     {
-        View::composer('platform::dashboard', function () use ($resource, $key) {
-            Dashboard::menu()->add(
-                Menu::MAIN,
-                ItemMenu::label($resource::label())
-                    ->icon($resource::icon())
-                    ->route('platform.resource.list', [$resource::uriKey()])
-                    ->permission($resource::uriKey())
-                    ->sort($resource::sort())
-                    ->title($key === 0 ? __('Resources') : null)
-            );
-        });
+        Dashboard::menu()->add(
+            Menu::MAIN,
+            ItemMenu::label($resource::label())
+                ->icon($resource::icon())
+                ->route('platform.resource.list', [$resource::uriKey()])
+                ->permission($resource::permission())
+                ->sort($resource::sort())
+                ->title($key === 0 ? __('Resources') : null)
+        );
 
         return $this;
     }
@@ -116,9 +114,13 @@ class Arbitrator
      */
     private function registerPermission(Resource $resource): Arbitrator
     {
+        if ($resource::permission() === null) {
+            return $this;
+        }
+
         Dashboard::registerPermissions(
             ItemPermission::group('CRUD')
-                ->addPermission($resource::uriKey(), $resource::label())
+                ->addPermission($resource::permission(), $resource::label())
         );
 
         return $this;

@@ -2,10 +2,12 @@
 
 namespace Orchid\Crud\Tests;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Support\Str;
 use Orchid\Crud\Arbitrator;
 use Orchid\Crud\Tests\Fixtures\PostResource;
+use Orchid\Platform\Menu;
+use Orchid\Support\Facades\Dashboard;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ArbitratorTest extends TestCase
 {
@@ -22,12 +24,7 @@ class ArbitratorTest extends TestCase
     {
         parent::setUp();
 
-        $resources = $this
-            ->getResourceFinder()
-            ->setNamespace('Orchid\Crud\Tests\Fixtures')
-            ->find(__DIR__ . '/Fixtures');
-
-        $this->arbitrator = (new Arbitrator())->resources($resources);
+        $this->arbitrator = app(Arbitrator::class);
     }
 
     /**
@@ -53,8 +50,33 @@ class ArbitratorTest extends TestCase
     /**
      *
      */
-    public function testBootRegisterResource():void
+    public function testBootRegisterMenuResource(): void
     {
         $this->arbitrator->boot();
+
+        /** @var Menu $menu */
+        $menu = Dashboard::menu();
+
+        $slug = Str::lower(PostResource::label());
+
+        $this->assertTrue($menu->container->has($slug));
+
+        $this->assertEquals($menu->container->get($slug)['arg']['route'], \route('platform.resource.list', [
+            'resource' => PostResource::uriKey(),
+        ]));
+    }
+
+    /**
+     *
+     */
+    public function testBootRegisterPermissionResource(): void
+    {
+        $this->arbitrator->boot();
+
+        $permission = Dashboard::getPermission()->get('CRUD');
+
+        $this->assertEquals([
+            ["slug" => "private-resource", "description" => "Privates"],
+        ], $permission);
     }
 }

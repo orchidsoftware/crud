@@ -88,6 +88,16 @@ abstract class Resource
     }
 
     /**
+     * Get the permission key for the resource.
+     *
+     * @return string|null
+     */
+    public static function permission(): ?string
+    {
+        return null;
+    }
+
+    /**
      * The underlying model resource instance.
      *
      * @return Model

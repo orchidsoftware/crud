@@ -3,8 +3,19 @@
 
 namespace Orchid\Crud\Tests;
 
-class ArtisanTest extends TestCase
+use Illuminate\Support\Facades\Route;
+
+class ProviderTest extends TestCase
 {
+
+
+    public function testRouteRegister():void
+    {
+        $this->assertTrue(Route::has('platform.resource.create'));
+        $this->assertTrue(Route::has('platform.resource.edit'));
+        $this->assertTrue(Route::has('platform.resource.list'));
+    }
+
     public function testArtisanMakeResource(): void
     {
         $name = time();
