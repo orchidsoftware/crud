@@ -210,7 +210,7 @@ TODO:
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/orchid#backer)]
 
-<a href="https://opencollective.com/colly#backers" target="_blank"><img src="https://opencollective.com/orchid/backers.svg?width=838"></a>
+<a href="https://opencollective.com/orchid#backers" target="_blank"><img src="https://opencollective.com/orchid/backers.svg?width=838"></a>
 
 ## Changelog
 
