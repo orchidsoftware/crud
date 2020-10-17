@@ -114,7 +114,7 @@ abstract class Resource
      */
     public static function singularLabel(): string
     {
-        return __(Str::singular(Str::title(Str::snake(static::nameWithoutResource(), ' '))));
+        return Str::of(static::nameWithoutResource())->snake(' ')->title()->singular();
     }
 
     /**
@@ -122,7 +122,7 @@ abstract class Resource
      */
     public static function nameWithoutResource():string
     {
-        return str_replace('Resource', '', class_basename(static::class));
+        return Str::of(class_basename(static::class))->replace('Resource', '');
     }
 
     /**
