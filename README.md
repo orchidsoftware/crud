@@ -175,9 +175,7 @@ TODO:
 
 ## Eager Loading
 
-If you routinely need to access a resource's relationships within your fields, it may be a good idea to add the relationship to the `with` property of your resource. This property instructs Nova to always eager load the listed relationships when retrieving the resource.
-
-For example, if you access a `Post` resource's `user` relationship within the `Post` resource's `subtitle` method, you should add the `user` relationship to the `Post` resource's `with` property:
+If you routinely need to access a resource's relationships within your fields, it may be a good idea to add the relationship to the `with` property of your resource. This property instructs to always eager load the listed relationships when retrieving the resource.
 
 ```php
  /**
