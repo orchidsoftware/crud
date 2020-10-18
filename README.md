@@ -13,6 +13,8 @@
 You can describe the entire process using one file. And when you need more options, it's easy to switch to using the platform.
 All fields, filters, and traits are compatible.
 
+> This package is still under development.
+
 ## Installation
 
 You can install the package using the Сomposer.
