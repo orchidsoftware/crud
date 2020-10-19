@@ -25,6 +25,11 @@ class TestCase extends Orchestra
         $this->loadLaravelMigrations();
         $this->loadMigrationsFrom(realpath('./tests/Migrations'));
 
+        Factory::guessFactoryNamesUsing(function ($factory) {
+            $factoryBasename = class_basename($factory);
+
+            return "Orchid\Platform\Database\Factories\\$factoryBasename".'Factory';
+        });
 
         $resources = $this
             ->getResourceFinder()
