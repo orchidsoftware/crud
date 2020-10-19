@@ -1,10 +1,9 @@
 <?php
 
-
 namespace Orchid\Crud\Tests;
 
 use Orchid\Crud\Tests\Fixtures\ExampleAbstractResource;
-use Orchid\Crud\Tests\Fixtures\ExampleResource;
+use Orchid\Crud\Tests\Fixtures\PostResource;
 
 class ResourceFinderTest extends TestCase
 {
@@ -16,11 +15,11 @@ class ResourceFinderTest extends TestCase
             ->find(__DIR__ . '/Fixtures');
 
         $this->assertIsArray($resources);
-        $this->assertContains(ExampleResource::class, $resources);
+        $this->assertContains(PostResource::class, $resources);
         $this->assertNotContains(ExampleAbstractResource::class, $resources);
     }
 
-    public function testFindResourceInNotСreatedDirectory(): void
+    public function testFindResourceInNotCreatedDirectory(): void
     {
         $resources = $this
             ->getResourceFinder()

@@ -1,24 +1,30 @@
 <?php
 
-use Faker\Generator as Faker;
-use Illuminate\Support\Str;
+namespace Orchid\Crud\Tests\Factories;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Orchid\Crud\Tests\Models\Post;
 
-$factory->define(Laravel\Nova\Tests\Fixtures\User::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
-        'remember_token' => Str::random(10),
-    ];
-});
+class PostFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Post::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'title' => $this->faker->realText(10),
+            'description' => $this->faker->realText(100),
+            'body' => $this->faker->realText(500),
+        ];
+    }
+}
