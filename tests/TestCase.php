@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Orchid\Crud\Arbitrator;
 use Orchid\Crud\CrudServiceProvider;
+use Orchid\Crud\Middleware\BootCrudGenerator;
 use Orchid\Crud\ResourceFinder;
 use Orchid\Platform\Providers\FoundationServiceProvider;
 use Orchid\Support\Facades\Alert;
@@ -24,12 +25,6 @@ class TestCase extends Orchestra
 
         $this->loadLaravelMigrations();
         $this->loadMigrationsFrom(realpath('./tests/Migrations'));
-
-        Factory::guessFactoryNamesUsing(function ($factory) {
-            $factoryBasename = class_basename($factory);
-
-            return "Orchid\Platform\Database\Factories\\$factoryBasename".'Factory';
-        });
 
 
         $resources = $this
@@ -60,7 +55,7 @@ class TestCase extends Orchestra
     {
         $app['config']->set('platform.auth', false);
         $app['config']->set('platform.middleware.public', ['web']);
-        $app['config']->set('platform.middleware.private', ['web']);
+        $app['config']->set('platform.middleware.private', ['web', BootCrudGenerator::class]);
 
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [

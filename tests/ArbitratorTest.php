@@ -2,6 +2,7 @@
 
 namespace Orchid\Crud\Tests;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Orchid\Crud\Arbitrator;
 use Orchid\Crud\Tests\Fixtures\PostResource;
@@ -54,14 +55,14 @@ class ArbitratorTest extends TestCase
     {
         $this->arbitrator->boot();
 
-        /** @var Menu $menu */
-        $menu = Dashboard::menu();
+        /** @var Collection $menu */
+        $menu = Dashboard::menu()->container;
 
         $slug = Str::lower(PostResource::label());
 
-        $this->assertTrue($menu->container->has($slug));
+        $this->assertTrue($menu->has($slug));
 
-        $this->assertEquals($menu->container->get($slug)['arg']['route'], \route('platform.resource.list', [
+        $this->assertEquals($menu->get($slug)['arg']['route'], \route('platform.resource.list', [
             'resource' => PostResource::uriKey(),
         ]));
     }
