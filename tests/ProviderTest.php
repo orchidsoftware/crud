@@ -14,7 +14,8 @@ class ProviderTest extends TestCase
         $this->assertTrue(Route::hasMiddlewareGroup('platform'));
 
         $this->assertContains(
-            BootCrudGenerator::class, Route::getMiddlewareGroups()['platform']
+            BootCrudGenerator::class,
+            Route::getMiddlewareGroups()['platform']
         );
     }
 

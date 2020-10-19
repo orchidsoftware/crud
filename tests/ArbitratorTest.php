@@ -6,7 +6,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Orchid\Crud\Arbitrator;
 use Orchid\Crud\Tests\Fixtures\PostResource;
-use Orchid\Platform\Menu;
 use Orchid\Support\Facades\Dashboard;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

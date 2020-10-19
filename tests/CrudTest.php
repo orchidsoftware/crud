@@ -60,7 +60,7 @@ class CrudTest extends TestCase
 
         $this->get(route('platform.resource.edit', [
             'resource' => PostResource::uriKey(),
-            'id'       => $post,
+            'id' => $post,
         ]))
             ->assertSee(PostResource::updateButtonLabel())
             ->assertSee($post->title)
