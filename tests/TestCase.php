@@ -12,6 +12,7 @@ use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Dashboard;
 use Tabuna\Breadcrumbs\Breadcrumbs;
 use Watson\Active\Facades\Active;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TestCase extends Orchestra
 {
@@ -28,7 +29,7 @@ class TestCase extends Orchestra
         Factory::guessFactoryNamesUsing(function ($factory) {
             $factoryBasename = class_basename($factory);
 
-            return "Orchid\Platform\Database\Factories\\$factoryBasename".'Factory';
+            return "Orchid\Crud\Tests\Factories\\$factoryBasename".'Factory';
         });
 
         $resources = $this
