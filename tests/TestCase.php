@@ -2,6 +2,7 @@
 
 namespace Orchid\Crud\Tests;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Orchid\Crud\Arbitrator;
 use Orchid\Crud\CrudServiceProvider;
@@ -12,7 +13,6 @@ use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Dashboard;
 use Tabuna\Breadcrumbs\Breadcrumbs;
 use Watson\Active\Facades\Active;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TestCase extends Orchestra
 {
