@@ -5,7 +5,6 @@ namespace Orchid\Crud\Tests\Builder;
 use Orchid\Crud\Builder\Migrations;
 use Orchid\Crud\Tests\Fixtures\AllFieldResource;
 use Orchid\Crud\Tests\TestCase;
-use Orchid\Crud\Builder\FieldMigration;
 
 class MigrationTest extends TestCase
 {
@@ -37,5 +36,4 @@ class MigrationTest extends TestCase
         $this->assertIsArray($migrations);
         $this->assertCount(7, $migrations);
     }
-
 }

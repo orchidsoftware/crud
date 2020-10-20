@@ -13,7 +13,6 @@ use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\TD;
 
-
 class AllFieldResource extends Resource
 {
     /**
@@ -59,7 +58,7 @@ class AllFieldResource extends Resource
 
             Select::make('selectname')
                 ->options([
-                    'index'   => 'Index',
+                    'index' => 'Index',
                     'noindex' => 'No index',
                 ])
                 ->title('Test name')

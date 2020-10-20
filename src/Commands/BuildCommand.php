@@ -2,12 +2,12 @@
 
 namespace Orchid\Crud\Commands;
 
-use Illuminate\Console\GeneratorCommand;
 use Illuminate\Console\Command;
+use Illuminate\Console\GeneratorCommand;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 use Orchid\Crud\Builder\Migrations;
 use Orchid\Crud\Resource;
-use Illuminate\Support\Str;
 
 class BuildCommand extends GeneratorCommand
 {
@@ -93,18 +93,18 @@ class BuildCommand extends GeneratorCommand
     protected function getResourceClass(): ?Resource
     {
         $name = $this->argument('name');
-        $class = $this->getResourceNamespace($this->rootNamespace(),$name);
+        $class = $this->getResourceNamespace($this->rootNamespace(), $name);
 
-        if (!class_exists($class))
-        {
+        if (! class_exists($class)) {
             $this->line("<error>Not found class:</error> {$class}");
+
             return null;
         }
 
         $resource = new $class();
-        if (!$resource instanceof Resource)
-        {
+        if (! $resource instanceof Resource) {
             $this->line("<error>Class is not Resource:</error> {$class}");
+
             return null;
         }
 
@@ -192,7 +192,7 @@ class BuildCommand extends GeneratorCommand
     protected function replaceSlug(&$stub)
     {
         $slug = '';
-        if (!is_null($this->resource->slug)) {
+        if (! is_null($this->resource->slug)) {
             $slug = '$table->string(\'slug\', \'255\')->unique();';
         }
 
@@ -226,5 +226,4 @@ class BuildCommand extends GeneratorCommand
     {
         return base_path().'/database/migrations/'.date('Y_m_d_His').'_'.$name.'.php';
     }
-
 }

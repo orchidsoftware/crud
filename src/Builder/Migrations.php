@@ -7,10 +7,9 @@ use Orchid\Screen\Fields\Upload;
 
 class Migrations
 {
-
     private $fields = [];
 
-    private $migration  = [];
+    private $migration = [];
 
 
     public static function make($field):self
@@ -30,7 +29,8 @@ class Migrations
      * @param $fields
      * @return $this
      */
-    private function buildFields($fields) {
+    private function buildFields($fields)
+    {
         foreach ($fields as $field) {
             if ($field instanceof Upload) {
                 continue;
@@ -46,10 +46,11 @@ class Migrations
      *
      * @return $this
      */
-    private function createMigrations() {
+    private function createMigrations()
+    {
         foreach ($this->fields as $name => $migration) {
             if (Str::contains($name, '.')) {
-                $name = explode('.',$name)[0];
+                $name = explode('.', $name)[0];
             }
 
             $this->migration[$name] = $migration->getMigration();
@@ -67,5 +68,4 @@ class Migrations
     {
         return $this->migration;
     }
-
 }

@@ -2,9 +2,9 @@
 
 namespace Orchid\Crud\Tests\Builder;
 
+use Orchid\Crud\Builder\FieldMigration;
 use Orchid\Crud\Tests\Fixtures\AllFieldResource;
 use Orchid\Crud\Tests\TestCase;
-use Orchid\Crud\Builder\FieldMigration;
 
 class FieldsTest extends TestCase
 {
@@ -131,5 +131,4 @@ class FieldsTest extends TestCase
         $this->assertIsString($migration);
         $this->assertEquals('$table->jsonb(\'manyname\')->nullable();', $migration);
     }
-
 }

@@ -6,16 +6,13 @@ use Illuminate\Support\Str;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\DateTimer;
+use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Picture;
-use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Fields\Upload;
-use Orchid\Screen\Fields\Input;
 
 class FieldMigration
 {
-
     private $name;
 
     private $type;
@@ -40,7 +37,7 @@ class FieldMigration
     {
         $this->parseDefault($field);
 
-        if ($this->parseJson($field)){
+        if ($this->parseJson($field)) {
             return $this;
         }
 
@@ -87,7 +84,7 @@ class FieldMigration
     private function parseJson($field)
     {
         if (Str::contains($this->name, '.')) {
-            $this->name = explode('.',$this->name)[0];
+            $this->name = explode('.', $this->name)[0];
             $this->type = 'jsonb';
             $this->options['nullable'] = true;
 
@@ -168,6 +165,4 @@ class FieldMigration
 
         return $syntax .= ';';
     }
-
-
 }
