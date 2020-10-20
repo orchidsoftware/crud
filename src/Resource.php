@@ -24,6 +24,13 @@ abstract class Resource
     public static $title = '';
 
     /**
+     * Field based for generate slug or null if not slug.
+     *
+     * @var string|null
+     */
+    public $slug = null;
+
+    /**
      * Get the value that should be displayed to represent the resource.
      *
      * @return string
