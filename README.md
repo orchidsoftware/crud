@@ -163,10 +163,25 @@ The CRUD generation package is entirely based on the table layer. You can [read 
 
 ## Defining Rules
 
-TODO:
+Each resource contains a `rules` method. When submitting a create or update form, the data can be validated, which is described in the `rules` method:
 ``` php
-// ...
+/**
+ * Get the validation rules that apply to save/update.
+ *
+ * @return array
+ */
+public function rules(): array
+{
+    return [
+        'title' => 'required|unique:posts|max:255',
+        'author.name' => 'required',
+        'author.description' => 'required',
+    ];
+}
 ```
+
+You can learn more on the Laravel [Validation page](https://laravel.com/docs/validation#available-validation-rules).
+
 
 ## Defining Filters
 
