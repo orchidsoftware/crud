@@ -73,6 +73,8 @@ class EditScreen extends CrudScreen
             ? Toast::info($this->resource::updateToastMessage())
             : Toast::warning($this->resource::errorToastMessage());
 
+        $this->resource::onSave($request, $model);
+
         return redirect()->route('platform.resource.list', $request->resource);
     }
 

@@ -241,4 +241,12 @@ abstract class Resource
     {
         return [];
     }
+
+
+    /**
+     * @return array
+     */
+    public static function onSave(ResourceRequest $request, $model)
+    {
+    }
 }
