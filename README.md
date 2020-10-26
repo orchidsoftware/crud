@@ -235,9 +235,7 @@ To create a new filter there is a command:
 php artisan orchid:filter QueryFilter
 ```
 
-This will create a class filter in the `app/Http/Filters` folder.
-
-To use filters in your own resource, you need:
+This will create a class filter in the `app/Http/Filters` folder. To use filters in your own resource, you need:
 
 ```php
 public function filters(): array

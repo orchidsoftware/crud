@@ -17,7 +17,7 @@ class ResourceRequest extends FormRequest
             return [];
         }
 
-        $rulesForResource = $this->resource()->rules();
+        $rulesForResource = $this->resource()->rules($this);
 
         return collect($rulesForResource)
             ->mapWithKeys(function ($item, $key) {
