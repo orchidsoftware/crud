@@ -214,9 +214,41 @@ You can learn more on the Laravel [Validation page](https://laravel.com/docs/val
 ## Defining Filters
 
 TODO:
+
+Each resource contains a `filters` method.
+
 ``` php
-// ...
+/**
+ * Get the filters available for the resource.
+ *
+ * @return array
+ */
+public function filters(): array
+{
+    return [];
+}
 ```
+
+To create a new filter there is a command:
+
+```bash
+php artisan orchid:filter QueryFilter
+```
+
+This will create a class filter in the `app/Http/Filters` folder.
+
+To use filters in your own resource, you need:
+
+```php
+public function filters(): array
+{
+    return [
+        QueryFilter::class
+    ];
+}
+```
+
+You can learn more on the Orchid [Filtration page](https://orchid.software/en/docs/filters/#natural-filter).
 
 ## Eager Loading
 
