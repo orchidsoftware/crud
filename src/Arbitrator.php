@@ -117,6 +117,14 @@ class Arbitrator
             return $this;
         }
 
+        $exist = Dashboard::getPermission()->flatten(1)->map(function ($permission) {
+            return $permission['slug'];
+        })->contains($resource::permission());
+
+        if ($exist === true) {
+            return $this;
+        }
+
         Dashboard::registerPermissions(
             ItemPermission::group('CRUD')
                 ->addPermission($resource::permission(), $resource::label())

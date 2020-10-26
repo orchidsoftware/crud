@@ -108,7 +108,35 @@ You are not required to manually register them.
 
 ## Permissions Resources
 
-For each registered resource, a new permission is created. It is necessary to give the right to manage it to the user.
+Each resource contains a `permission` method. Which should return the string key that the user needs to access this resource. By default, all resources are available to every user.
+
+```php
+/**
+ * Get the permission key for the resource.
+ *
+ * @return string|null
+ */
+public static function permission(): ?string
+{
+    return null;
+}
+```
+
+For each registered resource in which the method returns a non-null value, a new permission is created. 
+
+```php
+/**
+ * Get the permission key for the resource.
+ *
+ * @return string|null
+ */
+public static function permission(): ?string
+{
+    return 'private-post-resource';
+}
+```
+
+It is necessary to give the right to manage it to the user.
 To click on the profile in the left column and go to the system page, and then to the page with users, 
 where you can issue them a mandate or assign a role. After that, they will be displayed in the left menu.
 

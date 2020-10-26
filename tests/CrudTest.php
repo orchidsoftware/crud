@@ -64,8 +64,8 @@ class CrudTest extends TestCase
         ]))
             ->assertSee(PostResource::updateButtonLabel())
             ->assertSee($post->title)
-            ->assertSee($post->description, false)
-            ->assertSee($post->body, false)
+            ->assertSee($post->description)
+            ->assertSee($post->body)
             ->assertOk();
     }
 }

@@ -6,6 +6,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Orchid\Crud\Arbitrator;
 use Orchid\Crud\Tests\Fixtures\PostResource;
+use Orchid\Crud\Tests\Fixtures\PrivateResource;
+use Orchid\Platform\ItemPermission;
 use Orchid\Support\Facades\Dashboard;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -78,5 +80,22 @@ class ArbitratorTest extends TestCase
         $this->assertEquals([
             ["slug" => "private-resource", "description" => "Privates"],
         ], $permission);
+    }
+
+    /**
+     *
+     */
+    public function testBootRegisterExistingPermissionResource(): void
+    {
+        Dashboard::registerPermissions(
+            ItemPermission::group('Other')
+                ->addPermission(PrivateResource::permission(), PrivateResource::label())
+        );
+
+        $this->arbitrator->boot();
+
+        $permission = Dashboard::getPermission()->get('CRUD');
+
+        $this->assertNull($permission);
     }
 }
