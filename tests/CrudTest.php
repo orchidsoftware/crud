@@ -2,6 +2,7 @@
 
 namespace Orchid\Crud\Tests;
 
+use Illuminate\Support\Str;
 use Orchid\Crud\Tests\Fixtures\PostResource;
 use Orchid\Crud\Tests\Models\Post;
 
@@ -53,18 +54,102 @@ class CrudTest extends TestCase
     /**
      *
      */
-    public function testEditResource(): void
+    public function testCreateActionResource(): void
     {
-        $post = $this->posts->first();
+        $post = Post::factory()->make();
+
+        $this
+            ->followingRedirects()
+            ->post(route('platform.resource.create', [
+                'resource' => PostResource::uriKey(),
+                'method'   => 'save',
+            ]), [
+                'model' => $post->toArray(),
+            ])
+            ->assertSee(PostResource::createToastMessage())
+            ->assertOk();
 
         $this->get(route('platform.resource.edit', [
             'resource' => PostResource::uriKey(),
-            'id' => $post,
+            'id'       => Post::orderBy('id', 'desc')->first(),
         ]))
             ->assertSee(PostResource::updateButtonLabel())
             ->assertSee($post->title)
             ->assertSee($post->description)
             ->assertSee($post->body)
             ->assertOk();
+
+    }
+
+
+    /**
+     *
+     */
+    public function testEditResource(): void
+    {
+        $post = $this->posts->first();
+
+        $this->get(route('platform.resource.edit', [
+            'resource' => PostResource::uriKey(),
+            'id'       => $post,
+        ]))
+            ->assertSee(PostResource::updateButtonLabel())
+            ->assertSee($post->title)
+            ->assertSee($post->description)
+            ->assertSee($post->body)
+            ->assertOk();
+    }
+
+    /**
+     *
+     */
+    public function testUpdateActionResource(): void
+    {
+        $post = $this->posts->first();
+
+        $post->description = Str::random();
+
+        $this
+            ->followingRedirects()
+            ->post(route('platform.resource.edit', [
+                'resource' => PostResource::uriKey(),
+                'id'       => $post,
+                'method'   => 'update',
+            ]), [
+                'model' => $post->toArray(),
+            ])
+            ->assertSee(PostResource::updateToastMessage())
+            ->assertOk();
+
+        $this->get(route('platform.resource.edit', [
+            'resource' => PostResource::uriKey(),
+            'id'       => $post,
+        ]))
+            ->assertSee($post->description)
+            ->assertOk();
+    }
+
+    /**
+     *
+     */
+    public function testDeleteActionResource(): void
+    {
+        $post = $this->posts->first();
+
+        $this
+            ->followingRedirects()
+            ->post(route('platform.resource.edit', [
+                'resource' => PostResource::uriKey(),
+                'id'       => $post,
+                'method'   => 'delete',
+            ]))
+            ->assertSee(PostResource::deleteToastMessage())
+            ->assertOk();
+
+        $this->get(route('platform.resource.edit', [
+            'resource' => PostResource::uriKey(),
+            'id'       => $post,
+        ]))
+            ->assertNotFound();
     }
 }
