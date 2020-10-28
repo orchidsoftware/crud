@@ -17,7 +17,7 @@ class ResourceRequest extends FormRequest
             return [];
         }
 
-        $rulesForResource = $this->resource()->rules($this);
+        $rulesForResource = $this->resource()->rules($this->findModel());
 
         return collect($rulesForResource)
             ->mapWithKeys(function ($item, $key) {
@@ -51,6 +51,18 @@ class ResourceRequest extends FormRequest
     public function model(): Model
     {
         return $this->resource()->getModel();
+    }
+
+    /**
+     * Find the model instance for the request.
+     *
+     * @return Model|null
+     */
+    public function findModel(): ?Model
+    {
+        return $this->model()
+            ->with($this->resource()->with())
+            ->find($this->route('id'));
     }
 
     /**
