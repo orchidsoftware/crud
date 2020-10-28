@@ -58,9 +58,9 @@ class PostResource extends Resource
     public function rules(Post $post = null): array
     {
         return [
-            'title'       => 'required|string',
+            'title' => 'required|string',
             'description' => 'required|string',
-            'body'        => 'required|string',
+            'body' => 'required|string',
         ];
     }
 }
