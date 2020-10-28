@@ -266,9 +266,27 @@ public function with(): array
 
 ## Resource Events
 
-TODO:
+Each resource has two methods that do the processing, `onSave` and `onDelete`. Each of them is launched when the event is executed, and you can change or supplement the logic:
+
 ``` php
-// ...
+/**
+ * @param ResourceRequest $request
+ * @param Model           $model
+ */
+public function onSave(ResourceRequest $request, Model $model)
+{
+    $model->forceFill($request->input('model', []))->save();
+}
+
+/**
+ * @param Model $model
+ *
+ * @throws \Exception
+ */
+public function onDelete(Model $model)
+{
+    $model->delete();
+}
 ```
 
 ## Localization

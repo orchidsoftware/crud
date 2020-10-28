@@ -120,7 +120,7 @@ abstract class Resource
     /**
      * @return string
      */
-    public static function nameWithoutResource():string
+    public static function nameWithoutResource(): string
     {
         return Str::of(class_basename(static::class))->replace('Resource', '');
     }
@@ -186,16 +186,6 @@ abstract class Resource
     }
 
     /**
-     * Get the text for the error resource toast.
-     *
-     * @return string
-     */
-    public static function errorToastMessage(): string
-    {
-        return __('An error has occurred. Action not taken.');
-    }
-
-    /**
      * Get the text for the save resource button.
      *
      * @return string
@@ -233,5 +223,24 @@ abstract class Resource
     public function with(): array
     {
         return [];
+    }
+
+    /**
+     * @param ResourceRequest $request
+     * @param Model           $model
+     */
+    public function onSave(ResourceRequest $request, Model $model)
+    {
+        $model->forceFill($request->input('model', []))->save();
+    }
+
+    /**
+     * @param Model $model
+     *
+     * @throws \Exception
+     */
+    public function onDelete(Model $model)
+    {
+        $model->delete();
     }
 }

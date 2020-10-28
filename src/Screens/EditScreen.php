@@ -69,9 +69,9 @@ class EditScreen extends CrudScreen
     {
         $model = $request->findModelOrFail();
 
-        $model->forceFill($request->input('model', []))->save()
-            ? Toast::info($this->resource::updateToastMessage())
-            : Toast::warning($this->resource::errorToastMessage());
+        $request->resource()->onSave($request, $model);
+
+        Toast::info($this->resource::updateToastMessage());
 
         return redirect()->route('platform.resource.list', $request->resource);
     }
@@ -86,9 +86,9 @@ class EditScreen extends CrudScreen
     {
         $model = $request->findModelOrFail();
 
-        $model->delete()
-            ? Toast::info($this->resource::deleteToastMessage())
-            : Toast::warning($this->resource::errorToastMessage());
+        $request->resource()->onDelete($model);
+
+        Toast::info($this->resource::deleteToastMessage());
 
         return redirect()->route('platform.resource.list', $request->resource);
     }
