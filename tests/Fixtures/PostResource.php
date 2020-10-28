@@ -3,7 +3,6 @@
 namespace Orchid\Crud\Tests\Fixtures;
 
 use Orchid\Crud\Resource;
-use Orchid\Crud\ResourceRequest;
 use Orchid\Crud\Tests\Models\Post;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Input;
@@ -52,16 +51,16 @@ class PostResource extends Resource
     /**
      * Get the validation rules that apply to save/update.
      *
-     * @param ResourceRequest|null $request
+     * @param Post|null $post
      *
      * @return array
      */
-    public function rules(ResourceRequest $request = null): array
+    public function rules(Post $post = null): array
     {
         return [
-            'title' => 'required|string',
+            'title'       => 'required|string',
             'description' => 'required|string',
-            'body' => 'required|string',
+            'body'        => 'required|string',
         ];
     }
 }
