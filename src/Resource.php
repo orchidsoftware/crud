@@ -2,6 +2,7 @@
 
 namespace Orchid\Crud;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Orchid\Screen\Field;
@@ -231,13 +232,13 @@ abstract class Resource
      */
     public function onSave(ResourceRequest $request, Model $model)
     {
-        $model->forceFill($request->input('model', []))->save();
+        $model->forceFill($request->all())->save();
     }
 
     /**
      * @param Model $model
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function onDelete(Model $model)
     {

@@ -276,7 +276,7 @@ Each resource has two methods that do the processing, `onSave` and `onDelete`. E
  */
 public function onSave(ResourceRequest $request, Model $model)
 {
-    $model->forceFill($request->input('model', []))->save();
+    $model->forceFill($request->all())->save();
 }
 
 /**

@@ -4,6 +4,7 @@ namespace Orchid\Crud;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class ResourceRequest extends FormRequest
@@ -17,12 +18,20 @@ class ResourceRequest extends FormRequest
             return [];
         }
 
-        $rulesForResource = $this->resource()->rules($this->findModel());
+        return $this->resource()->rules($this->findModel());
+    }
 
-        return collect($rulesForResource)
-            ->mapWithKeys(function ($item, $key) {
-                return ['model.' . $key => $item];
-            })->toArray();
+    /**
+     * Validate the class instance.
+     *
+     * @return void
+     */
+    protected function prepareForValidation(): void
+    {
+        $data =  Arr::wrap($this->model);
+        unset($this->model);
+
+        $this->replace($data);
     }
 
     /**
