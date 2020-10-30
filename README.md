@@ -7,7 +7,7 @@
 
 ## Introduction
 
-<a href="https://orchid.software/" target="blank">Laravel Orchid</a> has provided a unique experience for writing applications, but sometimes a simple CRUD needs to be done when it might seem overkill. Therefore, we have created a new package aimed at developers who want to quickly create a user interface for eloquent models with functions such as create, read, update, and delete.
+<a href="https://orchid.software/" target="blank">Laravel Orchid</a> has provided a unique experience for writing applications. Still, sometimes a simple CRUD needs to be done when it might seem overkill. Therefore, we have created a new package aimed at developers who want to quickly create a user interface for eloquent models with functions such as creating, reading, updating, and deleting.
 
 
 You can describe the entire process using one file. And when you need more options, it's easy to switch to using the platform.
@@ -59,11 +59,11 @@ composer update
 
 ## Defining Resources
 
-Resources are stored are stored in the `app/Orchid/Resources` directory of your application.
+Resources are stored in the `app/Orchid/Resources` directory of your application.
 You may generate a new resource using the `orchid:resource` Artisan command:
 
 ```bash
-php artisan orchid:resource Post
+php artisan orchid:resource PostResource
 ```
 
 The most basic and fundamental property of a resource is its `model` property. 
@@ -87,7 +87,6 @@ Freshly created resources contain nothing. Don't worry, we'll add more fields to
 Many features of the Orchid platform relies on model customization. You can add or remove traits depending on your goals. But we will assume that you have set these for your model:
 
 ```php
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
@@ -95,7 +94,7 @@ use Orchid\Screen\AsSource;
 
 class Post extends Model
 {
-    use HasFactory, AsSource, Filterable, Attachable;
+    use AsSource, Filterable, Attachable;
 }
 ````
 
@@ -137,14 +136,14 @@ public static function permission(): ?string
 ```
 
 It is necessary to give the right to manage it to the user.
-To click on the profile in the left column and go to the system page, and then to the page with users, 
-where you can issue them a mandate or assign a role. After that, they will be displayed in the left menu.
+To click on the profile in the left column, go to the system page, and then to the page with users, 
+you can issue them a mandate or assign a role. After that, they will be displayed in the left menu.
 
 ## Defining Fields
 
 Each resource contains a `fields` method. This method returns an array of fields, which generally extend the `Orchid\Screen\Field` class. 
 
-To add a field to a resource, we can simply add it to the resource's `fields` method. Typically, fields may be created using their static `make` method. This method accepts several arguments; however, you usually only need to pass the name of the field.
+To add a field to a resource, we can add it to the resource's `fields` method. Typically, fields may be created using their static `make` method. This method accepts several arguments; however, you usually only need to pass the field's name.
 
 
 ```php
@@ -169,7 +168,7 @@ In the package to generate CRUD, you can use the fields Orchid platform. Review 
 
 ## Defining Сolumns
 
-Each resource contains a `сolumns` method. To add a column to a resource, we can simply add it to the resource's `column` method. Typically, columns may be created using their static `make` method. 
+Each resource contains a `сolumns` method. To add a column to a resource, we can add it to the resource's `column` method. Typically, columns may be created using their static `make` method. 
 
 ```php
 use Orchid\Screen\TD;
@@ -192,18 +191,20 @@ The CRUD generation package is entirely based on the table layer. You can [read 
 ## Defining Rules
 
 Each resource contains a `rules` method. When submitting a create or update form, the data can be validated, which is described in the `rules` method:
+
 ``` php
 /**
  * Get the validation rules that apply to save/update.
  *
  * @return array
  */
-public function rules(): array
+public function rules(Post $model): array
 {
     return [
-        'title' => 'required|unique:posts|max:255',
-        'author.name' => 'required',
-        'author.description' => 'required',
+        'slug' => [
+            'required',
+            Rule::unique(Post::class, 'slug')->ignore($model),
+        ],
     ];
 }
 ```
@@ -229,7 +230,7 @@ public function filters(): array
 }
 ```
 
-To create a new filter there is a command:
+To create a new filter, there is a command:
 
 ```bash
 php artisan orchid:filter QueryFilter
@@ -250,7 +251,7 @@ You can learn more on the Orchid [Filtration page](https://orchid.software/en/do
 
 ## Eager Loading
 
-If you routinely need to access a resource's relationships within your fields, it may be a good idea to add the relationship to the `with` property of your resource. This property instructs to always eager load the listed relationships when retrieving the resource.
+Suppose you routinely need to access a resource's relationships within your fields. In that case, it may be a good idea to add the relationship to the `with` property of your resource. This property instructs to always eager to load the listed relationships when retrieving the resource.
 
 ```php
  /**
