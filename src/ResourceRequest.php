@@ -28,7 +28,7 @@ class ResourceRequest extends FormRequest
      */
     protected function prepareForValidation(): void
     {
-        $data =  Arr::wrap($this->model);
+        $data = Arr::wrap($this->model);
         unset($this->model);
 
         $this->replace($data);
