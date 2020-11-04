@@ -350,6 +350,16 @@ Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com
 
 <a href="https://opencollective.com/orchid#backers" target="_blank"><img src="https://opencollective.com/orchid/backers.svg?width=838"></a>
 
+## Roadmap
+
+This roadmap isn't meant to cover everything we're going to work on. We will continue to invest in making CRUD easier to use and easier to manage.
+We want to do:
+- [ ] Add setting for displaying and restoring deleted models with `Illuminate\Database\Eloquent\SoftDeletes`;
+- [ ] Add the ability to perform actions for multiple models;
+
+It is an active community, so expect more contributions that will complement it with all sorts of other improvements to help improve production.
+
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
