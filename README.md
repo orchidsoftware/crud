@@ -271,6 +271,8 @@ Each resource has two methods that do the processing, `onSave` and `onDelete`. E
 
 ``` php
 /**
+ * Action to create and update the model
+ *
  * @param ResourceRequest $request
  * @param Model           $model
  */
@@ -280,9 +282,11 @@ public function onSave(ResourceRequest $request, Model $model)
 }
 
 /**
+ * Action to delete a model
+ *
  * @param Model $model
  *
- * @throws \Exception
+ * @throws Exception
  */
 public function onDelete(Model $model)
 {
