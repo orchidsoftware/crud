@@ -292,9 +292,52 @@ public function onDelete(Model $model)
 
 ## Localization
 
-TODO:
+Resource names may be localized by overriding the `label` and `singularLabel` methods on the resource class:
+
 ``` php
-// ...
+/**
+ * Get the displayable label of the resource.
+ *
+ * @return string
+ */
+public static function label()
+{
+    return __('Posts');
+}
+
+/**
+ * Get the displayable singular label of the resource.
+ *
+ * @return string
+ */
+public static function singularLabel()
+{
+    return __('Post');
+}
+```
+
+Action buttons and notifications can also be translated, for example:
+
+```php
+/**
+ * Get the text for the create resource button.
+ *
+ * @return string|null
+ */
+public static function createButtonLabel(): string
+{
+    return __('Create :resource', ['resource' => static::singularLabel()]);
+}
+
+/**
+ * Get the text for the create resource toast.
+ *
+ * @return string
+ */
+public static function createToastMessage(): string
+{
+    return __('The :resource was created!', ['resource' => static::singularLabel()]);
+}
 ```
 
 
