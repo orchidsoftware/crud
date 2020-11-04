@@ -212,9 +212,7 @@ You can learn more on the Laravel [validation page](https://laravel.com/docs/val
 
 ## Defining Filters
 
-TODO:
-
-Each resource contains a `filters` method.
+Each resource contains a `filters` method. Which expects you to return a list of class names that should be rendered and, if necessary, swapped out for the viewed model.
 
 ``` php
 /**
