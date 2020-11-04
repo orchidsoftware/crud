@@ -207,7 +207,7 @@ public function rules(Post $model): array
 }
 ```
 
-You can learn more on the Laravel [Validation page](https://laravel.com/docs/validation#available-validation-rules).
+You can learn more on the Laravel [validation page](https://laravel.com/docs/validation#available-validation-rules).
 
 
 ## Defining Filters
@@ -245,7 +245,7 @@ public function filters(): array
 }
 ```
 
-You can learn more on the Orchid [Filtration page](https://orchid.software/en/docs/filters/#natural-filter).
+You can learn more on the Orchid [filtration page](https://orchid.software/en/docs/filters/#eloquent-filter).
 
 ## Eager Loading
 
@@ -341,6 +341,7 @@ public static function createToastMessage(): string
     return __('The :resource was created!', ['resource' => static::singularLabel()]);
 }
 ```
+
 You can learn more on the [Laravel localization page](https://laravel.com/docs/localization).
 
 ## Backers
