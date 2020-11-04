@@ -341,7 +341,7 @@ public static function createToastMessage(): string
     return __('The :resource was created!', ['resource' => static::singularLabel()]);
 }
 ```
-
+You can learn more on the [Laravel localization page](https://laravel.com/docs/localization).
 
 ## Backers
 
