@@ -227,6 +227,8 @@ abstract class Resource
     }
 
     /**
+     * Action to create and update the model
+     *
      * @param ResourceRequest $request
      * @param Model           $model
      */
@@ -236,6 +238,8 @@ abstract class Resource
     }
 
     /**
+     * Action to delete a model
+     *
      * @param Model $model
      *
      * @throws Exception
