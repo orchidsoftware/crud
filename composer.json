@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.3",
         "orchid/platform": "^9.7"
     },
     "require-dev": {
