@@ -22,11 +22,7 @@ class ListScreen extends CrudScreen
     public function query(ResourceRequest $request): array
     {
         return [
-            'model' => $request->model()
-                ->with($this->resource->with())
-                ->filters()
-                ->filtersApply($this->resource->filters())
-                ->paginate(),
+            'model' => $request->getModelPaginationList(),
         ];
     }
 

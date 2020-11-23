@@ -4,6 +4,7 @@ namespace Orchid\Crud;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
@@ -69,9 +70,7 @@ class ResourceRequest extends FormRequest
      */
     public function findModel(): ?Model
     {
-        return $this->model()
-            ->with($this->resource()->with())
-            ->find($this->route('id'));
+        return $this->getModelQuery()->find($this->route('id'));
     }
 
     /**
@@ -81,8 +80,32 @@ class ResourceRequest extends FormRequest
      */
     public function findModelOrFail()
     {
+        return $this->getModelQuery()->findOrFail($this->route('id'));
+    }
+
+    /**
+     * @return Paginator
+     */
+    public function getModelPaginationList()
+    {
         return $this->model()
             ->with($this->resource()->with())
-            ->findOrFail($this->route('id'));
+            ->filters()
+            ->filtersApply($this->resource()->filters())
+            ->paginate();
+    }
+
+    /**
+     * @return Model
+     */
+    private function getModelQuery()
+    {
+        $query = $this->model();
+
+        if($this->resource()->softDeletes()) {
+            $query = $query->withTrashed();
+        }
+
+        return $query->with($this->resource()->with());
     }
 }

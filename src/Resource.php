@@ -4,6 +4,7 @@ namespace Orchid\Crud;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Orchid\Screen\Field;
 use Orchid\Screen\TD;
@@ -197,6 +198,26 @@ abstract class Resource
     }
 
     /**
+     * Get the text for the restore resource button.
+     *
+     * @return string
+     */
+    public static function restoreButtonLabel(): string
+    {
+        return __('Restore :resource', ['resource' => static::singularLabel()]);
+    }
+
+    /**
+     * Get the text for the restore resource toast.
+     *
+     * @return string
+     */
+    public static function restoreToastMessage(): string
+    {
+        return __('The :resource was restored!', ['resource' => static::singularLabel()]);
+    }
+
+    /**
      * Get the validation rules that apply to save/update.
      *
      * @return array
@@ -248,4 +269,40 @@ abstract class Resource
     {
         $model->delete();
     }
+
+    /**
+     * Determine if this resource uses soft deletes.
+     *
+     * @return bool
+     */
+    public static function softDeletes(): bool
+    {
+        return in_array(SoftDeletes::class, class_uses_recursive(static::$model), true);
+    }
+
+    /**
+     * Action to restore a model
+     *
+     * @param Model $model
+     */
+    public function onRestore(Model $model)
+    {
+        $model->restore();
+    }
+
+    /**
+     * Action to Force delete a model
+     *
+     * @param Model $model
+     *
+     * @throws Exception
+     */
+    public function onForceDelete(Model $model)
+    {
+        // Force deleting a single model instance...
+        $model->forceDelete();
+    }
+
+
+
 }
