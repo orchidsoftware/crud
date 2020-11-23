@@ -102,7 +102,7 @@ class ResourceRequest extends FormRequest
     {
         $query = $this->model();
 
-        if($this->resource()->softDeletes()) {
+        if ($this->resource()->softDeletes()) {
             $query = $query->withTrashed();
         }
 

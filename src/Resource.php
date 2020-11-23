@@ -302,7 +302,4 @@ abstract class Resource
         // Force deleting a single model instance...
         $model->forceDelete();
     }
-
-
-
 }
