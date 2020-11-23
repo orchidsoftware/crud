@@ -13,7 +13,7 @@ class WithTrashed extends Filter
      * @var array
      */
     public $parameters = [
-        'withTrashed'
+        'withTrashed',
     ];
 
     /**
@@ -41,7 +41,7 @@ class WithTrashed extends Filter
     {
         return [
             CheckBox::make('withTrashed')
-                ->placeholder(__('Show deleted entries'))
+                ->placeholder(__('Show deleted entries')),
         ];
     }
 }
