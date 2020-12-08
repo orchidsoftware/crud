@@ -317,7 +317,7 @@ Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com
 
 This roadmap isn't meant to cover everything we're going to work on. We will continue to invest in making CRUD easier to use and easier to manage.
 We want to do:
-- [ ] Add setting for displaying and restoring deleted models with `Illuminate\Database\Eloquent\SoftDeletes`;
+- [x] Add setting for displaying and restoring deleted models with `Illuminate\Database\Eloquent\SoftDeletes`;
 - [ ] Add the ability to perform actions for multiple models;
 
 It is an active community, so expect more contributions that will complement it with all sorts of other improvements to help improve production.
