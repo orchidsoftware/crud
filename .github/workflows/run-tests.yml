@@ -1,6 +1,13 @@
 name: Tests
 
-on: [push, pull_request]
+on: 
+  # Run action on every push and PR
+  push:
+  pull_request:
+
+  # Run action at midnight to test against any updated dependencies
+  schedule:
+  - cron: '0 0 * * *'
 
 jobs:
   test:
