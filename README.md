@@ -31,7 +31,7 @@ You may generate a new resource using the `orchid:resource` Artisan command:
 php artisan orchid:resource PostResource
 ```
 
-The most basic and fundamental property of a resource is its `model` property. 
+The most fundamental property of a resource is its `model` property. 
 This property tells the generator which Eloquent model the resource corresponds to:
 
 ```php
@@ -45,7 +45,7 @@ use App\Models\Post;
 public static $model = Post::class;
 ```
 
-Freshly created resources contain nothing. Don't worry, we'll add more fields to our resource soon.
+Freshly created resources contain nothing. Don't worry. We'll add more fields to our resource soon.
 
 ## Expanding of Model
 
@@ -66,8 +66,8 @@ class Post extends Model
 
 ## Registering Resources
 
-By default, all resources within the `app/Orchid/Resources` directory will automatically be registered.
-You are not required to manually register them.
+All resources within the `app/Orchid/Resources` directory will automatically be registered by default.
+You are not required to register them manually.
 
 
 ## Defining Fields
@@ -224,7 +224,7 @@ public function onDelete(Model $model)
 
 ## Permissions Resources
 
-Each resource contains a `permission` method. Which should return the string key that the user needs to access this resource. By default, all resources are available to every user.
+Each resource contains a `permission` method, which should return the string key that the user needs to access this resource. By default, all resources are available to every user.
 
 ```php
 /**
@@ -269,7 +269,7 @@ Typically, these policies will be registered in your application's `AuthServiceP
 - restore
 - forceDelete
 
-No additional configuration is required! So, for example, to determine which users are allowed to update a `Post` model, you simply need to define an `update` method on the model's corresponding policy class:
+No additional configuration is required! So, for example, to determine which users are allowed to update a `Post` model, you need to define an `update` method on the model's corresponding policy class:
 
 ```php
 namespace App\Policies;
@@ -297,7 +297,7 @@ class PostPolicy
 ```
 
 
-> If a policy exists but is missing a method for a particular action, the user will not be allowed to perform that action. So, if you have defined a policy, don't forget to define all of its relevant authorization methods.
+> If a policy exists but is missing a particular action method, the user will not be allowed to perform that action. So, if you have defined a policy, don't forget to define all of its relevant authorization methods.
 
 
 If you don't want the policy to affect CRUD generation users, you may wish to authorize all actions within a given policy. To accomplish this, define a `before` method on the policy. Before any other policy methods, the before method will be executed, allowing you to authorize the action before the intended policy method is actually called.
