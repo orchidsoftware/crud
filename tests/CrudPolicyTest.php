@@ -30,8 +30,8 @@ class CrudPolicyTest extends TestCase
     public function loginWithFakeUser()
     {
         $user = new User([
-            'name'     => 'Admin',
-            'email'    => 'admin@admin.com',
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
             'password' => Hash::make('password'),
         ]);
 
