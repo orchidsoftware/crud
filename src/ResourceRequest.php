@@ -131,7 +131,7 @@ class ResourceRequest extends FormRequest
         /** @var Authorizable|null $user */
         $user = $this->user();
 
-        if($user === null) {
+        if ($user === null) {
             return false;
         }
 

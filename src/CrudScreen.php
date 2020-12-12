@@ -46,7 +46,6 @@ abstract class CrudScreen extends Screen
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-
             $this->request = app(ResourceRequest::class);
             $this->resource = $this->request->resource();
             $this->name = $this->resource::label();

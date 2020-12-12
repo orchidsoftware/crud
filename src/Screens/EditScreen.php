@@ -12,7 +12,6 @@ use Orchid\Crud\Requests\RestoreRequest;
 use Orchid\Crud\Requests\UpdateRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Field;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
@@ -54,7 +53,7 @@ class EditScreen extends CrudScreen
 
             Button::make($this->resource::deleteButtonLabel())
                 ->confirm(__('Are you sure you want to delete this resource?'))
-                ->canSee(!$this->isSoftDeleted() && $this->can('delete'))
+                ->canSee(! $this->isSoftDeleted() && $this->can('delete'))
                 ->method('delete')
                 ->icon('trash'),
 
