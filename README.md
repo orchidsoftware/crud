@@ -70,40 +70,6 @@ By default, all resources within the `app/Orchid/Resources` directory will autom
 You are not required to manually register them.
 
 
-## Permissions Resources
-
-Each resource contains a `permission` method. Which should return the string key that the user needs to access this resource. By default, all resources are available to every user.
-
-```php
-/**
- * Get the permission key for the resource.
- *
- * @return string|null
- */
-public static function permission(): ?string
-{
-    return null;
-}
-```
-
-For each registered resource in which the method returns a non-null value, a new permission is created. 
-
-```php
-/**
- * Get the permission key for the resource.
- *
- * @return string|null
- */
-public static function permission(): ?string
-{
-    return 'private-post-resource';
-}
-```
-
-It is necessary to give the right to manage it to the user.
-To click on the profile in the left column, go to the system page, and then to the page with users, 
-you can issue them a mandate or assign a role. After that, they will be displayed in the left menu.
-
 ## Defining Fields
 
 Each resource contains a `fields` method. This method returns an array of fields, which generally extend the `Orchid\Screen\Field` class. To add a field to a resource, we can add it to the resource's `fields` method. Typically, fields may be created using their static `make` method. This method accepts several arguments; however, you usually only need to pass the field's name.
@@ -254,6 +220,41 @@ public function onDelete(Model $model)
     $model->delete();
 }
 ```
+
+
+## Permissions Resources
+
+Each resource contains a `permission` method. Which should return the string key that the user needs to access this resource. By default, all resources are available to every user.
+
+```php
+/**
+ * Get the permission key for the resource.
+ *
+ * @return string|null
+ */
+public static function permission(): ?string
+{
+    return null;
+}
+```
+
+For each registered resource in which the method returns a non-null value, a new permission is created. 
+
+```php
+/**
+ * Get the permission key for the resource.
+ *
+ * @return string|null
+ */
+public static function permission(): ?string
+{
+    return 'private-post-resource';
+}
+```
+
+It is necessary to give the right to manage it to the user.
+To click on the profile in the left column, go to the system page, and then to the page with users, 
+you can issue them a mandate or assign a role. After that, they will be displayed in the left menu.
 
 ## Localization
 
