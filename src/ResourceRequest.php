@@ -2,10 +2,12 @@
 
 namespace Orchid\Crud;
 
+use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class ResourceRequest extends FormRequest
@@ -107,5 +109,32 @@ class ResourceRequest extends FormRequest
         }
 
         return $query->with($this->resource()->with());
+    }
+
+    /**
+     * Determine if the entity has a given ability.
+     *
+     * @param string $abilities
+     *
+     * @return bool
+     */
+    public function can(string $abilities): bool
+    {
+        $model = $this->route('id') === null
+            ? $this->model()
+            : $this->findModelOrFail();
+
+        if (Gate::getPolicyFor($model) === null) {
+            return true;
+        }
+
+        /** @var Authorizable|null $user */
+        $user = $this->user();
+
+        if($user === null) {
+            return false;
+        }
+
+        return $this->user()->can($abilities, $model);
     }
 }

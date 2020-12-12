@@ -2,21 +2,25 @@
 
 namespace Orchid\Crud\Screens;
 
-use Orchid\Crud\ResourceRequest;
+use Illuminate\Http\RedirectResponse;
+use Orchid\Crud\CrudScreen;
+use Orchid\Crud\Requests\CreateRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Field;
+use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
-class CreateScreen extends EditScreen
+class CreateScreen extends CrudScreen
 {
     /**
      * Query data.
      *
-     * @param ResourceRequest $request
+     * @param CreateRequest $request
      *
      * @return array
      */
-    public function query(ResourceRequest $request): array
+    public function query(CreateRequest $request): array
     {
         return [
             'model' => $request->model(),
@@ -38,11 +42,23 @@ class CreateScreen extends EditScreen
     }
 
     /**
-     * @param ResourceRequest $request
+     * Views.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Orchid\Screen\Layout[]
      */
-    public function save(ResourceRequest $request)
+    public function layout(): array
+    {
+        return [
+            Layout::rows($this->fields()),
+        ];
+    }
+
+    /**
+     * @param CreateRequest $request
+     *
+     * @return RedirectResponse
+     */
+    public function save(CreateRequest $request)
     {
         $model = $request->model();
 

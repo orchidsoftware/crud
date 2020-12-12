@@ -256,6 +256,79 @@ It is necessary to give the right to manage it to the user.
 To click on the profile in the left column, go to the system page, and then to the page with users, 
 you can issue them a mandate or assign a role. After that, they will be displayed in the left menu.
 
+## Policies
+
+To limit which users may view, create, update, or delete resources leverages Laravel's [authorization policies](https://laravel.com/docs/authorization#creating-policies). Policies are simple PHP classes that organize authorization logic for a particular model or resource. For example, if your application is a blog, you may have a `Post` model and a corresponding `PostPolicy` within your application.
+
+Typically, these policies will be registered in your application's `AuthServiceProvider`. If CRUD detects a policy has been registered for the model, it will automatically check that policy's relevant authorization methods before performing their respective actions, such as:
+
+- viewAny
+- create
+- update
+- delete
+- restore
+- forceDelete
+
+No additional configuration is required! So, for example, to determine which users are allowed to update a `Post` model, you simply need to define an `update` method on the model's corresponding policy class:
+
+```php
+namespace App\Policies;
+
+use App\Models\User;
+use App\Models\Post;
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class PostPolicy
+{
+    use HandlesAuthorization;
+
+    /**
+     * Determine whether the user can update the post.
+     *
+     * @param  User  $user
+     * @param  Post  $post
+     * @return mixed
+     */
+    public function update(User $user, Post $post)
+    {
+        return true;
+    }
+}
+```
+
+
+> If a policy exists but is missing a method for a particular action, the user will not be allowed to perform that action. So, if you have defined a policy, don't forget to define all of its relevant authorization methods.
+
+
+If you don't want the policy to affect CRUD generation users, you may wish to authorize all actions within a given policy. To accomplish this, define a `before` method on the policy. Before any other policy methods, the before method will be executed, allowing you to authorize the action before the intended policy method is actually called.
+
+```php
+namespace App\Policies;
+
+use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class PostPolicy
+{
+    use HandlesAuthorization;
+
+    /**
+     * Perform pre-authorization checks.
+     *
+     * @param  User  $user
+     * @param  string  $ability
+     * @return void|bool
+     */
+    public function before(User $user, $ability)
+    {
+        if ($user->hasAccess('private-post-resource')) {
+            return true;
+        }
+    }
+}
+```
+
+
 ## Localization
 
 Resource names may be localized by overriding the `label` and `singularLabel` methods on the resource class:

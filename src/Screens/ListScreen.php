@@ -4,7 +4,7 @@ namespace Orchid\Crud\Screens;
 
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Crud\CrudScreen;
-use Orchid\Crud\ResourceRequest;
+use Orchid\Crud\Requests\IndexRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\TD;
@@ -15,11 +15,11 @@ class ListScreen extends CrudScreen
     /**
      * Query data.
      *
-     * @param ResourceRequest $request
+     * @param IndexRequest $request
      *
      * @return array
      */
-    public function query(ResourceRequest $request): array
+    public function query(IndexRequest $request): array
     {
         return [
             'model' => $request->getModelPaginationList(),
@@ -48,9 +48,11 @@ class ListScreen extends CrudScreen
     public function layout(): array
     {
         $grid = $this->resource->columns();
+
         $grid[] = TD::set(__('Actions'))
             ->align(TD::ALIGN_RIGHT)
             ->cantHide()
+            ->canSee($this->can('update'))
             ->render(function (Model $model) {
                 return Link::make(__('Edit'))
                     ->icon('pencil')
@@ -59,7 +61,6 @@ class ListScreen extends CrudScreen
                         $model->getAttribute($model->getKeyName()),
                     ]);
             });
-
 
         return [
             Layout::selection($this->resource->filters()),

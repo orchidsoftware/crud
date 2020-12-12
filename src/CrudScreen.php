@@ -3,6 +3,7 @@
 
 namespace Orchid\Crud;
 
+use Orchid\Screen\Field;
 use Orchid\Screen\Screen;
 
 abstract class CrudScreen extends Screen
@@ -20,6 +21,11 @@ abstract class CrudScreen extends Screen
      * @var string
      */
     public $description;
+
+    /**
+     * @var ResourceRequest
+     */
+    public $request;
 
     /**
      * Permission.
@@ -40,11 +46,37 @@ abstract class CrudScreen extends Screen
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $this->resource = app(ResourceRequest::class)->resource();
+
+            $this->request = app(ResourceRequest::class);
+            $this->resource = $this->request->resource();
             $this->name = $this->resource::label();
             $this->permission = $this->resource::permission();
 
             return $next($request);
         });
+    }
+
+    /**
+     * Determine if the entity has a given ability.
+     *
+     * @param string $abilities
+     *
+     * @return bool
+     */
+    public function can(string $abilities): bool
+    {
+        return $this->request->can($abilities);
+    }
+
+    /**
+     * Get fields with prefixes
+     *
+     * @return array|Field[]
+     */
+    public function fields()
+    {
+        return array_map(function (Field $field) {
+            return $field->set('name', 'model.' . $field->get('name'));
+        }, $this->resource->fields());
     }
 }

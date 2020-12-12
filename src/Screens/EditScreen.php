@@ -6,7 +6,10 @@ use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Orchid\Crud\CrudScreen;
-use Orchid\Crud\ResourceRequest;
+use Orchid\Crud\Requests\DeleteRequest;
+use Orchid\Crud\Requests\ForceDeleteRequest;
+use Orchid\Crud\Requests\RestoreRequest;
+use Orchid\Crud\Requests\UpdateRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Field;
@@ -23,11 +26,11 @@ class EditScreen extends CrudScreen
     /**
      * Query data.
      *
-     * @param ResourceRequest $request
+     * @param UpdateRequest $request
      *
      * @return array
      */
-    public function query(ResourceRequest $request): array
+    public function query(UpdateRequest $request): array
     {
         $this->model = $request->findModelOrFail();
 
@@ -45,25 +48,26 @@ class EditScreen extends CrudScreen
     {
         return [
             Button::make($this->resource::updateButtonLabel())
+                ->canSee($this->request->can('update'))
                 ->method('update')
                 ->icon('check'),
 
             Button::make($this->resource::deleteButtonLabel())
                 ->confirm(__('Are you sure you want to delete this resource?'))
-                ->canSee(! $this->isSoftDeleted())
+                ->canSee(!$this->isSoftDeleted() && $this->can('delete'))
                 ->method('delete')
                 ->icon('trash'),
 
             Button::make($this->resource::deleteButtonLabel())
                 ->confirm(__('Are you sure you want to force delete this resource?'))
-                ->canSee($this->isSoftDeleted())
+                ->canSee($this->isSoftDeleted() && $this->can('forceDelete'))
                 ->method('forceDelete')
                 ->icon('trash'),
 
 
             Button::make($this->resource::restoreButtonLabel())
                 ->confirm(__('Are you sure you want to restore this resource?'))
-                ->canSee($this->isSoftDeleted())
+                ->canSee($this->isSoftDeleted() && $this->can('restore'))
                 ->method('restore')
                 ->icon('reload'),
         ];
@@ -76,21 +80,17 @@ class EditScreen extends CrudScreen
      */
     public function layout(): array
     {
-        $fields = array_map(function (Field $field) {
-            return $field->set('name', 'model.' . $field->get('name'));
-        }, $this->resource->fields());
-
         return [
-            Layout::rows($fields),
+            Layout::rows($this->fields()),
         ];
     }
 
     /**
-     * @param ResourceRequest $request
+     * @param UpdateRequest $request
      *
      * @return RedirectResponse
      */
-    public function update(ResourceRequest $request)
+    public function update(UpdateRequest $request)
     {
         $request->resource()->onSave($request, $request->findModelOrFail());
 
@@ -100,12 +100,12 @@ class EditScreen extends CrudScreen
     }
 
     /**
-     * @param ResourceRequest $request
+     * @param DeleteRequest $request
      *
      * @return RedirectResponse
      * @throws Exception
      */
-    public function delete(ResourceRequest $request)
+    public function delete(DeleteRequest $request)
     {
         $request->resource()->onDelete(
             $request->findModelOrFail()
@@ -117,12 +117,12 @@ class EditScreen extends CrudScreen
     }
 
     /**
-     * @param ResourceRequest $request
+     * @param ForceDeleteRequest $request
      *
      * @return RedirectResponse
      * @throws Exception
      */
-    public function forceDelete(ResourceRequest $request)
+    public function forceDelete(ForceDeleteRequest $request)
     {
         $request->resource()->onForceDelete(
             $request->findModelOrFail()
@@ -134,11 +134,11 @@ class EditScreen extends CrudScreen
     }
 
     /**
-     * @param ResourceRequest $request
+     * @param RestoreRequest $request
      *
      * @return RedirectResponse
      */
-    public function restore(ResourceRequest $request)
+    public function restore(RestoreRequest $request)
     {
         $request->resource()->onRestore(
             $request->findModelOrFail()
