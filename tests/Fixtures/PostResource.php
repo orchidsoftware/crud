@@ -2,6 +2,8 @@
 
 namespace Orchid\Crud\Tests\Fixtures;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use Orchid\Crud\Resource;
 use Orchid\Crud\Tests\Models\Post;
 use Orchid\Screen\Field;
@@ -24,11 +26,11 @@ class PostResource extends Resource
     public function columns(): array
     {
         return [
-            TD::set('title'),
-            TD::set('description'),
-            TD::set('body'),
-            TD::set('created_at'),
-            TD::set('updated_at'),
+            TD::make('title'),
+            TD::make('description'),
+            TD::make('body'),
+            TD::make('created_at'),
+            TD::make('updated_at'),
         ];
     }
 
@@ -43,7 +45,6 @@ class PostResource extends Resource
                 ->help('A string containing the name text and design to attract attention'),
 
             TextArea::make('description'),
-
             TextArea::make('body'),
         ];
     }
@@ -51,16 +52,20 @@ class PostResource extends Resource
     /**
      * Get the validation rules that apply to save/update.
      *
-     * @param Post|null $post
+     * @param Model $model
      *
      * @return array
      */
-    public function rules(Post $post = null): array
+    public function rules(Model $model): array
     {
         return [
-            'title' => 'required|string',
+            'title' => [
+                'string',
+                'required',
+                Rule::unique(Post::class, 'title')->ignore($model),
+            ],
             'description' => 'required|string',
-            'body' => 'required|string',
+            'body'        => 'required|string',
         ];
     }
 }

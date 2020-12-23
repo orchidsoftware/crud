@@ -49,7 +49,7 @@ class ListScreen extends CrudScreen
     {
         $grid = $this->resource->columns();
 
-        $grid[] = TD::set(__('Actions'))
+        $grid[] = TD::make(__('Actions'))
             ->align(TD::ALIGN_RIGHT)
             ->cantHide()
             ->canSee($this->can('update'))

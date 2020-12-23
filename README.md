@@ -110,8 +110,8 @@ use Orchid\Screen\TD;
 public function columns(): array
 {
     return [
-        TD::set('id'),
-        TD::set('title'),
+        TD::make('id'),
+        TD::make('title'),
     ];
 }
 ```
@@ -127,7 +127,7 @@ Each resource contains a `rules` method. When submitting a create or update form
  *
  * @return array
  */
-public function rules(Post $model): array
+public function rules(Model $model): array
 {
     return [
         'slug' => [

@@ -21,7 +21,29 @@ class ResourceRequest extends FormRequest
             return [];
         }
 
-        return $this->resource()->rules($this->findModel());
+        $model = $this->findModel() ?? $this->resource()->getModel();
+        $rules = $this->resource()->rules($model);
+
+        return collect($rules)
+            ->mapWithKeys(function ($value, $key) {
+                return ['model.' . $key => $value];
+            })
+            ->toArray();
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes(): array
+    {
+        return collect($this->model)->keys()
+            ->mapWithKeys(function ($key) {
+                return ['model.' . $key => $key];
+            })
+            ->merge($this->resource()->attributes())
+            ->toArray();
     }
 
     /**
@@ -31,7 +53,28 @@ class ResourceRequest extends FormRequest
      */
     protected function prepareForValidation(): void
     {
+
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages():array
+    {
+        return $this->resource()->messages();
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @return void
+     */
+    public function withValidator()
+    {
         $data = Arr::wrap($this->model);
+
         unset($this->model);
 
         $this->replace($data);

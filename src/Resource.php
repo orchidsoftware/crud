@@ -220,9 +220,31 @@ abstract class Resource
     /**
      * Get the validation rules that apply to save/update.
      *
+     * @param Model $model
+     *
      * @return array
      */
-    public function rules(): array
+    public function rules(Model $model): array
+    {
+        return [];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes(): array
     {
         return [];
     }

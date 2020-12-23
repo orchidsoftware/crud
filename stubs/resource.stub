@@ -32,14 +32,14 @@ class {{ class }} extends Resource
     public function columns(): array
     {
         return [
-            TD::set('id'),
+            TD::make('id'),
 
-            TD::set('created_at', 'Date of creation')
+            TD::make('created_at', 'Date of creation')
                 ->render(function ($model) {
                     return $model->created_at->toDateTimeString();
                 }),
 
-            TD::set('updated_at', 'Update date')
+            TD::make('updated_at', 'Update date')
                 ->render(function ($model) {
                     return $model->updated_at->toDateTimeString();
                 }),
