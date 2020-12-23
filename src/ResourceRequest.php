@@ -53,7 +53,6 @@ class ResourceRequest extends FormRequest
      */
     protected function prepareForValidation(): void
     {
-
     }
 
     /**

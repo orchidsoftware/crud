@@ -65,7 +65,7 @@ class PostResource extends Resource
                 Rule::unique(Post::class, 'title')->ignore($model),
             ],
             'description' => 'required|string',
-            'body'        => 'required|string',
+            'body' => 'required|string',
         ];
     }
 }
