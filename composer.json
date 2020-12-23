@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": "^7.3",
-        "orchid/platform": "^9.14"
+        "orchid/platform": "^9.14.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
