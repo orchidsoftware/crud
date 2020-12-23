@@ -59,7 +59,8 @@ class DefaultSort extends Filter
     {
         return $builder->defaultSort(
             $this->sortColumn ?? $builder->getModel()->getKeyName(),
-            $this->sortOrder);
+            $this->sortOrder
+        );
     }
 
     /**
