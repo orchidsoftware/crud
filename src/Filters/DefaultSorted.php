@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Orchid\Filters\Filter;
 use Orchid\Screen\Field;
 
-class DefaultSort extends Filter
+class DefaultSorted extends Filter
 {
     /**
      * @var array
@@ -34,12 +34,12 @@ class DefaultSort extends Filter
      * @param string      $sortOrder
      * @param string|null $sortColumn
      */
-    public function __construct(string $sortOrder = 'asc', string $sortColumn = null)
+    public function __construct(string $sortColumn = null, string $sortOrder = 'asc')
     {
         parent::__construct();
 
-        $this->sortOrder = $sortOrder;
         $this->sortColumn = $sortColumn;
+        $this->sortOrder = $sortOrder;
     }
 
     /**

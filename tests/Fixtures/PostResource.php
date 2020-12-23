@@ -4,6 +4,7 @@ namespace Orchid\Crud\Tests\Fixtures;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
+use Orchid\Crud\Filters\DefaultSorted;
 use Orchid\Crud\Resource;
 use Orchid\Crud\Tests\Models\Post;
 use Orchid\Screen\Field;
@@ -47,6 +48,16 @@ class PostResource extends Resource
             TextArea::make('description'),
             TextArea::make('body'),
         ];
+    }
+
+    /**
+     * @return DefaultSorted[]
+     */
+    public function filters(): array
+    {
+       return [
+           new DefaultSorted()
+       ];
     }
 
     /**
