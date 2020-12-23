@@ -132,7 +132,7 @@ public function rules(Model $model): array
     return [
         'slug' => [
             'required',
-            Rule::unique(Post::class, 'slug')->ignore($model),
+            Rule::unique(self::$model, 'slug')->ignore($model),
         ],
     ];
 }

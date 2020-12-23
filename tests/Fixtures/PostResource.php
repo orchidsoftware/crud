@@ -62,7 +62,7 @@ class PostResource extends Resource
             'title' => [
                 'string',
                 'required',
-                Rule::unique(Post::class, 'title')->ignore($model),
+                Rule::unique(self::$model, 'title')->ignore($model),
             ],
             'description' => 'required|string',
             'body'        => 'required|string',
