@@ -55,8 +55,8 @@ class PostResource extends Resource
      */
     public function filters(): array
     {
-       return [
-           new DefaultSorted()
+        return [
+           new DefaultSorted(),
        ];
     }
 
