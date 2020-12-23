@@ -52,12 +52,14 @@ class EditScreen extends CrudScreen
                 ->icon('check'),
 
             Button::make($this->resource::deleteButtonLabel())
+                ->novalidate()
                 ->confirm(__('Are you sure you want to delete this resource?'))
                 ->canSee(! $this->isSoftDeleted() && $this->can('delete'))
                 ->method('delete')
                 ->icon('trash'),
 
             Button::make($this->resource::deleteButtonLabel())
+                ->novalidate()
                 ->confirm(__('Are you sure you want to force delete this resource?'))
                 ->canSee($this->isSoftDeleted() && $this->can('forceDelete'))
                 ->method('forceDelete')
@@ -65,6 +67,7 @@ class EditScreen extends CrudScreen
 
 
             Button::make($this->resource::restoreButtonLabel())
+                ->novalidate()
                 ->confirm(__('Are you sure you want to restore this resource?'))
                 ->canSee($this->isSoftDeleted() && $this->can('restore'))
                 ->method('restore')
