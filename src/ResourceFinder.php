@@ -75,7 +75,6 @@ class ResourceFinder
             ->toArray();
     }
 
-
     /**
      * @param string      $directory
      * @param SplFileInfo $file

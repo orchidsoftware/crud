@@ -101,8 +101,9 @@ class EditScreen extends CrudScreen
     /**
      * @param DeleteRequest $request
      *
-     * @return RedirectResponse
      * @throws Exception
+     *
+     * @return RedirectResponse
      */
     public function delete(DeleteRequest $request)
     {
@@ -118,8 +119,9 @@ class EditScreen extends CrudScreen
     /**
      * @param ForceDeleteRequest $request
      *
-     * @return RedirectResponse
      * @throws Exception
+     *
+     * @return RedirectResponse
      */
     public function forceDelete(ForceDeleteRequest $request)
     {

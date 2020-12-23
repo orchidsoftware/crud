@@ -62,7 +62,7 @@ class CrudTest extends TestCase
             ->followingRedirects()
             ->post(route('platform.resource.create', [
                 'resource' => PostResource::uriKey(),
-                'method' => 'save',
+                'method'   => 'save',
             ]), [
                 'model' => $post->toArray(),
             ])
@@ -71,7 +71,7 @@ class CrudTest extends TestCase
 
         $this->get(route('platform.resource.edit', [
             'resource' => PostResource::uriKey(),
-            'id' => Post::orderBy('id', 'desc')->first(),
+            'id'       => Post::orderBy('id', 'desc')->first(),
         ]))
             ->assertSee(PostResource::updateButtonLabel())
             ->assertSee($post->title)
@@ -93,7 +93,7 @@ class CrudTest extends TestCase
             ->followingRedirects()
             ->post(route('platform.resource.create', [
                 'resource' => PostResource::uriKey(),
-                'method' => 'save',
+                'method'   => 'save',
             ]), [
                 'model' => $post->toArray(),
             ])
@@ -108,7 +108,7 @@ class CrudTest extends TestCase
             ->followingRedirects()
             ->post(route('platform.resource.create', [
                 'resource' => PostResource::uriKey(),
-                'method' => 'save',
+                'method'   => 'save',
             ]), [
                 'model' => $post->toArray(),
             ])
@@ -126,7 +126,7 @@ class CrudTest extends TestCase
 
         $this->get(route('platform.resource.edit', [
             'resource' => PostResource::uriKey(),
-            'id' => $post,
+            'id'       => $post,
         ]))
             ->assertSee(PostResource::updateButtonLabel())
             ->assertSee($post->title)
@@ -148,8 +148,8 @@ class CrudTest extends TestCase
             ->followingRedirects()
             ->post(route('platform.resource.edit', [
                 'resource' => PostResource::uriKey(),
-                'id' => $post,
-                'method' => 'update',
+                'id'       => $post,
+                'method'   => 'update',
             ]), [
                 'model' => $post->toArray(),
             ])
@@ -158,7 +158,7 @@ class CrudTest extends TestCase
 
         $this->get(route('platform.resource.edit', [
             'resource' => PostResource::uriKey(),
-            'id' => $post,
+            'id'       => $post,
         ]))
             ->assertSee($post->description)
             ->assertOk();
@@ -175,15 +175,15 @@ class CrudTest extends TestCase
             ->followingRedirects()
             ->post(route('platform.resource.edit', [
                 'resource' => PostResource::uriKey(),
-                'id' => $post,
-                'method' => 'delete',
+                'id'       => $post,
+                'method'   => 'delete',
             ]))
             ->assertSee(PostResource::deleteToastMessage())
             ->assertOk();
 
         $this->get(route('platform.resource.edit', [
             'resource' => PostResource::uriKey(),
-            'id' => $post,
+            'id'       => $post,
         ]))
             ->assertNotFound();
     }

@@ -64,13 +64,11 @@ class TestCase extends Orchestra
 
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
+            'driver'   => 'sqlite',
             'database' => ':memory:',
-            'prefix' => '',
+            'prefix'   => '',
         ]);
     }
-
-
 
     /**
      * @return ResourceFinder
@@ -101,10 +99,10 @@ class TestCase extends Orchestra
     protected function getPackageAliases($app): array
     {
         return [
-            'Alert' => Alert::class,
-            'Active' => Active::class,
+            'Alert'       => Alert::class,
+            'Active'      => Active::class,
             'Breadcrumbs' => Breadcrumbs::class,
-            'Dashboard' => Dashboard::class,
+            'Dashboard'   => Dashboard::class,
         ];
     }
 }
