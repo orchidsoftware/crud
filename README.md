@@ -174,6 +174,22 @@ public function filters(): array
 }
 ```
 
+
+We already offer some prepared filters:
+
+- `Orchid\Crud\Filters\DefaultSorted` - To display deleted records
+- `Orchid\Crud\Filters\WithTrashed` - Setting default column sorting
+
+
+```php
+public function filters(): array
+{
+    return [
+        new DefaultSorted('id', 'desc'),
+    ];
+}
+```
+
 You can learn more on the Orchid [filtration page](https://orchid.software/en/docs/filters/#eloquent-filter).
 
 ## Eager Loading
