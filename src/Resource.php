@@ -19,23 +19,6 @@ abstract class Resource
     public static $model = '';
 
     /**
-     * The single value that should be used to represent the resource when being displayed.
-     *
-     * @var string
-     */
-    public static $title = '';
-
-    /**
-     * Get the value that should be displayed to represent the resource.
-     *
-     * @return string
-     */
-    public function title(): string
-    {
-        return $this->{static::$title};
-    }
-
-    /**
      * Get the displayable label of the resource.
      *
      * @return string
