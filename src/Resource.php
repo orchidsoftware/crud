@@ -42,7 +42,7 @@ abstract class Resource
      */
     public static function label(): string
     {
-        return Str::plural(static::nameWithoutResource());
+        return  Str::of(static::nameWithoutResource())->snake(' ')->title()->plural();
     }
 
     /**
