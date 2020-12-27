@@ -115,7 +115,7 @@ public function columns(): array
     ];
 }
 ```
-The CRUD generation package is entirely based on the table layer. You can [read more about this on the documentation page](https://orchid.software/en/docs/layouts/table/).
+The CRUD generation package is entirely based on the table layer. You can [read more about this on the documentation page](https://orchid.software/en/docs/table/).
 
 ## Defining Rules
 
