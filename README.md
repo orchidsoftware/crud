@@ -397,6 +397,24 @@ public static function createToastMessage(): string
 
 You can learn more on the [Laravel localization page](https://laravel.com/docs/localization).
 
+
+## Preventing Conflicts (Traffic Cop)
+
+If this option is active, the model will be checked for the last change if it was updated after the edit form was opened. A validation error will be thrown. Feature Traffic Cop is disabled by default.
+
+```php
+/**
+ * Indicates whether should check for modifications between viewing and updating a resource.
+ *
+ * @return  bool
+*/
+public static function trafficCop(): bool
+{
+    return false;
+}
+```
+
+
 ## Backers
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/orchid#backer)]

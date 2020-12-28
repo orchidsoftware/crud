@@ -61,6 +61,16 @@ class PostResource extends Resource
     }
 
     /**
+     * Indicates whether should check for modifications between viewing and updating a resource.
+     *
+     * @return  bool
+     */
+    public static function trafficCop(): bool
+    {
+        return true;
+    }
+
+    /**
      * Get the validation rules that apply to save/update.
      *
      * @param Model $model

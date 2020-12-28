@@ -49,7 +49,10 @@ class EditScreen extends CrudScreen
             Button::make($this->resource::updateButtonLabel())
                 ->canSee($this->request->can('update'))
                 ->method('update')
-                ->icon('check'),
+                ->icon('check')
+                ->parameters([
+                    '_retrieved_at' => optional($this->model->{$this->model->getUpdatedAtColumn()})->toJson(),
+                ]),
 
             Button::make($this->resource::deleteButtonLabel())
                 ->novalidate()
