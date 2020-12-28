@@ -63,7 +63,7 @@ class PostResource extends Resource
     /**
      * Indicates whether should check for modifications between viewing and updating a resource.
      *
-     * @return  bool
+     * @return bool
      */
     public static function trafficCop(): bool
     {

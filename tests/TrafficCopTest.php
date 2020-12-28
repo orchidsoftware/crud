@@ -34,7 +34,8 @@ class TrafficCopTest extends TestCase
     /**
      * Set the URL of the previous request.
      *
-     * @param  string  $url
+     * @param string $url
+     *
      * @return $this
      */
     public function from(string $url)
@@ -43,5 +44,4 @@ class TrafficCopTest extends TestCase
 
         return $this;
     }
-
 }

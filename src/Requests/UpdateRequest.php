@@ -39,7 +39,7 @@ class UpdateRequest extends ResourceRequest
      */
     protected function hasBeenUpdatedSinceRetrieval(): bool
     {
-        if($this->missing('_retrieved_at')) {
+        if ($this->missing('_retrieved_at')) {
             return false;
         }
 
