@@ -201,6 +201,19 @@ abstract class Resource
     }
 
     /**
+     * Get the text for Traffic Cop error.
+     *
+     * @return string
+     */
+    public static function trafficCopMessage(): string
+    {
+        return __('Since the :resource was edited, its values have changed. Refresh the page to see them or click ":button" again to replace them.', [
+            'resource' => static::singularLabel(),
+            'button'   => self::updateButtonLabel(),
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to save/update.
      *
      * @param Model $model
@@ -250,6 +263,16 @@ abstract class Resource
     public function with(): array
     {
         return [];
+    }
+
+    /**
+     * Indicates whether should check for modifications between viewing and updating a resource.
+     *
+     * @return bool
+     */
+    public static function trafficCop(): bool
+    {
+        return false;
     }
 
     /**
