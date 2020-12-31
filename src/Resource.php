@@ -31,8 +31,9 @@ abstract class Resource
     /**
      * Get the number of models to return per page
      *
-     * @return int
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     *
+     * @return int
      */
     public static function perPage(): int
     {
