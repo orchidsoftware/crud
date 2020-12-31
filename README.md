@@ -45,6 +45,10 @@ use App\Models\Post;
 public static $model = Post::class;
 ```
 
+These classes are completely static. They don't have any state at all due to their declarative nature. 
+They only tell what to do. They don't hold any data. So if you add custom methods, make sure they're static.
+
+
 Freshly created resources contain nothing. Don't worry. We'll add more fields to our resource soon.
 
 ## Expanding of Model
