@@ -29,6 +29,17 @@ abstract class Resource
     }
 
     /**
+     * Get the number of models to return per page
+     *
+     * @return int
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public static function perPage(): int
+    {
+        return app()->make(static::$model)->getPerPage();
+    }
+
+    /**
      * Get the displayable icon of the resource.
      *
      * @return string

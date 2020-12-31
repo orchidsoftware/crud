@@ -11,10 +11,7 @@ use Orchid\Screen\AsSource;
 
 class Post extends Model
 {
-    use HasFactory;
-    use AsSource;
-    use Filterable;
-    use Attachable;
+    use HasFactory, AsSource, Filterable, Attachable;
 
     /**
      * Create a new factory instance for the model.

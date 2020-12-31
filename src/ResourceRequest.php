@@ -136,7 +136,7 @@ class ResourceRequest extends FormRequest
             ->with($this->resource()->with())
             ->filters()
             ->filtersApply($this->resource()->filters())
-            ->paginate();
+            ->paginate($this->resource()->perPage());
     }
 
     /**
