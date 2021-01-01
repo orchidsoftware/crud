@@ -181,8 +181,8 @@ public function filters(): array
 
 We already offer some prepared filters:
 
-- `Orchid\Crud\Filters\DefaultSorted` - To display deleted records
-- `Orchid\Crud\Filters\WithTrashed` - Setting default column sorting
+- `Orchid\Crud\Filters\DefaultSorted` - Setting default column sorting
+- `Orchid\Crud\Filters\WithTrashed` - To display deleted records
 
 
 ```php
