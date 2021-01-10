@@ -57,7 +57,7 @@ class EditScreen extends CrudScreen
             Button::make($this->resource::deleteButtonLabel())
                 ->novalidate()
                 ->confirm(__('Are you sure you want to delete this resource?'))
-                ->canSee(! $this->isSoftDeleted() && $this->can('delete'))
+                ->canSee(!$this->isSoftDeleted() && $this->can('delete'))
                 ->method('delete')
                 ->icon('trash'),
 
