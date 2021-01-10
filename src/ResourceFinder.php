@@ -70,7 +70,7 @@ class ResourceFinder
             })
             ->filter(function (string $class) {
                 return is_subclass_of($class, Resource::class)
-                    && !(new \ReflectionClass($class))->isAbstract();
+                    && ! (new \ReflectionClass($class))->isAbstract();
             })
             ->toArray();
     }

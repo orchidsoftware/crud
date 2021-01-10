@@ -54,7 +54,7 @@ class UpdateRequest extends ResourceRequest
         $model = $this->findModelOrFail();
         $column = $model->getUpdatedAtColumn();
 
-        if (!$model->{$column}) {
+        if (! $model->{$column}) {
             return false;
         }
 
