@@ -20,9 +20,9 @@ class TrafficCopTest extends TestCase
                 'id'       => $post,
             ]))
             ->post(route('platform.resource.edit', [
-                'resource' => PostResource::uriKey(),
-                'id'       => $post,
-                'method'   => 'update',
+                'resource'      => PostResource::uriKey(),
+                'id'            => $post,
+                'method'        => 'update',
                 '_retrieved_at' => $retrievedAt,
             ]), [
                 'model'         => $post->toArray(),
@@ -30,7 +30,6 @@ class TrafficCopTest extends TestCase
             ->assertSee(PostResource::trafficCopMessage())
             ->assertOk();
     }
-
 
     public function testEditSuccessCopResource(): void
     {
@@ -41,9 +40,9 @@ class TrafficCopTest extends TestCase
         $this
             ->followingRedirects()
             ->post(route('platform.resource.edit', [
-                'resource' => PostResource::uriKey(),
-                'id'       => $post,
-                'method'   => 'update',
+                'resource'      => PostResource::uriKey(),
+                'id'            => $post,
+                'method'        => 'update',
                 '_retrieved_at' => $retrievedAt,
             ]), [
                 'model'         => $post->toArray(),
