@@ -17,6 +17,15 @@ abstract class Resource
      * @var string
      */
     public static $model = '';
+    
+    
+    /**
+     * Should the resource be registered in the menu.
+     *
+     * @var boolean
+     */
+    
+    public static $registerMenu = true;
 
     /**
      * Get the displayable label of the resource.
