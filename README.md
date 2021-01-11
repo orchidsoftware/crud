@@ -14,6 +14,8 @@ All fields, filters, and traits are compatible.
 
 ## Installation
 
+> The manual assumes that you already have a copy of [Laravel](https://laravel.com/docs/installation) with [Orchid](https://orchid.software/en/docs/installation/)
+
 You can install the package using the Сomposer. Run this at the command line:
 
 ```php
