@@ -29,6 +29,16 @@ abstract class Resource
     }
 
     /**
+     * Get the resource should be displayed in the navigation
+     *
+     * @return bool
+     */
+    public static function displayInNavigation(): bool
+    {
+        return true;
+    }
+
+    /**
      * Get the number of models to return per page
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
