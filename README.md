@@ -213,6 +213,23 @@ public function with(): array
 }
 ```
 
+## Pagination
+
+To define how many results should be shown per page, set the `perPage` method:
+
+```php
+/**
+ * Get the number of models to return per page
+ *
+ * @return int
+ */
+public static function perPage(): int
+{
+    return 30;
+}
+```
+
+
 ## Resource Events
 
 Each resource has two methods that do the processing, `onSave` and `onDelete`. Each of them is launched when the event is executed, and you can change or supplement the logic:
