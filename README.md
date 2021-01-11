@@ -199,6 +199,23 @@ public function filters(): array
 
 You can learn more on the Orchid [filtration page](https://orchid.software/en/docs/filters/#eloquent-filter).
 
+## Navigation
+
+If you do not want a resource to appear in the navigation, you may override the `displayInNavigation` method of your resource class:
+
+```php
+/**
+ * Get the resource should be displayed in the navigation
+ *
+ * @return bool
+ */
+public static function displayInNavigation(): bool
+{
+    return false;
+}
+```
+
+
 ## Eager Loading
 
 Suppose you routinely need to access a resource's relationships within your fields. In that case, it may be a good idea to add the relationship to the `with` property of your resource. This property instructs to always eager to load the listed relationships when retrieving the resource.
