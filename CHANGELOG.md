@@ -2,6 +2,11 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 2.5.0 - 2021-01-11
+
+### Added
+- Method for hidden resource in navigation [#16](https://github.com/orchidsoftware/crud/pull/16)
+
 ## 2.4.0 - 2021-01-11
 
 ### Added
