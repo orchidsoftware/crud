@@ -2,6 +2,11 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 2.4.0 - 2021-01-11
+
+### Added
+- Setting up pagination for a resource [#11](https://github.com/orchidsoftware/crud/pull/11)
+
 ## 2.3.0 - 2020-12-28
 
 ### Added
