@@ -2,6 +2,11 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 2.5.1 - 2021-01-11
+
+### Fixed
+- Issue with `_retrieved_at` on resource edit [#13](https://github.com/orchidsoftware/crud/issues/13)
+
 ## 2.5.0 - 2021-01-11
 
 ### Added

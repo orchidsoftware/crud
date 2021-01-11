@@ -23,11 +23,32 @@ class TrafficCopTest extends TestCase
                 'resource' => PostResource::uriKey(),
                 'id'       => $post,
                 'method'   => 'update',
+                '_retrieved_at' => $retrievedAt,
             ]), [
                 'model'         => $post->toArray(),
-                '_retrieved_at' => $retrievedAt,
             ])
             ->assertSee(PostResource::trafficCopMessage())
+            ->assertOk();
+    }
+
+
+    public function testEditSuccessCopResource(): void
+    {
+        $post = Post::factory()->create();
+        $post->touch();
+        $retrievedAt = $post->updated_at->addMinutes(5)->toJson();
+
+        $this
+            ->followingRedirects()
+            ->post(route('platform.resource.edit', [
+                'resource' => PostResource::uriKey(),
+                'id'       => $post,
+                'method'   => 'update',
+                '_retrieved_at' => $retrievedAt,
+            ]), [
+                'model'         => $post->toArray(),
+            ])
+            ->assertDontSee(PostResource::trafficCopMessage())
             ->assertOk();
     }
 
