@@ -51,6 +51,13 @@ They only tell what to do. They don't hold any data. So if you add custom method
 
 Freshly created resources contain nothing. Don't worry. We'll add more fields to our resource soon.
 
+
+## Registering Resources
+
+All resources within the `app/Orchid/Resources` directory will automatically be registered by default.
+You are not required to register them manually.
+
+
 ## Expanding of Model
 
 Many features of the Orchid platform relies on model customization. You can add or remove traits depending on your goals. But we will assume that you have set these for your model:
@@ -66,12 +73,6 @@ class Post extends Model
     use AsSource, Filterable, Attachable;
 }
 ````
-
-
-## Registering Resources
-
-All resources within the `app/Orchid/Resources` directory will automatically be registered by default.
-You are not required to register them manually.
 
 
 ## Defining Fields
