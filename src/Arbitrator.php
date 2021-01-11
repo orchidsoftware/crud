@@ -93,15 +93,18 @@ class Arbitrator
      */
     private function registerMenu(Resource $resource, int $key): Arbitrator
     {
-        Dashboard::menu()->add(
-            Menu::MAIN,
-            ItemMenu::label($resource::label())
-                ->icon($resource::icon())
-                ->route('platform.resource.list', [$resource::uriKey()])
-                ->permission($resource::permission())
-                ->sort($resource::sort())
-                ->title($key === 0 ? __('Resources') : null)
-        );
+        if($resource::$registerMenu)
+        {
+            Dashboard::menu()->add(
+                Menu::MAIN,
+                ItemMenu::label($resource::label())
+                    ->icon($resource::icon())
+                    ->route('platform.resource.list', [$resource::uriKey()])
+                    ->permission($resource::permission())
+                    ->sort($resource::sort())
+                    ->title($key === 0 ? __('Resources') : null)
+            );
+        }
 
         return $this;
     }
