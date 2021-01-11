@@ -93,6 +93,10 @@ class Arbitrator
      */
     private function registerMenu(Resource $resource, int $key): Arbitrator
     {
+        if (!$resource::displayInNavigation()) {
+            return $this;
+        }
+
         Dashboard::menu()->add(
             Menu::MAIN,
             ItemMenu::label($resource::label())
