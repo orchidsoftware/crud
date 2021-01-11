@@ -36,6 +36,6 @@ class PaginationTest extends TestCase
             $response->assertSeeText($post->description);
         });
 
-        $response->assertDontSeeText( $this->posts->last()->description);
+        $response->assertDontSeeText($this->posts->last()->description);
     }
 }
