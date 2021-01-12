@@ -24,9 +24,7 @@ class TrafficCopTest extends TestCase
                 'id'            => $post,
                 'method'        => 'update',
                 '_retrieved_at' => $retrievedAt,
-            ]), [
-                'model'         => $post->toArray(),
-            ])
+            ]), $post->toArray())
             ->assertSee(PostResource::trafficCopMessage())
             ->assertOk();
     }
@@ -44,9 +42,7 @@ class TrafficCopTest extends TestCase
                 'id'            => $post,
                 'method'        => 'update',
                 '_retrieved_at' => $retrievedAt,
-            ]), [
-                'model'         => $post->toArray(),
-            ])
+            ]), $post->toArray())
             ->assertDontSee(PostResource::trafficCopMessage())
             ->assertOk();
     }

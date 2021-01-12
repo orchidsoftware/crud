@@ -22,7 +22,7 @@ class ListScreen extends CrudScreen
     public function query(IndexRequest $request): array
     {
         return [
-            'model' => $request->getModelPaginationList(),
+            'models' => $request->getModelPaginationList(),
         ];
     }
 
@@ -64,7 +64,7 @@ class ListScreen extends CrudScreen
 
         return [
             Layout::selection($this->resource->filters()),
-            Layout::table('model', $grid),
+            Layout::table('models', $grid),
         ];
     }
 }

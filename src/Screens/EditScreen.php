@@ -33,9 +33,7 @@ class EditScreen extends CrudScreen
     {
         $this->model = $request->findModelOrFail();
 
-        return [
-            'model' => $this->model,
-        ];
+        return $this->model->toArray();
     }
 
     /**
