@@ -402,6 +402,57 @@ public static function trafficCop(): bool
 }
 ```
 
+## Description
+
+To display an additional description on each page of the resource, use the `description`:
+
+```php
+/**
+ * Get the descriptions for the screen.
+ *
+ * @return null|string
+ */
+public static function description(): ?string
+{
+    return null;
+}
+```
+
+## Breadcrumbs
+
+On every page of the resource, there are breadcrumbs. You can monitor messages using the following methods:
+
+```php
+/**
+ * Get the text for the list breadcrumbs.
+ *
+ * @return string
+ */
+public static function listBreadcrumbsMessage(): string
+{
+    return static::label();
+}
+
+/**
+ * Get the text for the create breadcrumbs.
+ *
+ * @return string
+ */
+public static function createBreadcrumbsMessage(): string
+{
+    return __('New :resource', ['resource' => static::singularLabel()]);
+}
+
+/**
+ * Get the text for the edit breadcrumbs.
+ *
+ * @return string
+ */
+public static function editBreadcrumbsMessage(): string
+{
+    return __('Edit :resource', ['resource' => static::singularLabel()]);
+}
+```
 
 ## Localization
 
