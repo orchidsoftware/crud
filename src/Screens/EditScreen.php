@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Orchid\Crud\CrudScreen;
+use Orchid\Crud\Layouts\ResourceFields;
 use Orchid\Crud\Requests\DeleteRequest;
 use Orchid\Crud\Requests\ForceDeleteRequest;
 use Orchid\Crud\Requests\RestoreRequest;
@@ -34,7 +35,7 @@ class EditScreen extends CrudScreen
         $this->model = $request->findModelOrFail();
 
         return [
-            'model' => $this->model,
+            ResourceFields::PREFIX => $this->model,
         ];
     }
 
@@ -86,7 +87,7 @@ class EditScreen extends CrudScreen
     public function layout(): array
     {
         return [
-            Layout::rows($this->fields()),
+            new ResourceFields($this->resource->fields()),
         ];
     }
 

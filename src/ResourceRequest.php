@@ -9,6 +9,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
+use Orchid\Crud\Layouts\ResourceFields;
 
 class ResourceRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class ResourceRequest extends FormRequest
 
         return collect($rules)
             ->mapWithKeys(function ($value, $key) {
-                return ['model.' . $key => $value];
+                return [ResourceFields::PREFIX . '.' . $key => $value];
             })
             ->toArray();
     }
@@ -40,7 +41,7 @@ class ResourceRequest extends FormRequest
     {
         return collect($this->model)->keys()
             ->mapWithKeys(function ($key) {
-                return ['model.' . $key => $key];
+                return [ResourceFields::PREFIX . '.' . $key => $key];
             })
             ->merge($this->resource()->attributes())
             ->toArray();

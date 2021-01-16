@@ -8,6 +8,7 @@ use Orchid\Crud\Filters\DefaultSorted;
 use Orchid\Crud\Resource;
 use Orchid\Crud\Tests\Models\Post;
 use Orchid\Screen\Field;
+use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\TD;
@@ -45,8 +46,10 @@ class PostResource extends Resource
                 ->title('Title')
                 ->help('A string containing the name text and design to attract attention'),
 
-            TextArea::make('description'),
-            TextArea::make('body'),
+            Group::make([
+                TextArea::make('description'),
+                TextArea::make('body'),
+            ])
         ];
     }
 

@@ -67,16 +67,4 @@ abstract class CrudScreen extends Screen
     {
         return $this->request->can($abilities);
     }
-
-    /**
-     * Get fields with prefixes
-     *
-     * @return array|Field[]
-     */
-    public function fields()
-    {
-        return array_map(function (Field $field) {
-            return $field->set('name', 'model.' . $field->get('name'));
-        }, $this->resource->fields());
-    }
 }

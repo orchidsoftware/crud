@@ -4,10 +4,10 @@ namespace Orchid\Crud\Screens;
 
 use Illuminate\Http\RedirectResponse;
 use Orchid\Crud\CrudScreen;
+use Orchid\Crud\Layouts\ResourceFields;
 use Orchid\Crud\Requests\CreateRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
-use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
 class CreateScreen extends CrudScreen
@@ -22,7 +22,7 @@ class CreateScreen extends CrudScreen
     public function query(CreateRequest $request): array
     {
         return [
-            'model' => $request->model(),
+            ResourceFields::PREFIX => $request->model(),
         ];
     }
 
@@ -48,7 +48,7 @@ class CreateScreen extends CrudScreen
     public function layout(): array
     {
         return [
-            Layout::rows($this->fields()),
+            new ResourceFields($this->resource->fields()),
         ];
     }
 

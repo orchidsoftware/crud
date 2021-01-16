@@ -2,6 +2,11 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 2.6.1 - 2021-01-16
+
+### Fixed
+- It is not possible to use Group in a resource [#15](https://github.com/orchidsoftware/crud/issues/15)
+
 ## 2.6.0 - 2021-01-16
 
 ### Added
