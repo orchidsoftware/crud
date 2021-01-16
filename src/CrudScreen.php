@@ -3,7 +3,6 @@
 
 namespace Orchid\Crud;
 
-use Orchid\Screen\Field;
 use Orchid\Screen\Screen;
 
 abstract class CrudScreen extends Screen

@@ -49,7 +49,7 @@ class PostResource extends Resource
             Group::make([
                 TextArea::make('description'),
                 TextArea::make('body'),
-            ])
+            ]),
         ];
     }
 

@@ -23,7 +23,7 @@ class ResourceFields extends Rows
      */
     public function __construct(array $fields)
     {
-       $this->fields = $fields;
+        $this->fields = $fields;
     }
 
     /**
@@ -39,9 +39,9 @@ class ResourceFields extends Rows
     /**
      * @param Repository $repository
      *
+     * @throws \Throwable
      *
      * @return \Illuminate\View\View
-     * @throws \Throwable
      */
     public function build(Repository $repository)
     {
@@ -53,4 +53,3 @@ class ResourceFields extends Rows
         ]);
     }
 }
-
