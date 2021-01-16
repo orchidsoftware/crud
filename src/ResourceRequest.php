@@ -6,7 +6,6 @@ use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
@@ -22,13 +21,8 @@ class ResourceRequest extends FormRequest
         }
 
         $model = $this->findModel() ?? $this->resource()->getModel();
-        $rules = $this->resource()->rules($model);
 
-        return collect($rules)
-            ->mapWithKeys(function ($value, $key) {
-                return ['model.' . $key => $value];
-            })
-            ->toArray();
+        return $this->resource()->rules($model);
     }
 
     /**
@@ -40,7 +34,7 @@ class ResourceRequest extends FormRequest
     {
         return collect($this->model)->keys()
             ->mapWithKeys(function ($key) {
-                return ['model.' . $key => $key];
+                return [$key => $key];
             })
             ->merge($this->resource()->attributes())
             ->toArray();
@@ -72,8 +66,6 @@ class ResourceRequest extends FormRequest
      */
     public function withValidator()
     {
-        $data = Arr::wrap($this->model);
-
         // Remove private parameters (Start with '_')
         collect($this->query->all())
             ->keys()
@@ -83,13 +75,14 @@ class ResourceRequest extends FormRequest
                 $this->query->remove($key);
             });
 
+        // Remove private parameters (Start with '_')
         collect($this->all())
             ->keys()
-            ->each(function (string $key) {
+            ->filter(function (string $key) {
+                return Str::startsWith($key, '_');
+            })->each(function (string $key) {
                 $this->offsetUnset($key);
             });
-
-        $this->replace($data);
     }
 
     /**

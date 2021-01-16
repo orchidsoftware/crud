@@ -65,9 +65,7 @@ class CrudTest extends TestCase
             ->post(route('platform.resource.create', [
                 'resource' => PostResource::uriKey(),
                 'method'   => 'save',
-            ]), [
-                'model' => $post->toArray(),
-            ])
+            ]), $post->toArray())
             ->assertSee(PostResource::createToastMessage())
             ->assertOk();
 
@@ -96,9 +94,7 @@ class CrudTest extends TestCase
             ->post(route('platform.resource.create', [
                 'resource' => PostResource::uriKey(),
                 'method'   => 'save',
-            ]), [
-                'model' => $post->toArray(),
-            ])
+            ]), $post->toArray())
             ->assertSee(PostResource::createToastMessage())
             ->assertOk();
 
@@ -111,9 +107,7 @@ class CrudTest extends TestCase
             ->post(route('platform.resource.create', [
                 'resource' => PostResource::uriKey(),
                 'method'   => 'save',
-            ]), [
-                'model' => $post->toArray(),
-            ])
+            ]), $post->toArray())
             ->assertSee('The title has already been taken.')
             ->assertSee('Change a few things up and try submitting again.')
             ->assertOk();
@@ -153,9 +147,7 @@ class CrudTest extends TestCase
                 'resource' => PostResource::uriKey(),
                 'id'       => $post,
                 'method'   => 'update',
-            ]), [
-                'model' => $post->toArray(),
-            ])
+            ]), $post->toArray())
             ->assertSee(PostResource::updateToastMessage())
             ->assertOk();
 

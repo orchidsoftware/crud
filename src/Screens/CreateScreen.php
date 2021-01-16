@@ -21,9 +21,7 @@ class CreateScreen extends CrudScreen
      */
     public function query(CreateRequest $request): array
     {
-        return [
-            'model' => $request->model(),
-        ];
+        return $request->model()->toArray();
     }
 
     /**

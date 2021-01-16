@@ -75,8 +75,6 @@ abstract class CrudScreen extends Screen
      */
     public function fields()
     {
-        return array_map(function (Field $field) {
-            return $field->set('name', 'model.' . $field->get('name'));
-        }, $this->resource->fields());
+        return $this->resource->fields();
     }
 }
