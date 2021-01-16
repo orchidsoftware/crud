@@ -54,8 +54,8 @@ class Arbitrator
             ->values()
             ->each(function (Resource $resource, $key) {
                 $this
-                ->registerPermission($resource)
-                ->registerMenu($resource, $key);
+                    ->registerPermission($resource)
+                    ->registerMenu($resource, $key);
             });
     }
 
@@ -93,7 +93,7 @@ class Arbitrator
      */
     private function registerMenu(Resource $resource, int $key): Arbitrator
     {
-        if (! $resource::displayInNavigation()) {
+        if (!$resource::displayInNavigation()) {
             return $this;
         }
 
@@ -102,6 +102,7 @@ class Arbitrator
             ItemMenu::label($resource::label())
                 ->icon($resource::icon())
                 ->route('platform.resource.list', [$resource::uriKey()])
+                ->active($this->activeMenu($resource))
                 ->permission($resource::permission())
                 ->sort($resource::sort())
                 ->title($key === 0 ? __('Resources') : null)
@@ -135,5 +136,26 @@ class Arbitrator
         );
 
         return $this;
+    }
+
+    /**
+     * @param Resource $resource
+     *
+     * @return array
+     */
+    private function activeMenu(Resource $resource): array
+    {
+        return [
+            route('platform.resource.list', [
+                'resource' => $resource::uriKey(),
+            ]),
+            route('platform.resource.create', [
+                'resource' => $resource::uriKey(),
+            ]),
+            route('platform.resource.edit', [
+                'resource' => $resource::uriKey(),
+                'id'       => '*',
+            ]),
+        ];
     }
 }

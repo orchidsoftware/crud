@@ -2,6 +2,11 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 2.6.2 - 2021-01-16
+
+### Fixed
+- Highlighting the active element when creating and editing
+
 ## 2.6.1 - 2021-01-16
 
 ### Fixed
