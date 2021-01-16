@@ -236,6 +236,36 @@ abstract class Resource
     }
 
     /**
+     * Get the text for the list breadcrumbs.
+     *
+     * @return string
+     */
+    public static function listBreadcrumbsMessage(): string
+    {
+        return static::label();
+    }
+
+    /**
+     * Get the text for the create breadcrumbs.
+     *
+     * @return string
+     */
+    public static function createBreadcrumbsMessage(): string
+    {
+        return __('New :resource', ['resource' => static::singularLabel()]);
+    }
+
+    /**
+     * Get the text for the edit breadcrumbs.
+     *
+     * @return string
+     */
+    public static function editBreadcrumbsMessage(): string
+    {
+        return __('Edit :resource', ['resource' => static::singularLabel()]);
+    }
+
+    /**
      * Get the validation rules that apply to save/update.
      *
      * @param Model $model

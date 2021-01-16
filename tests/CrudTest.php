@@ -33,6 +33,7 @@ class CrudTest extends TestCase
         ]))
             ->assertSee(PostResource::singularLabel())
             ->assertSee(PostResource::createButtonLabel())
+            ->assertSee(PostResource::listBreadcrumbsMessage())
             ->assertSee('Edit')
             ->assertSeeText($this->posts->first()->description)
             ->assertOk();
@@ -47,6 +48,7 @@ class CrudTest extends TestCase
             'resource' => PostResource::uriKey(),
         ]))
             ->assertSee(PostResource::createButtonLabel())
+            ->assertSee(PostResource::createBreadcrumbsMessage())
             ->assertSee('A string containing the name text and design to attract attention')
             ->assertOk();
     }
@@ -129,6 +131,7 @@ class CrudTest extends TestCase
             'id'       => $post,
         ]))
             ->assertSee(PostResource::updateButtonLabel())
+            ->assertSee(PostResource::editBreadcrumbsMessage())
             ->assertSee($post->title)
             ->assertSee($post->description)
             ->assertSee($post->body)
