@@ -49,6 +49,7 @@ abstract class CrudScreen extends Screen
             $this->request = app(ResourceRequest::class);
             $this->resource = $this->request->resource();
             $this->name = $this->resource::label();
+            $this->description = $this->resource::description();
             $this->permission = $this->resource::permission();
 
             return $next($request);

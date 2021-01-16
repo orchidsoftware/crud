@@ -266,6 +266,16 @@ abstract class Resource
     }
 
     /**
+     * Get the descriptions for the screen.
+     *
+     * @return null|string
+     */
+    public static function description(): ?string
+    {
+        return null;
+    }
+
+    /**
      * Get the validation rules that apply to save/update.
      *
      * @param Model $model
