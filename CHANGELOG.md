@@ -6,7 +6,7 @@ All notable changes to `crud` will be documented in this file
 
 ### Added
 - Breadcrumbs for resources
-- Description for resources #[#21](https://github.com/orchidsoftware/crud/issues/21)
+- Description for resources [#21](https://github.com/orchidsoftware/crud/issues/21)
 
 ## 2.5.1 - 2021-01-11
 
