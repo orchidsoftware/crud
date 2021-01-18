@@ -328,6 +328,16 @@ abstract class Resource
     }
 
     /**
+     * Get the actions available for the resource.
+     *
+     * @return array
+     */
+    public function actions(): array
+    {
+        return [];
+    }
+
+    /**
      * Indicates whether should check for modifications between viewing and updating a resource.
      *
      * @return bool

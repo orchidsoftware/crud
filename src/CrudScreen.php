@@ -3,6 +3,9 @@
 
 namespace Orchid\Crud;
 
+use Illuminate\Support\Collection;
+use Orchid\Crud\Requests\ActionRequest;
+use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Screen;
 
 abstract class CrudScreen extends Screen
@@ -62,8 +65,64 @@ abstract class CrudScreen extends Screen
      *
      * @return bool
      */
-    public function can(string $abilities): bool
+    protected function can(string $abilities): bool
     {
         return $this->request->can($abilities);
     }
+
+    /**
+     * @return DropDown
+     */
+    protected function actionsButtons(): DropDown
+    {
+        $actions = $this->actions()
+            ->map(function (Action $action) {
+                return $action->button()
+                    ->method('action')
+                    ->parameters(['_action' => $action->name()]);
+            });
+
+        return DropDown::make('Actions')
+            ->icon('options-vertical')
+            ->list($actions->toArray());
+    }
+
+    /**
+     * @return Collection
+     */
+    protected function actionsMethods()
+    {
+        return $this->actions()->map(function (Action $action) {
+            return $action->name();
+        });
+    }
+
+    /**
+     * @return Collection
+     */
+    protected function actions(): Collection
+    {
+        return collect($this->resource->actions())->map(function ($action){
+           return is_string($action) ? app()->make($action) : $action;
+        });
+    }
+
+    /**
+     * @param ActionRequest $request
+     *
+     * @return mixed
+     */
+    public function action(ActionRequest $request)
+    {
+        /** @var Action $action */
+        $action = $this->actions()
+            ->filter(function (Action $action) use ($request) {
+                return $action->name() === $request->query('_action');
+            })->whenEmpty(function () {
+                abort(405);
+            })->first();
+
+        return $action->handle($request->models());
+    }
+
 }

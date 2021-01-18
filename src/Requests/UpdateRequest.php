@@ -3,10 +3,11 @@
 namespace Orchid\Crud\Requests;
 
 use Carbon\Carbon;
+use Orchid\Crud\Layouts\ResourceFields;
 use Orchid\Crud\Resource;
 use Orchid\Crud\ResourceRequest;
 
-class UpdateRequest extends ResourceRequest
+class UpdateRequest extends CreateRequest
 {
     /**
      * Determine if the user is authorized to make this request.
