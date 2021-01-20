@@ -103,7 +103,7 @@ abstract class CrudScreen extends Screen
     protected function actions(): Collection
     {
         return collect($this->resource->actions())->map(function ($action){
-           return is_string($action) ? app()->make($action) : $action;
+           return is_string($action) ? resolve($action) : $action;
         });
     }
 

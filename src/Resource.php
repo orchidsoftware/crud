@@ -47,7 +47,7 @@ abstract class Resource
      */
     public static function perPage(): int
     {
-        return app()->make(static::$model)->getPerPage();
+        return resolve(static::$model)->getPerPage();
     }
 
     /**
