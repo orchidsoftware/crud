@@ -1,4 +1,4 @@
-<p align="center"> 
+<p align="center" style="margin: 1.5em!important;"> 
  <a href="https://github.com/orchidsoftware/crud"><img src="https://orchid.software/assets/img/logo-crud.svg" alt="Laravel Orchid CRUD" height="48"></a>
 </p>
 
