@@ -53,6 +53,7 @@ class ListScreen extends CrudScreen
 
         $grid->prepend(TD::make()
             ->width(50)
+            ->cantHide()
             ->canSee($this->availableActions()->isNotEmpty())
             ->render(function (Model $model) {
                 return CheckBox::make('_models[]')
