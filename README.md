@@ -1,9 +1,11 @@
-<p> 
+<p align="center"> 
  <a href="https://github.com/orchidsoftware/crud"><img src="https://orchid.software/assets/img/logo-crud.svg" alt="Laravel Orchid CRUD" height="48"></a>
 </p>
 
-![Tests](https://github.com/orchidsoftware/crud/workflows/Tests/badge.svg)
-![Open Collective backers and sponsors](https://img.shields.io/opencollective/all/orchid)
+<p align="center">
+<img src="https://github.com/orchidsoftware/crud/workflows/Tests/badge.svg" alt="Tests">
+<img src="https://img.shields.io/opencollective/all/orchid" alt="Open Collective backers and sponsors">
+</p>
 
 
 ## Introduction
