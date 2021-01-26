@@ -11,7 +11,7 @@ class PostActionResource extends PostResource
      */
     public function actions(): array
     {
-       return [
+        return [
            CustomAction::class,
        ];
     }

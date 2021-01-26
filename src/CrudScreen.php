@@ -116,8 +116,8 @@ abstract class CrudScreen extends Screen
      */
     protected function actions(): Collection
     {
-        return collect($this->resource->actions())->map(function ($action){
-           return is_string($action) ? resolve($action) : $action;
+        return collect($this->resource->actions())->map(function ($action) {
+            return is_string($action) ? resolve($action) : $action;
         });
     }
 
@@ -146,5 +146,4 @@ abstract class CrudScreen extends Screen
 
         return $action->handle($request->models());
     }
-
 }

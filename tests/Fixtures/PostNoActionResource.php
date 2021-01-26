@@ -11,6 +11,6 @@ class PostNoActionResource extends PostResource
      */
     public function actions(): array
     {
-       return [];
+        return [];
     }
 }

@@ -13,7 +13,7 @@ class ActionRequest extends ResourceRequest
     public function rules()
     {
         return  [
-            '_action' => 'required'
+            '_action' => 'required',
         ];
     }
 

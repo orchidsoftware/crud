@@ -62,8 +62,8 @@ class ActionTest extends TestCase
             ]))
             ->followingRedirects()
             ->post(route('platform.resource.list', [
-                'resource' => PostActionResource::uriKey(),
-                'method'   => 'action',
+                'resource'  => PostActionResource::uriKey(),
+                'method'    => 'action',
                 '_action'   => CustomAction::name(),
             ]))
             ->assertSee(PostActionResource::emptyResourceForAction())
