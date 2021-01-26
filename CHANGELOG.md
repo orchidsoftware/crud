@@ -2,6 +2,11 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 2.7.0 - 2021-01-26
+
+### Added
+- Bulk Actions [#23](https://github.com/orchidsoftware/crud/pull/23)
+
 ## 2.6.2 - 2021-01-16
 
 ### Fixed
