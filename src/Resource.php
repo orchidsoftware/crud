@@ -276,6 +276,16 @@ abstract class Resource
     }
 
     /**
+     * Get the text when there are no resources for the action.
+     *
+     * @return string
+     */
+    public static function emptyResourceForAction(): string
+    {
+        return __('No ":resources" over which you can perform an action', ['resources' => static::label()]);
+    }
+
+    /**
      * Get the validation rules that apply to save/update.
      *
      * @param Model $model

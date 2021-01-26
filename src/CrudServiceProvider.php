@@ -4,6 +4,7 @@ namespace Orchid\Crud;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Orchid\Crud\Commands\ActionCommand;
 use Orchid\Crud\Commands\ResourceCommand;
 use Orchid\Crud\Middleware\BootCrudGenerator;
 use Orchid\Platform\Providers\FoundationServiceProvider;
@@ -25,6 +26,7 @@ class CrudServiceProvider extends ServiceProvider
      */
     protected $commands = [
         ResourceCommand::class,
+        ActionCommand::class,
     ];
 
     /**

@@ -27,7 +27,7 @@ abstract class Action
      *
      * @return string
      */
-    public function name(): string
+    public static function name(): string
     {
         return Str::of(static::class)->replace('\\', '-')->slug();
     }

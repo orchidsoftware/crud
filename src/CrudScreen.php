@@ -5,8 +5,10 @@ namespace Orchid\Crud;
 
 use Illuminate\Support\Collection;
 use Orchid\Crud\Requests\ActionRequest;
+use Orchid\Screen\Action as ActionButton;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Toast;
 
 abstract class CrudScreen extends Screen
 {
@@ -71,19 +73,31 @@ abstract class CrudScreen extends Screen
     }
 
     /**
-     * @return DropDown
+     * @return Collection
      */
-    protected function actionsButtons(): DropDown
+    protected function availableActions(): Collection
     {
-        $actions = $this->actions()
+        return $this->actions()
             ->map(function (Action $action) {
                 return $action->button()
                     ->method('action')
                     ->parameters(['_action' => $action->name()]);
+            })
+            ->filter(function (ActionButton $action) {
+                return $action->isSee();
             });
+    }
+
+    /**
+     * @return DropDown
+     */
+    protected function actionsButtons(): DropDown
+    {
+        $actions = $this->availableActions();
 
         return DropDown::make('Actions')
             ->icon('options-vertical')
+            ->canSee($actions->isNotEmpty())
             ->list($actions->toArray());
     }
 
@@ -114,6 +128,14 @@ abstract class CrudScreen extends Screen
      */
     public function action(ActionRequest $request)
     {
+        $models = $request->models();
+
+        if ($models->isEmpty()) {
+            Toast::warning($request->resource()->emptyResourceForAction());
+
+            return back();
+        }
+
         /** @var Action $action */
         $action = $this->actions()
             ->filter(function (Action $action) use ($request) {
