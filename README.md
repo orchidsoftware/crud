@@ -1,4 +1,6 @@
-# Laravel Orchid CRUD
+<p> 
+ <a href="https://github.com/orchidsoftware/crud"><img src="https://orchid.software/assets/img/logo-crud.svg" alt="Laravel Orchid CRUD" height="48"></a>
+</p>
 
 ![Tests](https://github.com/orchidsoftware/crud/workflows/Tests/badge.svg)
 ![Open Collective backers and sponsors](https://img.shields.io/opencollective/all/orchid)
