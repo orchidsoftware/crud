@@ -313,6 +313,74 @@ It is necessary to give the right to manage it to the user.
 To click on the profile in the left column, go to the system page, and then to the page with users, 
 you can issue them a mandate or assign a role. After that, they will be displayed in the left menu.
 
+## Actions
+
+Actions may be generated using the `orchid:action` Artisan command:
+
+```bash
+php artisan orchid:action CustomAction
+```
+
+By default, all actions are placed in the `app/Orchid/Actions` directory. The action necessarily consists of two methods. Method `button` defines name, icon, dialog box, etc. And the `handler` method directly handles the action with the models.
+
+```php
+namespace App\Orchid\Actions;
+
+use Illuminate\Support\Collection;
+use Orchid\Crud\Action;
+use Orchid\Screen\Actions\Button;
+use Orchid\Support\Facades\Toast;
+
+class CustomAction extends Action
+{
+    /**
+     * The button of the action.
+     *
+     * @return Button
+     */
+    public function button(): Button
+    {
+        return Button::make('Run Custom Action')->icon('fire');
+    }
+
+    /**
+     * Perform the action on the given models.
+     *
+     * @param \Illuminate\Support\Collection $models
+     */
+    public function handle(Collection $models)
+    {
+        $models->each(function () {
+            // action
+        });
+
+        Toast::message('It worked!');
+    }
+}
+```
+
+Within the `handle` method, you may perform whatever tasks are necessary to complete the action.
+
+> The handle method always receives a `Collection` of models, even if the action is only being performed against a single model.
+
+
+Once you have defined an action, you are ready to attach it to a resource. Each resource contains an actions method. To attach an action to a resource, you should add it to the array of actions returned by this method:
+
+```php
+/**
+ * Get the actions available for the resource.
+ *
+ * @return array
+ */
+public function actions(): array
+{
+    return [
+        CustomAction::class,
+    ];
+}
+```
+
+
 ## Policies
 
 To limit which users may view, create, update, or delete resources leverages Laravel's [authorization policies](https://laravel.com/docs/authorization#creating-policies). Policies are simple PHP classes that organize authorization logic for a particular model or resource. For example, if your application is a blog, you may have a `Post` model and a corresponding `PostPolicy` within your application.
