@@ -50,18 +50,4 @@ class TrafficCopTest extends TestCase
             ->assertDontSee(PostResource::trafficCopMessage())
             ->assertOk();
     }
-
-    /**
-     * Set the URL of the previous request.
-     *
-     * @param string $url
-     *
-     * @return $this
-     */
-    public function from(string $url)
-    {
-        session()->setPreviousUrl($url);
-
-        return $this;
-    }
 }

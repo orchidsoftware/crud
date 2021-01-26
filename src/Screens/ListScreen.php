@@ -7,6 +7,7 @@ use Orchid\Crud\CrudScreen;
 use Orchid\Crud\Requests\IndexRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
 
@@ -34,6 +35,7 @@ class ListScreen extends CrudScreen
     public function commandBar(): array
     {
         return [
+            $this->actionsButtons(),
             Link::make($this->resource::createButtonLabel())
                 ->route('platform.resource.create', $this->resource::uriKey())
                 ->icon('plus'),
@@ -47,9 +49,18 @@ class ListScreen extends CrudScreen
      */
     public function layout(): array
     {
-        $grid = $this->resource->columns();
+        $grid = collect($this->resource->columns());
 
-        $grid[] = TD::make(__('Actions'))
+        $grid->prepend(TD::make()
+            ->width(50)
+            ->canSee($this->availableActions()->isNotEmpty())
+            ->render(function (Model $model) {
+                return CheckBox::make('_models[]')
+                    ->value($model->getKey())
+                    ->checked(false);
+            }));
+
+        $grid->push(TD::make(__('Actions'))
             ->align(TD::ALIGN_RIGHT)
             ->cantHide()
             ->canSee($this->can('update'))
@@ -60,11 +71,11 @@ class ListScreen extends CrudScreen
                         $this->resource::uriKey(),
                         $model->getAttribute($model->getKeyName()),
                     ]);
-            });
+            }));
 
         return [
             Layout::selection($this->resource->filters()),
-            Layout::table('model', $grid),
+            Layout::table('model', $grid->toArray()),
         ];
     }
 }

@@ -105,4 +105,18 @@ class TestCase extends Orchestra
             'Dashboard'   => Dashboard::class,
         ];
     }
+
+    /**
+     * Set the URL of the previous request.
+     *
+     * @param string $url
+     *
+     * @return $this
+     */
+    public function from(string $url)
+    {
+        session()->setPreviousUrl($url);
+
+        return $this;
+    }
 }

@@ -47,7 +47,7 @@ abstract class Resource
      */
     public static function perPage(): int
     {
-        return app()->make(static::$model)->getPerPage();
+        return resolve(static::$model)->getPerPage();
     }
 
     /**
@@ -276,6 +276,16 @@ abstract class Resource
     }
 
     /**
+     * Get the text when there are no resources for the action.
+     *
+     * @return string
+     */
+    public static function emptyResourceForAction(): string
+    {
+        return __('No ":resources" over which you can perform an action', ['resources' => static::label()]);
+    }
+
+    /**
      * Get the validation rules that apply to save/update.
      *
      * @param Model $model
@@ -323,6 +333,16 @@ abstract class Resource
      * @return array
      */
     public function with(): array
+    {
+        return [];
+    }
+
+    /**
+     * Get the actions available for the resource.
+     *
+     * @return array
+     */
+    public function actions(): array
     {
         return [];
     }
