@@ -2,6 +2,11 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 2.7.1 - 2021-01-26
+
+### Fixed
+-  Prevent hiding functional column
+
 ## 2.7.0 - 2021-01-26
 
 ### Added
