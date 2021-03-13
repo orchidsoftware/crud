@@ -47,6 +47,16 @@ class {{ class }} extends Resource
     }
 
     /**
+     * Get the sights displayed by the resource.
+     *
+     * @return Sight[]
+     */
+    public function legend(): array
+    {
+        return [];
+    }
+
+    /**
      * Get the filters available for the resource.
      *
      * @return array

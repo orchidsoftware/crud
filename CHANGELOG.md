@@ -2,6 +2,15 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 3.0.0 - 2021-04-14
+
+### Added
+-  Legend method for view resource
+
+### Changed
+- Support Orchid platform 10.x
+
+
 ## 2.7.2 - 2021-03-21
 
 ### Fixed

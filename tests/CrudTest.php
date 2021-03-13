@@ -141,6 +141,23 @@ class CrudTest extends TestCase
     /**
      *
      */
+    public function testViewResource(): void
+    {
+        $post = $this->posts->first();
+
+        $this->get(route('platform.resource.view', [
+            'resource' => PostResource::uriKey(),
+            'id'       => $post,
+        ]))
+            ->assertSee($post->title)
+            ->assertSee($post->description)
+            ->assertSee($post->body)
+            ->assertOk();
+    }
+
+    /**
+     *
+     */
     public function testUpdateActionResource(): void
     {
         $post = $this->posts->first();

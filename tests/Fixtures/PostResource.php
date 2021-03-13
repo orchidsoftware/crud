@@ -11,6 +11,7 @@ use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\TextArea;
+use Orchid\Screen\Sight;
 use Orchid\Screen\TD;
 
 class PostResource extends Resource
@@ -90,6 +91,22 @@ class PostResource extends Resource
             ],
             'description' => 'required|string',
             'body'        => 'required|string',
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function legend(): array
+    {
+        return [
+            Sight::make('id'),
+            Sight::make('title'),
+            Sight::make('description'),
+            Sight::make('body'),
+            Sight::make('created_at'),
+            Sight::make('updated_at'),
+            Sight::make('deleted_at'),
         ];
     }
 }

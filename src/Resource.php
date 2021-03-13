@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Orchid\Screen\Field;
+use Orchid\Screen\Sight;
 use Orchid\Screen\TD;
 
 abstract class Resource
@@ -83,6 +84,13 @@ abstract class Resource
      * @return Field[]
      */
     abstract public function fields(): array;
+
+    /**
+     * Get the sights displayed by the resource.
+     *
+     * @return Sight[]
+     */
+    abstract public function legend(): array;
 
     /**
      * Get the URI key for the resource.

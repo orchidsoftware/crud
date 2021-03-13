@@ -3,11 +3,13 @@
 namespace Orchid\Crud\Tests;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Orchid\Crud\Arbitrator;
 use Orchid\Crud\Tests\Fixtures\PostResource;
 use Orchid\Crud\Tests\Fixtures\PrivateResource;
 use Orchid\Platform\ItemPermission;
+use Orchid\Screen\Actions\Menu;
 use Orchid\Support\Facades\Dashboard;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -56,16 +58,24 @@ class ArbitratorTest extends TestCase
     {
         $this->arbitrator->boot();
 
+        View::callComposer(\view('platform::dashboard'));
+
         /** @var Collection $menu */
-        $menu = Dashboard::menu()->container;
+        $menu = app(\Orchid\Platform\Dashboard::class)->menu[\Orchid\Platform\Dashboard::MENU_MAIN];
 
-        $slug = Str::lower(PostResource::label());
+        $existName = $menu->filter(function (Menu $menu) {
+            return $menu->get('name') === PostResource::label();
+        })->isNotEmpty();
 
-        $this->assertTrue($menu->has($slug));
+        $this->assertTrue($existName);
 
-        $this->assertEquals($menu->get($slug)['arg']['route'], \route('platform.resource.list', [
-            'resource' => PostResource::uriKey(),
-        ]));
+        $existUri = $menu->filter(function (Menu $menu) {
+            return $menu->get('href') === \route('platform.resource.list', [
+                    'resource' => PostResource::uriKey(),
+                ]);
+        })->isNotEmpty();
+
+        $this->assertTrue($existUri);
     }
 
     /**
