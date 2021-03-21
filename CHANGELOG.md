@@ -2,6 +2,11 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 2.7.2 - 2021-03-21
+
+### Fixed
+- Show create button only if user allowed to create [#31](https://github.com/orchidsoftware/crud/pull/31)
+
 ## 2.7.1 - 2021-01-26
 
 ### Fixed
