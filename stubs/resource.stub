@@ -3,43 +3,100 @@
 namespace {{ namespace }};
 
 use Orchid\Crud\Resource;
+use Orchid\Crud\Filters\DefaultSorted;
 use Orchid\Screen\TD;
+use Illuminate\Support\Str;
+use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Fields\Input;
 
 class {{ class }} extends Resource
 {
     /**
-     * The model the resource corresponds to.
+     * The model that this resource corresponds to.
      *
      * @var string
      */
     public static $model = '';
 
     /**
-     * Get the fields displayed by the resource.
+     * Get the displayable singular label of the resource.
+     *
+     * @return string
+     */
+    // public static function singularLabel()
+    // {
+    //     return __('Post');
+    // }
+
+    /**
+     * Text to show in the side menu, breadcrumbs and top of content area
+     *
+     * @var string
+     */
+    // public static function label(): string
+    // {
+    //     return "<H1> of the page";
+    // }
+
+    /**
+     * Description right under the label at top of content area
+     *
+     * @var string
+     */
+    // public static function description(): ?string
+    // {
+    //     return "Text under the <H1>";
+    // }
+
+    /**
+     * Indicates whether should check for modifications between viewing and updating a resource.
+     *
+     * @return  bool
+     */
+    public static function trafficCop(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Declares how the resource columns are edited
      *
      * @return array
      */
     public function fields(): array
     {
-        return [];
+        return [
+            // Input::make('name')
+            //     ->title('Name')
+            //     ->disabled()
+            //     ->placeholder('Enter Name here'),
+        ];
     }
 
     /**
-     * Get the columns displayed by the resource.
+     * Declares the columns and their order when browsing the resource.
      *
      * @return TD[]
      */
     public function columns(): array
     {
         return [
-            TD::make('id'),
+            TD::make('id')
+                ->sort()
+                ->filter(TD::FILTER_NUMERIC)
+                ->render(function ($model) {
+                    return Link::make($model->id)
+                        ->route('platform.resource.edit', [Str::kebab('{{ class }}'), $model->id]);
+                }),
 
             TD::make('created_at', 'Date of creation')
+                ->sort()
                 ->render(function ($model) {
                     return $model->created_at->toDateTimeString();
                 }),
 
             TD::make('updated_at', 'Update date')
+                ->sort()
                 ->render(function ($model) {
                     return $model->updated_at->toDateTimeString();
                 }),
@@ -47,11 +104,23 @@ class {{ class }} extends Resource
     }
 
     /**
-     * Get the filters available for the resource.
+     * Define the filters available for the entire resource
      *
      * @return array
      */
     public function filters(): array
+    {
+        return [
+            new DefaultSorted('id', 'desc'),
+        ];
+    }
+
+        /**
+     * Get the actions available for the resource.
+     *
+     * @return array
+     */
+    public function actions(): array
     {
         return [];
     }
