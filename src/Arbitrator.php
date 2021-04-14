@@ -102,7 +102,8 @@ class Arbitrator
         }
 
         View::composer('platform::dashboard', function () use ($resource, $key) {
-            Dashboard::registerMenuElement(\Orchid\Platform\Dashboard::MENU_MAIN,
+            Dashboard::registerMenuElement(
+                \Orchid\Platform\Dashboard::MENU_MAIN,
                 Menu::make($resource::label())
                     ->icon($resource::icon())
                     ->route('platform.resource.list', [$resource::uriKey()])
