@@ -44,7 +44,7 @@ class ActionRequest extends ResourceRequest
         $current = $this->findModel();
 
         if ($current !== null) {
-            $models = collect($current);
+            $models->push($current);
         }
 
         return $models;

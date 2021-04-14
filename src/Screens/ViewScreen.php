@@ -5,12 +5,13 @@ namespace Orchid\Crud\Screens;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Crud\CrudScreen;
 use Orchid\Crud\Layouts\ResourceFields;
-use Orchid\Crud\Requests\UpdateRequest;
+use Orchid\Crud\Requests\ViewRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
 use Orchid\Support\Facades\Layout;
 
-class EditScreen extends CrudScreen
+class ViewScreen extends CrudScreen
 {
     /**
      * @var Model
@@ -20,11 +21,11 @@ class EditScreen extends CrudScreen
     /**
      * Query data.
      *
-     * @param UpdateRequest $request
+     * @param ViewRequest $request
      *
      * @return array
      */
-    public function query(UpdateRequest $request): array
+    public function query(ViewRequest $request): array
     {
         $this->model = $request->findModelOrFail();
 
@@ -41,12 +42,14 @@ class EditScreen extends CrudScreen
     public function commandBar(): array
     {
         return [
-            Button::make($this->resource::updateButtonLabel())
-                ->canSee($this->request->can('update'))
-                ->method('update')
-                ->icon('check')
-                ->parameters([
-                    '_retrieved_at' => optional($this->model->{$this->model->getUpdatedAtColumn()})->toJson(),
+            $this->actionsButtons(),
+
+            Link::make(__('Edit'))
+                ->icon('pencil')
+                ->canSee($this->can('update'))
+                ->route('platform.resource.edit', [
+                    $this->resource::uriKey(),
+                    $this->model->getKey(),
                 ]),
 
             Button::make($this->resource::deleteButtonLabel())
@@ -80,7 +83,7 @@ class EditScreen extends CrudScreen
     public function layout(): array
     {
         return [
-            new ResourceFields($this->resource->fields()),
+            Layout::legend(ResourceFields::PREFIX, $this->resource->legend()),
         ];
     }
 }

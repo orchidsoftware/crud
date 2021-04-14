@@ -3,8 +3,14 @@
 
 namespace Orchid\Crud;
 
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Collection;
 use Orchid\Crud\Requests\ActionRequest;
+use Orchid\Crud\Requests\DeleteRequest;
+use Orchid\Crud\Requests\ForceDeleteRequest;
+use Orchid\Crud\Requests\RestoreRequest;
+use Orchid\Crud\Requests\UpdateRequest;
 use Orchid\Screen\Action as ActionButton;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Screen;
@@ -145,5 +151,81 @@ abstract class CrudScreen extends Screen
             })->first();
 
         return $action->handle($request->models());
+    }
+
+    /**
+     * @param UpdateRequest $request
+     *
+     * @return RedirectResponse
+     */
+    public function update(UpdateRequest $request)
+    {
+        $request->resource()->onSave($request, $request->findModelOrFail());
+
+        Toast::info($this->resource::updateToastMessage());
+
+        return redirect()->route('platform.resource.list', $request->resource);
+    }
+
+    /**
+     * @param DeleteRequest $request
+     *
+     * @throws Exception
+     *
+     * @return RedirectResponse
+     */
+    public function delete(DeleteRequest $request)
+    {
+        $request->resource()->onDelete(
+            $request->findModelOrFail()
+        );
+
+        Toast::info($this->resource::deleteToastMessage());
+
+        return redirect()->route('platform.resource.list', $request->resource);
+    }
+
+    /**
+     * @param ForceDeleteRequest $request
+     *
+     * @throws Exception
+     *
+     * @return RedirectResponse
+     */
+    public function forceDelete(ForceDeleteRequest $request)
+    {
+        $request->resource()->onForceDelete(
+            $request->findModelOrFail()
+        );
+
+        Toast::info($this->resource::deleteToastMessage());
+
+        return redirect()->route('platform.resource.list', $request->resource);
+    }
+
+    /**
+     * @param RestoreRequest $request
+     *
+     * @return RedirectResponse
+     */
+    public function restore(RestoreRequest $request)
+    {
+        $request->resource()->onRestore(
+            $request->findModelOrFail()
+        );
+
+        Toast::info($this->resource::restoreToastMessage());
+
+        return redirect()->route('platform.resource.list', $request->resource);
+    }
+
+    /**
+     * Determine if the resource is soft deleted.
+     *
+     * @return bool
+     */
+    protected function isSoftDeleted(): bool
+    {
+        return $this->resource::softDeletes() && $this->model->trashed();
     }
 }

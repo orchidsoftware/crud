@@ -3,9 +3,9 @@
 namespace Orchid\Crud;
 
 use Illuminate\Support\Collection;
-use Orchid\Platform\ItemMenu;
+use Illuminate\Support\Facades\View;
 use Orchid\Platform\ItemPermission;
-use Orchid\Platform\Menu;
+use Orchid\Screen\Actions\Menu;
 use Orchid\Support\Facades\Dashboard;
 
 class Arbitrator
@@ -52,6 +52,10 @@ class Arbitrator
             return [$resource::sort(), $resource::label()];
         })
             ->values()
+            ->sort(function ($resource, $resource2) {
+                return strnatcmp($resource::label(), $resource2::label());
+            })
+            ->values()
             ->each(function (Resource $resource, $key) {
                 $this
                     ->registerPermission($resource)
@@ -97,16 +101,18 @@ class Arbitrator
             return $this;
         }
 
-        Dashboard::menu()->add(
-            Menu::MAIN,
-            ItemMenu::label($resource::label())
-                ->icon($resource::icon())
-                ->route('platform.resource.list', [$resource::uriKey()])
-                ->active($this->activeMenu($resource))
-                ->permission($resource::permission())
-                ->sort($resource::sort())
-                ->title($key === 0 ? __('Resources') : null)
-        );
+        View::composer('platform::dashboard', function () use ($resource, $key) {
+            Dashboard::registerMenuElement(
+                \Orchid\Platform\Dashboard::MENU_MAIN,
+                Menu::make($resource::label())
+                    ->icon($resource::icon())
+                    ->route('platform.resource.list', [$resource::uriKey()])
+                    ->active($this->activeMenu($resource))
+                    ->permission($resource::permission())
+                    ->sort($resource::sort())
+                    ->title($key === 0 ? __('Resources') : null)
+            );
+        });
 
         return $this;
     }
