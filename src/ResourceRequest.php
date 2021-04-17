@@ -135,11 +135,26 @@ class ResourceRequest extends FormRequest
      */
     public function getModelPaginationList()
     {
-        return $this->model()
+        $builder = $this->model()
             ->with($this->resource()->with())
             ->filters()
-            ->filtersApply($this->resource()->filters())
-            ->paginate($this->resource()->perPage());
+            ->filtersApply($this->resource()->filters());
+
+        foreach (collect($this->resource()->columns()) as $TD) {
+            $callback = $TD->queryClosure;
+            if (!is_null($callback)) {
+                $filters = $this->request->all('filter');
+                $sorts = $this->request->all('sort');
+                $key = $TD->getColumn();
+                if (Arr::exists($filters, $key)) {
+                    $filter = $filters[$key];
+                    $sort = $sorts[$key];
+                    $builder = $callback($builder, $filter, $sort);
+                }
+            }
+        }
+
+        return $builder->paginate($this->resource()->perPage());
     }
 
     /**
