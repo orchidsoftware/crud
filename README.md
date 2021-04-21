@@ -130,6 +130,28 @@ public function columns(): array
 ```
 The CRUD generation package is entirely based on the table layer. You can [read more about this on the documentation page](https://orchid.software/en/docs/table/).
 
+## Defining Legend
+
+Each resource contains a `legend` method. It determines how the model will look when viewed. To add to a resource, we can add it to the resource's `legend` method. Typically, columns may be created using their static `make` method. 
+
+```php
+use Orchid\Screen\Sight;
+
+/**
+ * Get the sights displayed by the resource.
+ *
+ * @return Sight[]
+ */
+public function legend(): array
+{
+    return [
+        Sight::make('id'),
+        Sight::make('title'),
+    ];
+}
+```
+The CRUD generation package is entirely based on the legend layer. You can [read more about this on the documentation page](https://orchid.software/en/docs/legend).
+
 ## Defining Rules
 
 Each resource contains a `rules` method. When submitting a create or update form, the data can be validated, which is described in the `rules` method:
