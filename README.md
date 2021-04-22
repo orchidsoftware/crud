@@ -63,8 +63,28 @@ Freshly created resources contain nothing. Don't worry. We'll add more fields to
 ## Registering Resources
 
 All resources within the `app/Orchid/Resources` directory will automatically be registered by default.
-You are not required to register them manually.
+You are not required to register them manually. But if this is required, for example, when creating an additional package, then the best way would be:
 
+```php
+use App\Orchid\Resources\UserResource;
+use Illuminate\Support\ServiceProvider;
+use Orchid\Crud\Arbitrator;
+
+class CrudServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot(Arbitrator $arbitrator)
+    {
+        $arbitrator->resources([
+            UserResource::class,
+        ]);
+    }
+}
+```
 
 ## Expanding of Model
 
