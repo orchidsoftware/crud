@@ -635,9 +635,9 @@ This roadmap isn't meant to cover everything we're going to work on. We will con
 We want to do:
 - [x] Add setting for displaying and restoring deleted models with `Illuminate\Database\Eloquent\SoftDeletes`;
 - [x] Add the ability to perform actions for multiple models;
+- [ ] Support of nested relations when viewing  
 
 It is an active community, so expect more contributions that will complement it with all sorts of other improvements to help improve production.
-
 
 ## Changelog
 
