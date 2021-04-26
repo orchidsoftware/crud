@@ -141,15 +141,21 @@ class ResourceRequest extends FormRequest
             ->filtersApply($this->resource()->filters());
 
         foreach (collect($this->resource()->columns()) as $TD) {
+            if (! ($TD instanceof \Orchid\Crud\TD)) {
+                continue;
+            }
+
             $callback = $TD->queryClosure;
-            if (!is_null($callback)) {
+            if (! is_null($callback)) {
                 $filters = $this->request->all('filter');
-                $sorts = $this->request->all('sort');
+                $sort = $this->request->get('sort');
                 $key = $TD->getColumn();
+                $filter = null;
                 if (Arr::exists($filters, $key)) {
                     $filter = $filters[$key];
-                    $sort = $sorts[$key];
-                    $builder = $callback($builder, $filter, $sort);
+                }
+                if ($filter != null or $sort != null) {
+                    $callback($builder, $filter, $sort);
                 }
             }
         }

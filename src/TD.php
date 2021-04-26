@@ -7,7 +7,7 @@ use Orchid\Screen\TD as Base;
 
 class TD extends Base
 {
-    public $queryClosure;
+    public $queryClosure = null;
 
     public function query(Closure $queryClosure)
     {
