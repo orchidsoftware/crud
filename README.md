@@ -436,6 +436,7 @@ To limit which users may view, create, update, or delete resources leverages Lar
 Typically, these policies will be registered in your application's `AuthServiceProvider`. If CRUD detects a policy has been registered for the model, it will automatically check that policy's relevant authorization methods before performing their respective actions, such as:
 
 - viewAny
+- view
 - create
 - update
 - delete
