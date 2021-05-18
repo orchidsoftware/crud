@@ -10,6 +10,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Orchid\Crud\Layouts\ResourceFields;
+use Orchid\Filters\Filterable;
 
 class ResourceRequest extends FormRequest
 {
@@ -135,6 +136,15 @@ class ResourceRequest extends FormRequest
      */
     public function getModelPaginationList()
     {
+        if (config('app.debug')) {
+            $traits = $this->class_uses_deep($this->model());
+            if (! in_array(
+                Filterable::class,
+                $traits)) {
+                throw new \Exception(get_class($this->model()).' must use '.Filterable::class.' trait');
+            }
+        }
+
         $builder = $this->model()
             ->with($this->resource()->with())
             ->filters()
@@ -202,5 +212,18 @@ class ResourceRequest extends FormRequest
         }
 
         return $this->user()->can($abilities, $model);
+    }
+
+    private function class_uses_deep($class, $autoload = true)
+    {
+        $traits = [];
+        do {
+            $traits = array_merge(class_uses($class, $autoload), $traits);
+        } while ($class = get_parent_class($class));
+        foreach ($traits as $trait => $same) {
+            $traits = array_merge(class_uses($trait, $autoload), $traits);
+        }
+
+        return array_unique($traits);
     }
 }
