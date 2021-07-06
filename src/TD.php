@@ -12,6 +12,7 @@ class TD extends Base
     public function query(Closure $queryClosure)
     {
         $this->queryClosure = $queryClosure;
+
         return $this;
     }
 
