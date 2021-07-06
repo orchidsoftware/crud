@@ -33,23 +33,23 @@ use Tabuna\Breadcrumbs\Trail;
  *
  * # CURRENT
  *
- * list     GET|HEAD    /admin/crud/documents
- * create   GET|HEAD    /admin/crud/documents/create
- *          POST        /admin/crud/documents/create/save
- * view     GET|HEAD    /admin/crud/documents/{id}
- * edit     GET|HEAD    /admin/crud/documents/{id}/edit
- *          POST        /admin/crud/documents/{id}/edit/update
- *          POST        /admin/crud/documents/{id}/edit/delete
+ * list     GET|HEAD|POST    /admin/crud/documents
+ * create   GET|HEAD|POST    /admin/crud/documents/create
+ *          POST             /admin/crud/documents/create/save
+ * view     GET|HEAD         /admin/crud/documents/{id}
+ * edit     GET|HEAD|POST    /admin/crud/documents/{id}/edit
+ *          POST             /admin/crud/documents/{id}/edit/update
+ *          POST             /admin/crud/documents/{id}/edit/delete
  *
  * # DESIRED
  *
- * index    GET|HEAD	/admin/crud/documents
- * create   GET|HEAD	/admin/crud/documents/create
- * store    POST	    /admin/crud/documents
- * show     GET|HEAD	/admin/crud/documents/{id}
- * edit     GET|HEAD	/admin/crud/documents/{id}/edit
- * update   PUT|PATCH   /admin/crud/documents/{id}
- * destroy  DELETE      /admin/crud/documents/{id}
+ * index    GET|HEAD         /admin/crud/documents
+ * create   GET|HEAD	     /admin/crud/documents/create
+ * store    POST	         /admin/crud/documents
+ * show     GET|HEAD	     /admin/crud/documents/{id}
+ * edit     GET|HEAD	     /admin/crud/documents/{id}/edit
+ * update   PUT|PATCH        /admin/crud/documents/{id}
+ * destroy  DELETE           /admin/crud/documents/{id}
  */
 
 Route::screenMatch(['GET', 'HEAD', 'POST'], '/crud/{resource?}', ListScreen::class)
