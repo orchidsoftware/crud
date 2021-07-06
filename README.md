@@ -63,8 +63,28 @@ Freshly created resources contain nothing. Don't worry. We'll add more fields to
 ## Registering Resources
 
 All resources within the `app/Orchid/Resources` directory will automatically be registered by default.
-You are not required to register them manually.
+You are not required to register them manually. But if this is required, for example, when creating an additional package, then the best way would be:
 
+```php
+use App\Orchid\Resources\UserResource;
+use Illuminate\Support\ServiceProvider;
+use Orchid\Crud\Arbitrator;
+
+class CrudServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot(Arbitrator $arbitrator)
+    {
+        $arbitrator->resources([
+            UserResource::class,
+        ]);
+    }
+}
+```
 
 ## Expanding of Model
 
@@ -129,6 +149,28 @@ public function columns(): array
 }
 ```
 The CRUD generation package is entirely based on the table layer. You can [read more about this on the documentation page](https://orchid.software/en/docs/table/).
+
+## Defining Legend
+
+Each resource contains a `legend` method. It determines how the model will look when viewed. To add to a resource, we can add it to the resource's `legend` method. Typically, columns may be created using their static `make` method. 
+
+```php
+use Orchid\Screen\Sight;
+
+/**
+ * Get the sights displayed by the resource.
+ *
+ * @return Sight[]
+ */
+public function legend(): array
+{
+    return [
+        Sight::make('id'),
+        Sight::make('title'),
+    ];
+}
+```
+The CRUD generation package is entirely based on the legend layer. You can [read more about this on the documentation page](https://orchid.software/en/docs/legend).
 
 ## Defining Rules
 
@@ -394,6 +436,7 @@ To limit which users may view, create, update, or delete resources leverages Lar
 Typically, these policies will be registered in your application's `AuthServiceProvider`. If CRUD detects a policy has been registered for the model, it will automatically check that policy's relevant authorization methods before performing their respective actions, such as:
 
 - viewAny
+- view
 - create
 - update
 - delete
@@ -592,10 +635,10 @@ Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com
 This roadmap isn't meant to cover everything we're going to work on. We will continue to invest in making CRUD easier to use and easier to manage.
 We want to do:
 - [x] Add setting for displaying and restoring deleted models with `Illuminate\Database\Eloquent\SoftDeletes`;
-- [ ] Add the ability to perform actions for multiple models;
+- [x] Add the ability to perform actions for multiple models;
+- [ ] Support of nested relations when viewing  
 
 It is an active community, so expect more contributions that will complement it with all sorts of other improvements to help improve production.
-
 
 ## Changelog
 
