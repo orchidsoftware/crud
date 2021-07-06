@@ -137,7 +137,11 @@ abstract class Resource
      */
     public static function nameWithoutResource(): string
     {
-        return Str::of(class_basename(static::class))->replace('Resource', '');
+        return Str::of(class_basename(static::class))
+            ->replace('Resource', '')
+            ->whenEmpty(function () {
+                return 'Resource';
+            });
     }
 
     /**
