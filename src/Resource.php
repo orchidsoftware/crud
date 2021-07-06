@@ -99,7 +99,7 @@ abstract class Resource
      */
     public static function uriKey(): string
     {
-        return Str::of(class_basename(static::class))->kebab()->plural();
+        return Str::of(static::class)->classBasename()->kebab()->plural();
     }
 
     /**
@@ -137,7 +137,8 @@ abstract class Resource
      */
     public static function nameWithoutResource(): string
     {
-        return Str::of(class_basename(static::class))
+        return Str::of(static::class)
+            ->classBasename()
             ->replace('Resource', '')
             ->whenEmpty(function () {
                 return 'Resource';
