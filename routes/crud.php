@@ -52,7 +52,7 @@ use Tabuna\Breadcrumbs\Trail;
  * destroy  DELETE      /admin/crud/documents/{id}
  */
 
-Route::screenMatch(['GET', 'HEAD'], '/crud/{resource?}', ListScreen::class)
+Route::screenMatch(['GET', 'HEAD', 'POST'], '/crud/{resource?}', ListScreen::class)
     ->name('resource.list')
     ->breadcrumbs(function (Trail $trail) {
         $resource = app(ResourceRequest::class)->resource();
