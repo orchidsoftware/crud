@@ -2,6 +2,13 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 3.0.1 - 2021-06-06
+
+### Fixed
+
+- Fixed custom message validation [#35](https://github.com/orchidsoftware/crud/issues/35)
+- Do not delete the name "Resource", if it is named so [#39](https://github.com/orchidsoftware/crud/issues/39)
+
 ## 3.0.0 - 2021-04-14
 
 ### Added
