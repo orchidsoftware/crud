@@ -10,6 +10,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Orchid\Crud\Layouts\ResourceFields;
+use Orchid\Filters\Filterable;
 
 class ResourceRequest extends FormRequest
 {
@@ -141,11 +142,41 @@ class ResourceRequest extends FormRequest
      */
     public function getModelPaginationList()
     {
-        return $this->model()
+        if (config('app.debug')) {
+            $traits = $this->class_uses_deep($this->model());
+            if (! in_array(
+                Filterable::class,
+                $traits)) {
+                throw new \Exception(get_class($this->model()).' must use '.Filterable::class.' trait');
+            }
+        }
+
+        $builder = $this->model()
             ->with($this->resource()->with())
             ->filters()
-            ->filtersApply($this->resource()->filters())
-            ->paginate($this->resource()->perPage());
+            ->filtersApply($this->resource()->filters());
+
+        foreach (collect($this->resource()->columns()) as $TD) {
+            if (! ($TD instanceof \Orchid\Crud\TD)) {
+                continue;
+            }
+
+            $callback = $TD->queryClosure;
+            if (! is_null($callback)) {
+                $filters = $this->request->all('filter');
+                $sort = $this->request->get('sort');
+                $key = $TD->getColumn();
+                $filter = null;
+                if (Arr::exists($filters, $key)) {
+                    $filter = $filters[$key];
+                }
+                if ($filter != null or $sort != null) {
+                    $callback($builder, $filter, $sort);
+                }
+            }
+        }
+
+        return $builder->paginate($this->resource()->perPage());
     }
 
     /**
@@ -187,5 +218,18 @@ class ResourceRequest extends FormRequest
         }
 
         return $this->user()->can($abilities, $model);
+    }
+
+    private function class_uses_deep($class, $autoload = true)
+    {
+        $traits = [];
+        do {
+            $traits = array_merge(class_uses($class, $autoload), $traits);
+        } while ($class = get_parent_class($class));
+        foreach ($traits as $trait => $same) {
+            $traits = array_merge(class_uses($trait, $autoload), $traits);
+        }
+
+        return array_unique($traits);
     }
 }
