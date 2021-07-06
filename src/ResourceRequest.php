@@ -30,9 +30,12 @@ class ResourceRequest extends FormRequest
     {
         return collect($this->model)->keys()
             ->mapWithKeys(function ($key) {
-                return [ResourceFields::PREFIX . '.' . $key => $key];
+                return [$key => $key];
             })
             ->merge($this->resource()->attributes())
+            ->mapWithKeys(function ($value, $key) {
+                return [ResourceFields::PREFIX . '.' . $key => $value];
+            })
             ->toArray();
     }
 
@@ -52,7 +55,10 @@ class ResourceRequest extends FormRequest
      */
     public function messages():array
     {
-        return $this->resource()->messages();
+        return collect($this->resource()->messages())
+            ->mapWithKeys(function ($value, $key) {
+                return [ResourceFields::PREFIX . '.' . $key => $value];
+            })->toArray();
     }
 
     /**
