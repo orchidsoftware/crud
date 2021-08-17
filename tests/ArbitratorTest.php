@@ -6,16 +6,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Orchid\Crud\Arbitrator;
-use Orchid\Crud\Resource;
 use Orchid\Crud\Tests\Fixtures\PostResource;
 use Orchid\Crud\Tests\Fixtures\PrivateResource;
 use Orchid\Crud\Tests\FixturesBad\WithoutModel;
 use Orchid\Crud\Tests\FixturesBad\WithoutTraits;
 use Orchid\Platform\ItemPermission;
 use Orchid\Screen\Actions\Menu;
-use Orchid\Screen\Field;
-use Orchid\Screen\Sight;
-use Orchid\Screen\TD;
 use Orchid\Support\Facades\Dashboard;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -122,7 +118,7 @@ class ArbitratorTest extends TestCase
         $this->expectExceptionMessage('The resource "Orchid\Crud\Tests\FixturesBad\WithoutModel" must specify the Eloquent class to generate.');
 
         $arbitrator->resources([
-            WithoutModel::class
+            WithoutModel::class,
         ]);
     }
 
@@ -133,7 +129,7 @@ class ArbitratorTest extends TestCase
         $this->expectExceptionMessage('The model "Orchid\Crud\Tests\Models\PostWithoutTraits" must have the required orchid/platform traits.');
 
         $arbitrator->resources([
-            WithoutTraits::class
+            WithoutTraits::class,
         ]);
     }
 }

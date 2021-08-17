@@ -14,7 +14,6 @@ class WithoutTraits extends Resource
      */
     public static $model = PostWithoutTraits::class;
 
-
     public function columns(): array
     {
         return [];
