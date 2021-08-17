@@ -13,7 +13,6 @@ class ResourceFinder
      */
     private $finder;
 
-
     /**
      * @var string
      */

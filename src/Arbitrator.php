@@ -2,8 +2,10 @@
 
 namespace Orchid\Crud;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
+use Orchid\Filters\Filterable;
 use Orchid\Platform\ItemPermission;
 use Orchid\Screen\Actions\Menu;
 use Orchid\Support\Facades\Dashboard;
@@ -38,9 +40,32 @@ class Arbitrator
             ->merge($resources)
             ->map(function ($resource) {
                 return is_string($resource) ? app($resource) : $resource;
+            })
+            ->map(function (Resource $resource) {
+                return $this->checkResource($resource);
             });
 
         return $this;
+    }
+
+    /**
+     * @param \Orchid\Crud\Resource $resource
+     *
+     * @return \Orchid\Crud\Resource
+     */
+    public function checkResource(Resource $resource): Resource
+    {
+        $isEloquent = is_subclass_of($resource::$model, Model::class);
+
+        abort_unless($isEloquent, 500, sprintf('The resource "%s" must specify the Eloquent class to generate.', get_class($resource)));
+
+        $exist = collect(trait_uses_recursive($resource::$model))->has([
+            Filterable::class,
+        ]);
+
+        abort_unless($exist, 500, sprintf('The model "%s" must have the required orchid/platform traits.', $resource::$model));
+
+        return $resource;
     }
 
     /**
@@ -48,9 +73,10 @@ class Arbitrator
      */
     public function boot(): void
     {
-        $this->resources->sort(function (Resource $resource) {
-            return [$resource::sort(), $resource::label()];
-        })
+        $this->resources
+            ->sort(function (Resource $resource) {
+                return [$resource::sort(), $resource::label()];
+            })
             ->values()
             ->sort(function ($resource, $resource2) {
                 return strnatcmp($resource::label(), $resource2::label());
@@ -97,7 +123,7 @@ class Arbitrator
      */
     private function registerMenu(Resource $resource, int $key): Arbitrator
     {
-        if (! $resource::displayInNavigation()) {
+        if (!$resource::displayInNavigation()) {
             return $this;
         }
 
