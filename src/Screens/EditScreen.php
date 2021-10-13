@@ -8,7 +8,6 @@ use Orchid\Crud\Layouts\ResourceFields;
 use Orchid\Crud\Requests\UpdateRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
-use Orchid\Support\Facades\Layout;
 
 class EditScreen extends CrudScreen
 {
