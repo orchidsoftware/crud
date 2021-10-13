@@ -2,6 +2,16 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 3.1.0 - 2021-10-13
+
+### Added
+
+- Auto-detect and options for create resource [#1909](https://github.com/orchidsoftware/platform/discussions/1909)
+
+### Changed
+
+- Error code for missing traits
+
 ## 3.0.1 - 2021-06-06
 
 ### Fixed
