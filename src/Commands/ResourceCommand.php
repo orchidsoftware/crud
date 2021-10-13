@@ -3,6 +3,8 @@
 namespace Orchid\Crud\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Support\Str;
+use Symfony\Component\Console\Input\InputOption;
 
 class ResourceCommand extends GeneratorCommand
 {
@@ -34,7 +36,7 @@ class ResourceCommand extends GeneratorCommand
      */
     protected function getStub(): string
     {
-        return __DIR__.'/../../stubs/resource.stub';
+        return __DIR__ . '/../../stubs/resource.stub';
     }
 
     /**
@@ -46,6 +48,72 @@ class ResourceCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\Orchid\Resources';
+        return $rootNamespace . '\Orchid\Resources';
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['model', 'm', InputOption::VALUE_REQUIRED, 'The model class being represented.'],
+        ];
+    }
+
+    /**
+     * @param string $model
+     *
+     * @return string
+     */
+    protected function detectModel(string $model): string
+    {
+        $rootNamespace = $this->laravel->getNamespace();
+
+        $withFolder = $rootNamespace . 'Models\\' . $model;
+        $withoutFolder = $rootNamespace . 'Models\\' . $model;
+
+        if (class_exists($withFolder)) {
+            return '\\' . $withFolder . '::class';
+        }
+
+        if (class_exists($withoutFolder)) {
+            return '\\' . $withoutFolder . '::class';
+        }
+
+        return "''";
+    }
+
+    /**
+     * @return string
+     */
+    public function detectModelForNameResource(): string
+    {
+        $detectModelForName = Str::of($this->argument('name'));
+
+        if ($detectModelForName->endsWith('Resource')) {
+            $detectModelForName = $detectModelForName->replaceLast('Resource', '');
+        }
+
+        return $this->detectModel($detectModelForName);
+    }
+
+    /**
+     * Build the class with the given name.
+     *
+     * @param string $name
+     *
+     * @return string
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     */
+    protected function buildClass($name)
+    {
+        $model = $this->option('model') === null
+            ? $this->detectModelForNameResource()
+            : $this->detectModel($this->option('model'));
+
+        return Str::of(parent::buildClass($name))->replace('{{ namespacedModel }}', $model);
     }
 }

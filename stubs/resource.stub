@@ -12,7 +12,7 @@ class {{ class }} extends Resource
      *
      * @var string
      */
-    public static $model = '';
+    public static $model = {{ namespacedModel }};
 
     /**
      * Get the fields displayed by the resource.
