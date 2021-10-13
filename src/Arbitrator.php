@@ -57,13 +57,13 @@ class Arbitrator
     {
         $isEloquent = is_subclass_of($resource::$model, Model::class);
 
-        abort_unless($isEloquent, 500, sprintf('The resource "%s" must specify the Eloquent class to generate.', get_class($resource)));
+        abort_unless($isEloquent, 501, sprintf('The resource "%s" must specify the Eloquent class to generate.', get_class($resource)));
 
         $exist = collect(trait_uses_recursive($resource::$model))->has([
             Filterable::class,
         ]);
 
-        abort_unless($exist, 500, sprintf('The model "%s" must have the required orchid/platform traits.', $resource::$model));
+        abort_unless($exist, 501, sprintf('The model "%s" must have the required orchid/platform traits.', $resource::$model));
 
         return $resource;
     }
