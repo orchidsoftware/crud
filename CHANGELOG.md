@@ -2,6 +2,12 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 3.1.1 - 2021-10-20
+
+### Fixed
+
+- Active element menu for resource [#57](https://github.com/orchidsoftware/crud/pull/57)
+
 ## 3.1.0 - 2021-10-13
 
 ### Added
