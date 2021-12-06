@@ -141,7 +141,9 @@ class ResourceRequest extends FormRequest
      */
     public function getModelPaginationList()
     {
-        return $this->model()
+        $query = $this->resource()->paginationQuery($this, $this->model());
+
+        return $query
             ->with($this->resource()->with())
             ->filters()
             ->filtersApply($this->resource()->filters())
@@ -153,7 +155,7 @@ class ResourceRequest extends FormRequest
      */
     private function getModelQuery()
     {
-        $query = $this->model();
+        $query = $this->resource()->modelQuery($this, $this->model());
 
         if ($this->resource()->softDeletes()) {
             $query = $query->withTrashed();
