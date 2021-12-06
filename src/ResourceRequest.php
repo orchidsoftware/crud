@@ -141,11 +141,32 @@ class ResourceRequest extends FormRequest
      */
     public function getModelPaginationList()
     {
-        return $this->model()
+        $builder = $this->model()
             ->with($this->resource()->with())
             ->filters()
-            ->filtersApply($this->resource()->filters())
-            ->paginate($this->resource()->perPage());
+            ->filtersApply($this->resource()->filters());
+
+        foreach (collect($this->resource()->columns()) as $TD) {
+            if (! ($TD instanceof \Orchid\Crud\TD)) {
+                continue;
+            }
+
+            $callback = $TD->queryClosure;
+            if (! is_null($callback)) {
+                $filters = $this->request->all('filter');
+                $sort = $this->request->get('sort');
+                $key = $TD->getColumn();
+                $filter = null;
+                if (Arr::exists($filters, $key)) {
+                    $filter = $filters[$key];
+                }
+                if ($filter != null or $sort != null) {
+                    $callback($builder, $filter, $sort);
+                }
+            }
+        }
+
+        return $builder->paginate($this->resource()->perPage());
     }
 
     /**
