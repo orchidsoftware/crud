@@ -4,6 +4,7 @@ namespace Orchid\Crud;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Orchid\Screen\Field;
@@ -368,6 +369,27 @@ abstract class Resource
     public static function trafficCop(): bool
     {
         return false;
+    }
+
+
+    /**
+     * Action to query one model
+     *
+     * @param Model           $model
+     * @return Model           $model
+     */
+    public function modelQuery(ResourceRequest $request, Model $model): Builder {
+        return $model->query();
+    }
+
+    /**
+     * Action to query models list
+     *
+     * @param Model           $model
+     * @return Model           $model
+     */
+    public function paginationQuery(ResourceRequest $request, Model $model): Builder {
+        return $model->query();
     }
 
     /**
