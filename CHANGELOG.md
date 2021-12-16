@@ -2,6 +2,11 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 3.2.0 - 2021-12-16
+
+### Added
+- Allow overriding index and show requests [#58](https://github.com/orchidsoftware/crud/pull/58)
+
 ## 3.1.1 - 2021-10-20
 
 ### Fixed
