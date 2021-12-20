@@ -1,5 +1,5 @@
 <p align="center" style="margin: 1.5em!important;"> 
- <a href="https://github.com/orchidsoftware/crud"><img src="https://orchid.software/assets/img/logo-crud-space.svg" alt="Laravel Orchid CRUD" height="148"></a>
+ <a href="https://github.com/orchidsoftware/crud"><img src="https://orchid.software/img/logo-crud-space.svg" alt="Laravel Orchid CRUD" height="148"></a>
 </p>
 
 <p align="center">
