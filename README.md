@@ -21,7 +21,7 @@ All fields, filters, and traits are compatible.
 
 ## Official Documentation
 
-Documentation for CRUD can be found on the [orchid.software website] (https://orchid.software/en/docs/packages/crud/#introduction).
+Documentation for CRUD can be found on the [orchid.software website](https://orchid.software/en/docs/packages/crud/#introduction).
 
 
 ## Roadmap
