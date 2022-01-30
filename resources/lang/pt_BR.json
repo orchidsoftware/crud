@@ -9,5 +9,6 @@
     "An error has occurred": "Ocorreu um erro",
     "Are you sure you want to delete this resource?": "Você tem certeza que quer excluir este recurso?",
     "Are you sure you want to force delete this resource?": "Você tem certeza que quer forçar a exclusão deste recurso?",
-    "Since the :resource was edited, its values have changed. Refresh the page to see them or click \":button\" again to replace them.": "Desde que você abriu esse(a) :resource para edição, os seus valores mudaram. Atualize a página para ver os novos valores ou clique em \":button\" para substituí-los."
+    "Since the :resource was edited, its values have changed. Refresh the page to see them or click \":button\" again to replace them.": "Desde que você abriu esse(a) :resource para edição, os seus valores mudaram. Atualize a página para ver os novos valores ou clique em \":button\" para substituí-los.",
+    "Resources": "Recursos"
 }
