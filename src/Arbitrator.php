@@ -138,8 +138,7 @@ class Arbitrator
                 ->route('platform.resource.list', [$resource::uriKey()])
                 ->active($this->activeMenu($resource))
                 ->permission($resource::permission())
-                ->sort($resource::sort())
-                ->title($key === 0 ? __('Resources') : null);
+                ->sort($resource::sort());
 
             Dashboard::registerMenuElement(\Orchid\Platform\Dashboard::MENU_MAIN, $title);
             Dashboard::registerMenuElement(\Orchid\Platform\Dashboard::MENU_MAIN, $menu);

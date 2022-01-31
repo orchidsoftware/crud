@@ -2,6 +2,11 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 3.3.2 - 2022-01-31
+
+### Fixed
+- Don't show title for not permission for the first resource [#61](https://github.com/orchidsoftware/crud/issues/61)
+
 ## 3.3.1 - 2022-01-31
 
 ### Fixed
