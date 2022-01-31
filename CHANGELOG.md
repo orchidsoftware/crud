@@ -2,6 +2,11 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 3.3.0 - 2022-01-31
+
+### Added
+- Added pt_BR (Brazilian Portuguese) translation [#63](https://github.com/orchidsoftware/crud/pull/63)
+
 ## 3.2.0 - 2021-12-16
 
 ### Added

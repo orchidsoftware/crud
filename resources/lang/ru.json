@@ -9,5 +9,6 @@
     "An error has occurred": "Произошла ошибка",
     "Are you sure you want to delete this resource?": "Вы уверены, что хотите удалить этот ресурс?",
     "Are you sure you want to force delete this resource?": "Вы уверены, что хотите принудительно удалить этот ресурс?",
-    "Since the :resource was edited, its values have changed. Refresh the page to see them or click \":button\" again to replace them.": "С момента редактирования :resource его значения изменились. Обновите страницу, чтобы увидеть их, или нажмите «:button» еще раз, чтобы заменить их."
+    "Since the :resource was edited, its values have changed. Refresh the page to see them or click \":button\" again to replace them.": "С момента редактирования :resource его значения изменились. Обновите страницу, чтобы увидеть их, или нажмите «:button» еще раз, чтобы заменить их.",
+    "Resources": "Ресурсы"
 }
