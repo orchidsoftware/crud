@@ -127,20 +127,20 @@ class Arbitrator
             return $this;
         }
 
-        $title = Menu::make()
-            ->canSee($key === 0)
-            ->title(__('Resources'))
-            ->sort($resource::sort());
+        View::composer('platform::dashboard', function () use ($resource, $key) {
+            $title = Menu::make()
+                ->canSee($key === 0)
+                ->title(__('Resources'))
+                ->sort($resource::sort());
 
-        $menu = Menu::make($resource::label())
-            ->icon($resource::icon())
-            ->route('platform.resource.list', [$resource::uriKey()])
-            ->active($this->activeMenu($resource))
-            ->permission($resource::permission())
-            ->sort($resource::sort())
-            ->title($key === 0 ? __('Resources') : null);
+            $menu = Menu::make($resource::label())
+                ->icon($resource::icon())
+                ->route('platform.resource.list', [$resource::uriKey()])
+                ->active($this->activeMenu($resource))
+                ->permission($resource::permission())
+                ->sort($resource::sort())
+                ->title($key === 0 ? __('Resources') : null);
 
-        View::composer('platform::dashboard', function () use ($menu, $title) {
             Dashboard::registerMenuElement(\Orchid\Platform\Dashboard::MENU_MAIN, $title);
             Dashboard::registerMenuElement(\Orchid\Platform\Dashboard::MENU_MAIN, $menu);
         });
