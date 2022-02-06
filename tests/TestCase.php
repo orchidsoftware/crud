@@ -25,7 +25,7 @@ class TestCase extends Orchestra
 
         $this->loadLaravelMigrations();
         $this->loadMigrationsFrom(realpath('./tests/Migrations'));
-        $this->artisan('orchid:publish');        
+        $this->artisan('orchid:publish');
 
         Factory::guessFactoryNamesUsing(function ($factory) {
             $factoryBasename = class_basename($factory);
