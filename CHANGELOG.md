@@ -2,6 +2,12 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 3.4.0 - 2022-02-06
+
+### Changed
+
+- Support Laravel Orchid 11.x
+
 ## 3.3.2 - 2022-01-31
 
 ### Fixed
