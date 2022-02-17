@@ -386,36 +386,14 @@ abstract class Resource
     /**
      * Action to query models list
      *
-     * @param Model $model
+     * @param \Orchid\Crud\ResourceRequest $request
+     * @param Model                        $model
      *
-     * @return Model $model
+     * @return \Illuminate\Database\Eloquent\Builder $model
      */
     public function paginationQuery(ResourceRequest $request, Model $model): Builder
     {
         return $model->query();
-    }
-
-    /**
-     * Action to create and update the model
-     *
-     * @param ResourceRequest $request
-     * @param Model           $model
-     */
-    public function onSave(ResourceRequest $request, Model $model)
-    {
-        $model->forceFill($request->all())->save();
-    }
-
-    /**
-     * Action to delete a model
-     *
-     * @param Model $model
-     *
-     * @throws Exception
-     */
-    public function onDelete(Model $model)
-    {
-        $model->delete();
     }
 
     /**
@@ -429,12 +407,53 @@ abstract class Resource
     }
 
     /**
+     * Action to create and update the model
+     *
+     * @param ResourceRequest $request
+     * @param Model           $model
+     */
+    public function save(ResourceRequest $request, Model $model): void
+    {
+        if (method_exists(static::class, 'onSave')) {
+            static::onSave($request, $model);
+
+            return;
+        }
+
+        $model->forceFill($request->all())->save();
+    }
+
+    /**
+     * Action to delete a model
+     *
+     * @param Model $model
+     *
+     * @throws Exception
+     */
+    public function delete(Model $model): void
+    {
+        if (method_exists(static::class, 'onDelete')) {
+            static::onDelete($model);
+
+            return;
+        }
+
+        $model->delete();
+    }
+
+    /**
      * Action to restore a model
      *
      * @param Model $model
      */
-    public function onRestore(Model $model)
+    public function restore(Model $model): void
     {
+        if (method_exists(static::class, 'onRestore')) {
+            static::onRestore($model);
+
+            return;
+        }
+
         $model->restore();
     }
 
@@ -445,9 +464,14 @@ abstract class Resource
      *
      * @throws Exception
      */
-    public function onForceDelete(Model $model)
+    public function forceDelete(Model $model): void
     {
-        // Force deleting a single model instance...
+        if (method_exists(self::class, 'onForceDelete')) {
+            static::onForceDelete($model);
+
+            return;
+        }
+
         $model->forceDelete();
     }
 }

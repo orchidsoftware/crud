@@ -160,7 +160,7 @@ abstract class CrudScreen extends Screen
      */
     public function update(UpdateRequest $request)
     {
-        $request->resource()->onSave($request, $request->findModelOrFail());
+        $request->resource()->save($request, $request->findModelOrFail());
 
         Toast::info($this->resource::updateToastMessage());
 
@@ -176,7 +176,7 @@ abstract class CrudScreen extends Screen
      */
     public function delete(DeleteRequest $request)
     {
-        $request->resource()->onDelete(
+        $request->resource()->delete(
             $request->findModelOrFail()
         );
 
@@ -194,7 +194,7 @@ abstract class CrudScreen extends Screen
      */
     public function forceDelete(ForceDeleteRequest $request)
     {
-        $request->resource()->onForceDelete(
+        $request->resource()->forceDelete(
             $request->findModelOrFail()
         );
 
@@ -210,7 +210,7 @@ abstract class CrudScreen extends Screen
      */
     public function restore(RestoreRequest $request)
     {
-        $request->resource()->onRestore(
+        $request->resource()->restore(
             $request->findModelOrFail()
         );
 

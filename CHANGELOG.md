@@ -2,6 +2,12 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 3.6.0 - 2022-02-18
+
+### Changed
+
+- Passing model type in default actions
+
 ## 3.5.0 - 2022-02-10
 
 ### Changed
