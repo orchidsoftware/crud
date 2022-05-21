@@ -1,0 +1,14 @@
+{
+    "Create :resource": ":resource döret",
+    "Update :resource": ":resource üýtget",
+    "Delete :resource": ":resource poz",
+    "Save :resource":   ":resource ýatda sakla",
+    "You have successfully updated the :resource.": "Siz :resource üstünlikli üýtgetdiňiz.",
+    "You have successfully saved the :resource.": "Siz :resource üstünlikli ýatda saklatdyňyz.",
+    "You have successfully deleted the :resource.": "Siz :resource üstünlikli pozdyňyz.",
+    "An error has occurred": "Ýalňyşlyk ýüze çykdu",
+    "Are you sure you want to delete this resource?": "Siz çyndanam, bu resursy pozmak isleýärsiňizmi?",
+    "Are you sure you want to force delete this resource?": "Siz çyndadam bu resursy doly pozmak isleýärsiňizmi?",
+    "Since the :resource was edited, its values have changed. Refresh the page to see them or click \":button\" again to replace them.": ":resource üýtgedilenden soň, ol üýtgedi. Sahypany täzeläp ýada \":button\" düwma täzelenen görnüşi görüň.",
+    "Resources": "Resurslar"
+}
