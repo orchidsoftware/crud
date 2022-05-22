@@ -2,6 +2,12 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 3.7.0 - 2022-05-22
+
+### Added
+
+-  Turkmen language [#70](https://github.com/orchidsoftware/crud/pull/70)
+
 ## 3.6.0 - 2022-02-18
 
 ### Changed
