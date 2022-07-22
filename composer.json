@@ -46,6 +46,9 @@
             ]
         }
     },
+    "conflict": {
+        "laravel/framework": "<9.2.0"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
