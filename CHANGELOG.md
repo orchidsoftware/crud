@@ -2,6 +2,12 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 3.8.0 - 2022-07-22
+
+### Added
+
+- Support for Orchid 13
+
 ## 3.7.0 - 2022-05-22
 
 ### Added

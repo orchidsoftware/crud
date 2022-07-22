@@ -31,13 +31,13 @@ class ProviderTest extends TestCase
         $name = Str::random();
 
         $this->artisan('orchid:resource', ['name' => $name])
-            ->expectsOutput('Resource created successfully.')
+            ->expectsOutputToContain('Resource created successfully.')
             ->assertExitCode(0);
 
         $this->assertFileExists(app_path('Orchid/Resources/' . $name . '.php'));
 
         $this->artisan('orchid:resource', ['name' => $name])
-            ->expectsOutput('Resource already exists!')
+            ->expectsOutputToContain('already exists')
             ->assertExitCode(0);
     }
 }
