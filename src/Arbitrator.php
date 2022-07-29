@@ -185,6 +185,9 @@ class Arbitrator
             route('platform.resource.list', [
                 'resource' => $resource::uriKey(),
             ]),
+            route('platform.resource.list', [
+                'resource' => $resource::uriKey() . '?*',
+            ]),
             route('platform.resource.create', [
                 'resource' => $resource::uriKey(),
             ]),
