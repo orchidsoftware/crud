@@ -89,7 +89,7 @@ class ListScreen extends CrudScreen
 
             Link::make(__('View'))
                 ->icon('eye')
-                ->canSee($this->can('view'))
+                ->canSee($this->can('view', $model))
                 ->route('platform.resource.view', [
                     $this->resource::uriKey(),
                     $model->getAttribute($model->getKeyName()),
@@ -97,7 +97,7 @@ class ListScreen extends CrudScreen
 
             Link::make(__('Edit'))
                 ->icon('pencil')
-                ->canSee($this->can('update'))
+                ->canSee($this->can('update', $model))
                 ->route('platform.resource.edit', [
                     $this->resource::uriKey(),
                     $model->getAttribute($model->getKeyName()),

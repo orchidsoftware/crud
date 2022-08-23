@@ -4,6 +4,7 @@
 namespace Orchid\Crud;
 
 use Exception;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Collection;
 use Orchid\Crud\Requests\ActionRequest;
@@ -70,12 +71,13 @@ abstract class CrudScreen extends Screen
      * Determine if the entity has a given ability.
      *
      * @param string $abilities
+     * @param Model|null $model
      *
      * @return bool
      */
-    protected function can(string $abilities): bool
+    protected function can(string $abilities, Model $model = null): bool
     {
-        return $this->request->can($abilities);
+        return $this->request->can($abilities, $model);
     }
 
     /**
