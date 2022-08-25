@@ -174,7 +174,7 @@ class ResourceRequest extends FormRequest
      */
     public function can(string $abilities, ?Model $model = null): bool
     {
-        if (! $model) {
+        if ($model === null) {
             $model = $this->route('id') === null
                 ? $this->model()
                 : $this->findModelOrFail();
