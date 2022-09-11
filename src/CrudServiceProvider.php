@@ -36,10 +36,6 @@ class CrudServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->singleton(Arbitrator::class, static function () {
-            return new Arbitrator();
-        });
-
         Route::pushMiddlewareToGroup('platform', BootCrudGenerator::class);
 
         Route::domain((string)config('platform.domain'))
@@ -61,5 +57,9 @@ class CrudServiceProvider extends ServiceProvider
         $this->commands($this->commands);
         $this->loadJsonTranslationsFrom($this->path.'/resources/lang/');
         $this->app->register(FoundationServiceProvider::class, true);
+
+        $this->app->singleton(Arbitrator::class, static function () {
+            return new Arbitrator();
+        });
     }
 }
