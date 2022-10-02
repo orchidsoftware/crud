@@ -168,14 +168,17 @@ class ResourceRequest extends FormRequest
      * Determine if the entity has a given ability.
      *
      * @param string $abilities
+     * @param Model|null $model
      *
      * @return bool
      */
-    public function can(string $abilities): bool
+    public function can(string $abilities, ?Model $model = null): bool
     {
-        $model = $this->route('id') === null
-            ? $this->model()
-            : $this->findModelOrFail();
+        if ($model === null) {
+            $model = $this->route('id') === null
+                ? $this->model()
+                : $this->findModelOrFail();
+        }
 
         if (Gate::getPolicyFor($model) === null) {
             return true;
