@@ -17,7 +17,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ArbitratorTest extends TestCase
 {
-
     /**
      * @var Arbitrator
      */

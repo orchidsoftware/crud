@@ -167,7 +167,7 @@ class ResourceRequest extends FormRequest
     /**
      * Determine if the entity has a given ability.
      *
-     * @param string $abilities
+     * @param string     $abilities
      * @param Model|null $model
      *
      * @return bool
