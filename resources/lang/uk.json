@@ -1,0 +1,14 @@
+{
+    "Create :resource": "Створити :resource",
+    "Update :resource": "Оновити :resource",
+    "Delete :resource": "Видалити :resource",
+    "Save :resource":   "Зберігти :resource",
+    "You have successfully updated the :resource.": "Оновлення :resource пройшло успішно.",
+    "You have successfully saved the :resource.": "Збереження :resource пройшло успішно.",
+    "You have successfully deleted the :resource.": "Видалення :resource пройшло успішно.",
+    "An error has occurred": "Виникла помилка",
+    "Are you sure you want to delete this resource?": "Ви впевнені, що бажаєте видалити цей ресурс?",
+    "Are you sure you want to force delete this resource?": "Ви впевнені, що бажаєте примумово видалити цей ресурс?",
+    "Since the :resource was edited, its values have changed. Refresh the page to see them or click \":button\" again to replace them.": "З моменту редагування :resource його значення змінилися. Оновіть сторінку, щоб побачити їх, або натисніть \":button\" ще раз, щоб замінити їх.",
+    "Resources": "Ресурси"
+}
