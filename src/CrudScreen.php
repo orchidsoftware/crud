@@ -89,7 +89,10 @@ abstract class CrudScreen extends Screen
             ->map(function (Action $action) {
                 return $action->button()
                     ->method('action')
-                    ->parameters(['_action' => $action->name()]);
+                    ->parameters(array_merge(
+                        $action->button()->get('parameters', []),
+                        ['_action' => $action->name()]
+                    ));
             })
             ->filter(function (ActionButton $action) {
                 return $action->isSee();
