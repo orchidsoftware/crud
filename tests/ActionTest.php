@@ -86,4 +86,14 @@ class ActionTest extends TestCase
             ->assertSee('It worked')
             ->assertOk();
     }
+
+    public function testActionButtonPreservesParameters():void
+    {
+        $this->get(route('platform.resource.list', [
+            'resource' => PostActionResource::uriKey(),
+        ]))
+            ->assertSee('_action='.CustomAction::name())
+            ->assertSee('_action_url_param=should_be_preserved')
+            ->assertOk();
+    }
 }

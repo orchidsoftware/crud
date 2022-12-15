@@ -16,7 +16,12 @@ class CustomAction extends Action
      */
     public function button(): Button
     {
-        return Button::make('Run Action')->icon('fire');
+        return Button::make('Run Action')
+            ->parameters([
+                '_action_url_param' => 'should_be_preserved',
+                '_action' => 'should_be_overridden',
+            ])
+            ->icon('fire');
     }
 
     /**
