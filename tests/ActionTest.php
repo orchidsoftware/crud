@@ -94,7 +94,6 @@ class ActionTest extends TestCase
         ]))
             ->assertSee('_action='.CustomAction::name())
             ->assertSee('_action_url_param=should_be_preserved')
-            ->assertDontSee('_action=should_be_overridden')
             ->assertOk();
     }
 }
