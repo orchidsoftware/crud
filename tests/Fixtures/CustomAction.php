@@ -19,7 +19,7 @@ class CustomAction extends Action
         return Button::make('Run Action')
             ->parameters([
                 '_action_url_param' => 'should_be_preserved',
-                '_action' => 'should_be_overridden',
+                '_action'           => 'should_be_overridden',
             ])
             ->icon('fire');
     }
