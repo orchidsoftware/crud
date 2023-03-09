@@ -3,6 +3,7 @@
 
 namespace Orchid\Crud\Tests;
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Orchid\Crud\Middleware\BootCrudGenerator;
@@ -31,7 +32,7 @@ class ProviderTest extends TestCase
         $name = Str::random();
 
         $this->artisan('orchid:resource', ['name' => $name])
-            ->expectsOutputToContain('Resource created successfully.')
+            ->expectsOutputToContain('created successfully.')
             ->assertExitCode(0);
 
         $this->assertFileExists(app_path('Orchid/Resources/' . $name . '.php'));

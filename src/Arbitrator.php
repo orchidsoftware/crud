@@ -140,8 +140,8 @@ class Arbitrator
                 ->permission($resource::permission())
                 ->sort($resource::sort());
 
-            Dashboard::registerMenuElement(\Orchid\Platform\Dashboard::MENU_MAIN, $title);
-            Dashboard::registerMenuElement(\Orchid\Platform\Dashboard::MENU_MAIN, $menu);
+            Dashboard::registerMenuElement($title);
+            Dashboard::registerMenuElement($menu);
         });
 
         return $this;

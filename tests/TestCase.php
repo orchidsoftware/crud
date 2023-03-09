@@ -9,6 +9,7 @@ use Orchid\Crud\CrudServiceProvider;
 use Orchid\Crud\Middleware\BootCrudGenerator;
 use Orchid\Crud\ResourceFinder;
 use Orchid\Platform\Providers\FoundationServiceProvider;
+use Orchid\Platform\Providers\RouteServiceProvider;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Dashboard;
 use Tabuna\Breadcrumbs\Breadcrumbs;
@@ -22,6 +23,7 @@ class TestCase extends Orchestra
     public function setUp(): void
     {
         parent::setUp();
+        config()->set('platform.index', 'platform.index');
 
         $this->loadLaravelMigrations();
         $this->loadMigrationsFrom(realpath('./tests/Migrations'));
@@ -50,6 +52,7 @@ class TestCase extends Orchestra
     {
         return [
             FoundationServiceProvider::class,
+            RouteServiceProvider::class,
             CrudServiceProvider::class,
         ];
     }
