@@ -145,6 +145,15 @@ abstract class Resource
                 return 'Resource';
             });
     }
+    /**
+     * Get the Create Button should be displayed in the ListScreen
+     *
+     * @return string|null
+     */
+    public static function displayCreateButtonInList(): bool
+    {
+        return true;
+    }
 
     /**
      * Get the text for the create resource button.
