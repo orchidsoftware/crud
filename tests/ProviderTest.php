@@ -3,7 +3,6 @@
 
 namespace Orchid\Crud\Tests;
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Orchid\Crud\Middleware\BootCrudGenerator;
