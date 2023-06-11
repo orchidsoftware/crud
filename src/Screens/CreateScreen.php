@@ -36,7 +36,7 @@ class CreateScreen extends CrudScreen
         return [
             Button::make($this->resource::createButtonLabel())
                 ->method('save')
-                ->icon('check'),
+                ->icon('bs.check-circle'),
         ];
     }
 

@@ -21,7 +21,7 @@ class CustomAction extends Action
                 '_action_url_param' => 'should_be_preserved',
                 '_action'           => 'should_be_overridden',
             ])
-            ->icon('fire');
+            ->icon('bs.fire');
     }
 
     /**

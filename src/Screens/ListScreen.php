@@ -40,7 +40,7 @@ class ListScreen extends CrudScreen
             Link::make($this->resource::createButtonLabel())
                 ->route('platform.resource.create', $this->resource::uriKey())
                 ->canSee($this->can('create'))
-                ->icon('plus'),
+                ->icon('bs.plus-circle'),
         ];
     }
 
@@ -64,10 +64,11 @@ class ListScreen extends CrudScreen
             }));
 
         $grid->push(TD::make(__('Actions'))
+            ->alignRight()
             ->cantHide()
             ->render(function (Model $model) {
                 return $this->getTableActions($model)
-                    ->alignCenter()
+                    ->set('align', 'justify-content-end align-items-center')
                     ->autoWidth()
                     ->render();
             }));
@@ -86,9 +87,8 @@ class ListScreen extends CrudScreen
     private function getTableActions(Model $model): Group
     {
         return Group::make([
-
             Link::make(__('View'))
-                ->icon('eye')
+                ->icon('bs.eye')
                 ->canSee($this->can('view', $model))
                 ->route('platform.resource.view', [
                     $this->resource::uriKey(),
@@ -96,7 +96,7 @@ class ListScreen extends CrudScreen
                 ]),
 
             Link::make(__('Edit'))
-                ->icon('pencil')
+                ->icon('bs.pencil')
                 ->canSee($this->can('update', $model))
                 ->route('platform.resource.edit', [
                     $this->resource::uriKey(),
