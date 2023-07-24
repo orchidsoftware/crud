@@ -1,8 +1,8 @@
 {
-    "Create :resource": "作成 :resource",
-    "Update :resource": "更新 :resource",
-    "Delete :resource": "削除 :resource",
-    "Save :resource":   "保存 :resource",
+    "Create :resource": ":resourceを作成",
+    "Update :resource": ":resourceを編集",
+    "Delete :resource": ":resourceを削除",
+    "Save :resource":   ":resourceを保存",
     "You have successfully updated the :resource.": ":resource を更新しました。",
     "You have successfully saved the :resource.": ":resource を保存しました。",
     "You have successfully deleted the :resource.": ":resource を削除しました。",
