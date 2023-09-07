@@ -35,10 +35,9 @@ class ActionRequest extends ResourceRequest
         $models = collect();
 
         if ($this->has('_models')) {
-            $models = $this->model()->whereIn(
-                $this->model()->getKeyName(),
+            $models = $this->getModelQuery()->findMany(
                 $this->get('_models')
-            )->get();
+            );
         }
 
         $current = $this->findModel();
