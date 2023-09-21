@@ -15,5 +15,6 @@
     "The :resource was deleted!": "Ресурс \":resource\" был удалён!",
     "The :resource was updated!": "Ресурс \":resource\" был обновлён!",
     "Edit :resource": "Изменение \":resource\"",
-    "New :resource": "Создание \":resource\""
+    "New :resource": "Создание \":resource\"",
+    "View": "Просмотреть"
 }
