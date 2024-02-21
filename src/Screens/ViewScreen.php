@@ -45,7 +45,7 @@ class ViewScreen extends CrudScreen
             $this->actionsButtons(),
 
             Link::make(__('Edit'))
-                ->icon('pencil')
+                ->icon('bs.pencil')
                 ->canSee($this->can('update'))
                 ->route('platform.resource.edit', [
                     $this->resource::uriKey(),
@@ -57,21 +57,21 @@ class ViewScreen extends CrudScreen
                 ->confirm(__('Are you sure you want to delete this resource?'))
                 ->canSee(! $this->isSoftDeleted() && $this->can('delete'))
                 ->method('delete')
-                ->icon('trash'),
+                ->icon('bs.trash'),
 
             Button::make($this->resource::deleteButtonLabel())
                 ->novalidate()
                 ->confirm(__('Are you sure you want to force delete this resource?'))
                 ->canSee($this->isSoftDeleted() && $this->can('forceDelete'))
                 ->method('forceDelete')
-                ->icon('trash'),
+                ->icon('bs.trash'),
 
             Button::make($this->resource::restoreButtonLabel())
                 ->novalidate()
                 ->confirm(__('Are you sure you want to restore this resource?'))
                 ->canSee($this->isSoftDeleted() && $this->can('restore'))
                 ->method('restore')
-                ->icon('reload'),
+                ->icon('bs.arrow-clockwise'),
         ];
     }
 

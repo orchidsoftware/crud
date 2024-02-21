@@ -21,7 +21,7 @@ All fields, filters, and traits are compatible.
 
 ## Official Documentation
 
-Documentation for CRUD can be found on the [orchid.software website](https://orchid.software/en/docs/packages/crud/#introduction).
+Documentation for CRUD can be found on the [orchid.software](https://orchid.software/en/docs/packages/crud/#introduction) website.
 
 
 ## Roadmap
@@ -38,19 +38,12 @@ It is an active community, so expect more contributions that will complement it 
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Contributing
-
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
-
 ## Communication Channels
 
 You can find help and discussion in the following places:
 
 * Start a new discussion [https://github.com/orchidsoftware/platform/discussions/new](https://github.com/orchidsoftware/platform/discussions/new)
 * Create issue [https://github.com/orchidsoftware/crud/issues/new](https://github.com/orchidsoftware/crud/issues/new)
-* [Telegram chat (EN)](https://t.me/orchid_community)
-* [Telegram chat (RU)](https://t.me/orchid_russian_community)
-
 
 ## Security Vulnerabilities
 

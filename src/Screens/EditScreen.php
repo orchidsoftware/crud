@@ -43,7 +43,7 @@ class EditScreen extends CrudScreen
             Button::make($this->resource::updateButtonLabel())
                 ->canSee($this->request->can('update'))
                 ->method('update')
-                ->icon('check')
+                ->icon('bs.check-circle')
                 ->parameters([
                     '_retrieved_at' => optional($this->model->{$this->model->getUpdatedAtColumn()})->toJson(),
                 ]),
@@ -53,21 +53,21 @@ class EditScreen extends CrudScreen
                 ->confirm(__('Are you sure you want to delete this resource?'))
                 ->canSee(! $this->isSoftDeleted() && $this->can('delete'))
                 ->method('delete')
-                ->icon('trash'),
+                ->icon('bs.trash'),
 
             Button::make($this->resource::deleteButtonLabel())
                 ->novalidate()
                 ->confirm(__('Are you sure you want to force delete this resource?'))
                 ->canSee($this->isSoftDeleted() && $this->can('forceDelete'))
                 ->method('forceDelete')
-                ->icon('trash'),
+                ->icon('bs.trash'),
 
             Button::make($this->resource::restoreButtonLabel())
                 ->novalidate()
                 ->confirm(__('Are you sure you want to restore this resource?'))
                 ->canSee($this->isSoftDeleted() && $this->can('restore'))
                 ->method('restore')
-                ->icon('reload'),
+                ->icon('bs.arrow-clockwise'),
         ];
     }
 

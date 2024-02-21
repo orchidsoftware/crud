@@ -2,6 +2,17 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 4.0.1 - 2023-07-12
+
+### Fixed
+- Usage `Bootstrap` icons
+
+## 4.0.0 - 2023-05-28
+
+### Added
+
+- Support for Orchid 14
+
 ## 3.8.0 - 2022-07-22
 
 ### Added

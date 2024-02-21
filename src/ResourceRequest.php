@@ -153,7 +153,7 @@ class ResourceRequest extends FormRequest
     /**
      * @return Model
      */
-    private function getModelQuery()
+    protected function getModelQuery()
     {
         $query = $this->resource()->modelQuery($this, $this->model());
 
