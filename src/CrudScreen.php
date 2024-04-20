@@ -6,6 +6,7 @@ namespace Orchid\Crud;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Orchid\Crud\Requests\ActionRequest;
 use Orchid\Crud\Requests\DeleteRequest;
@@ -20,30 +21,9 @@ use Orchid\Support\Facades\Toast;
 abstract class CrudScreen extends Screen
 {
     /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name;
-
-    /**
-     * Display header description.
-     *
-     * @var string
-     */
-    public $description;
-
-    /**
      * @var ResourceRequest
      */
-    public $request;
-
-    /**
-     * Permission.
-     *
-     * @var string|array
-     */
-    public $permission;
+    protected $request;
 
     /**
      * @var Resource
@@ -59,12 +39,33 @@ abstract class CrudScreen extends Screen
         $this->middleware(function ($request, $next) {
             $this->request = app(ResourceRequest::class);
             $this->resource = $this->request->resource();
-            $this->name = $this->resource::label();
-            $this->description = $this->resource::description();
-            $this->permission = $this->resource::permission();
 
             return $next($request);
         });
+    }
+
+    /**
+     * The name of the screen to be displayed in the header.
+     */
+    public function name(): ?string
+    {
+        return $this->resource::label();
+    }
+
+    /**
+     * A description of the screen to be displayed in the header.
+     */
+    public function description(): ?string
+    {
+        return $this->resource::description();
+    }
+
+    /**
+     * The permissions required to access this screen.
+     */
+    public function permission(): ?iterable
+    {
+        return Arr::wrap($this->resource::permission());
     }
 
     /**
