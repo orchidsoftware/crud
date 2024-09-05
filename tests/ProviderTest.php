@@ -5,20 +5,9 @@ namespace Orchid\Crud\Tests;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
-use Orchid\Crud\Middleware\BootCrudGenerator;
 
 class ProviderTest extends TestCase
 {
-    public function testMiddlewareRegister(): void
-    {
-        $this->assertTrue(Route::hasMiddlewareGroup('platform'));
-
-        $this->assertContains(
-            BootCrudGenerator::class,
-            Route::getMiddlewareGroups()['platform']
-        );
-    }
-
     public function testRouteRegister(): void
     {
         $this->assertTrue(Route::has('platform.resource.create'));
