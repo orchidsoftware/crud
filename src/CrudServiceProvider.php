@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Orchid\Crud\Commands\ActionCommand;
 use Orchid\Crud\Commands\ResourceCommand;
-use Orchid\Crud\Middleware\BootCrudGenerator;
 use Orchid\Platform\Providers\FoundationServiceProvider;
 use Orchid\Support\Facades\Dashboard;
 
@@ -34,9 +33,15 @@ class CrudServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(ResourceFinder $finder, Arbitrator $arbitrator)
     {
-        Route::pushMiddlewareToGroup('platform', BootCrudGenerator::class);
+        $resources = $finder
+            ->setNamespace(app()->getNamespace() . 'Orchid\\Resources')
+            ->find(app_path('Orchid/Resources'));
+
+        $arbitrator
+            ->resources($resources)
+            ->boot();
 
         Route::domain((string)config('platform.domain'))
             ->prefix(Dashboard::prefix('/'))
