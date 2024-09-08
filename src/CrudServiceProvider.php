@@ -33,7 +33,7 @@ class CrudServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(ResourceFinder $finder, Arbitrator $arbitrator)
+    public function boot(ResourceFinder $finder, Arbitrator $arbitrator): void
     {
         $resources = $finder
             ->setNamespace(app()->getNamespace() . 'Orchid\\Resources')
@@ -55,7 +55,7 @@ class CrudServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->path = dirname(__DIR__, 1);
 
