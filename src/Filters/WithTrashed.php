@@ -41,6 +41,7 @@ class WithTrashed extends Filter
     {
         return [
             CheckBox::make('withTrashed')
+                ->value($this->request->boolean('withTrashed'))
                 ->placeholder(__('Show deleted entries')),
         ];
     }
