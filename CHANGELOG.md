@@ -2,10 +2,17 @@
 
 All notable changes to `crud` will be documented in this file
 
-## 4.0.2 - 2023-09-08
+## 4.0.3 - 2023-09-08
+
+### Fixed
 - Duplicate menu on Octane [#99](https://github.com/orchidsoftware/crud/pull/99)
 - Resolve composer conflict on `prefer lowest`
 - Don't set active status filter on `WithTrashed`
+
+## 4.0.2 - 2023-04-20
+
+### Fixed
+- State manager
 
 ## 4.0.1 - 2023-07-12
 
