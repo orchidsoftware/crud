@@ -2,17 +2,26 @@
 
 All notable changes to `crud` will be documented in this file
 
-## 4.0.3 - 2023-09-08
+## 4.3.0 - 2024-09-08
+
+### Changed
+- Duplicate menu on Octane [#99](https://github.com/orchidsoftware/crud/pull/99)
 
 ### Fixed
-- Duplicate menu on Octane [#99](https://github.com/orchidsoftware/crud/pull/99)
 - Resolve composer conflict on `prefer lowest`
 - Don't set active status filter on `WithTrashed`
 
-## 4.0.2 - 2023-04-20
+## 4.2.0 - 2024-04-20
 
 ### Fixed
 - State manager
+
+## 4.1.0 - 2023-10-06
+
+### Changed
+- Feature/translation ja by @shibomb in https://github.com/orchidsoftware/crud/pull/92
+- Ability to run actions against soft deleted model by @ddzobov in https://github.com/orchidsoftware/crud/pull/93
+- Added some missed Russian translations by @dv0vd in https://github.com/orchidsoftware/crud/pull/94
 
 ## 4.0.1 - 2023-07-12
 
