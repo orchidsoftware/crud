@@ -18,8 +18,8 @@
         "orchid/platform": "^14.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^8.0",
-        "phpunit/phpunit": "^10.0"
+        "orchestra/testbench": "^8.0 || ^9.0",
+        "phpunit/phpunit": "^10.0 || ^11.0"
     },
     "autoload": {
         "psr-4": {
@@ -30,6 +30,10 @@
         "psr-4": {
             "Orchid\\Crud\\Tests\\": "tests"
         }
+    },
+    "conflict": {
+        "orchid/platform": "<14.34",
+        "orchid/blade-icons": "<4.2"
     },
     "scripts": {
         "test": "vendor/bin/phpunit --colors=always",
