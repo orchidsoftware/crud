@@ -62,7 +62,7 @@ class ArbitratorTest extends TestCase
         View::callComposer(\view('platform::dashboard'));
 
         /** @var Collection $menu */
-        $menu = app(\Orchid\Platform\Dashboard::class)->menu[\Orchid\Platform\Dashboard::MENU_MAIN];
+        $menu = app(\Orchid\Platform\Dashboard::class)->menu;
 
         $existName = $menu->filter(function (Menu $menu) {
             return $menu->get('name') === PostResource::label();
