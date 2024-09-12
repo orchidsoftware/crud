@@ -3,7 +3,9 @@
 namespace Orchid\Crud\Commands;
 
 use Illuminate\Console\GeneratorCommand;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'orchid:action')]
 class ActionCommand extends GeneratorCommand
 {
     /**
