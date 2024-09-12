@@ -4,8 +4,8 @@ namespace Orchid\Crud\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Input\InputOption;
 
 #[AsCommand(name: 'orchid:resource')]
 class ResourceCommand extends GeneratorCommand
