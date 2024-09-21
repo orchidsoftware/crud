@@ -3,15 +3,12 @@
 namespace Orchid\Crud\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
-use Orchid\Filters\Autofill;
 use Orchid\Filters\Filter;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
 
 class WithTrashed extends Filter
 {
-    use Autofill;
-
     /**
      * @var array
      */
