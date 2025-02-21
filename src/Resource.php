@@ -478,4 +478,14 @@ abstract class Resource
 
         $model->forceDelete();
     }
+
+    /**
+     * Should add actions?
+     *
+     * @return bool
+     */
+    public function isAddActions(): bool
+    {
+        return true;
+    }
 }
