@@ -480,11 +480,11 @@ abstract class Resource
     }
 
     /**
-     * Should add actions?
+     * Determines whether the actions block should be shown in the table.
      *
      * @return bool
      */
-    public function isAddActions(): bool
+    public function canShowTableActions(): bool
     {
         return true;
     }
