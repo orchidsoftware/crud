@@ -63,15 +63,17 @@ class ListScreen extends CrudScreen
                     ->checked(false);
             }));
 
-        $grid->push(TD::make(__('Actions'))
-            ->alignRight()
-            ->cantHide()
-            ->render(function (Model $model) {
-                return $this->getTableActions($model)
-                    ->set('align', 'justify-content-end align-items-center')
-                    ->autoWidth()
-                    ->render();
-            }));
+        if($this->resource->canShowTableActions()){
+            $grid->push(TD::make(__('Actions'))
+                ->alignRight()
+                ->cantHide()
+                ->render(function (Model $model) {
+                    return $this->getTableActions($model)
+                        ->set('align', 'justify-content-end align-items-center')
+                        ->autoWidth()
+                        ->render();
+                }));
+        }
 
         return [
             Layout::selection($this->resource->filters()),

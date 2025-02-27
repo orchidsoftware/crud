@@ -478,4 +478,14 @@ abstract class Resource
 
         $model->forceDelete();
     }
+
+    /**
+     * Determines whether the actions block should be shown in the table.
+     *
+     * @return bool
+     */
+    public function canShowTableActions(): bool
+    {
+        return true;
+    }
 }
