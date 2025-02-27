@@ -63,7 +63,7 @@ class ListScreen extends CrudScreen
                     ->checked(false);
             }));
 
-        if($this->resource->canShowTableActions()){
+        if ($this->resource->canShowTableActions()) {
             $grid->push(TD::make(__('Actions'))
                 ->alignRight()
                 ->cantHide()
