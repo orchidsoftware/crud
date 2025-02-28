@@ -2,6 +2,17 @@
 
 All notable changes to `crud` will be documented in this file
 
+## 4.4.0 - 2025-03-01
+
+### Added
+- Add method to hide table actions [#103](https://github.com/orchidsoftware/crud/pull/103)
+
+### Fixed
+- Not possible to use Policy inside displayInNavigation [#105](https://github.com/orchidsoftware/crud/pull/105) [#104](https://github.com/orchidsoftware/crud/issues/104)
+
+### Changed
+- Support Laravel 12 [#106](https://github.com/orchidsoftware/crud/pull/106)
+
 ## 4.3.0 - 2024-09-08
 
 ### Changed
