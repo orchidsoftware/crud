@@ -123,11 +123,11 @@ class Arbitrator
      */
     private function registerMenu(Resource $resource, int $key): Arbitrator
     {
-        if (! $resource::displayInNavigation()) {
-            return $this;
-        }
-
         View::composer('platform::dashboard', function () use ($resource, $key) {
+            if (! $resource::displayInNavigation()) {
+                return;
+            }
+
             $title = Menu::make()
                 ->canSee($key === 0)
                 ->title(__('Resources'))
