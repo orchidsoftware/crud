@@ -366,6 +366,16 @@ abstract class Resource
     }
 
     /**
+     * Get the relations for the resource.
+     *
+     * @return array
+     */
+    public function relations():array
+    {
+        return [];
+    }
+
+    /**
      * Indicates whether should check for modifications between viewing and updating a resource.
      *
      * @return bool
