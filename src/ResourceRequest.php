@@ -96,7 +96,7 @@ class ResourceRequest extends FormRequest
     public function resource(): Resource
     {
         return $this->arbitrator()->findOrFail(
-            $this->route('resource')
+            $this->route('resource'),
         );
     }
 
@@ -134,6 +134,28 @@ class ResourceRequest extends FormRequest
     public function findModelOrFail()
     {
         return $this->getModelQuery()->findOrFail($this->route('id'));
+    }
+
+    public function findRelation()
+    {
+        $relations = collect($this->resource()->relations());
+
+        $relation = $this->route('relation');
+
+        if ($relations->isEmpty()) {
+            return null;
+        }
+
+        if ($relation === null) {
+            $firstKey = $relations->keys()->first();
+            return ['key' => $firstKey, 'value' => $relations->get($firstKey)];
+        }
+
+        if (!$relations->has($relation)) {
+            abort(404);
+        }
+
+        return ['key' => $relation, 'value' => $relations->get($relation)];
     }
 
     /**
