@@ -5,6 +5,7 @@ namespace Orchid\Crud\Screens;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Crud\CrudScreen;
 use Orchid\Crud\Layouts\ResourceFields;
+use Orchid\Crud\Layouts\ResourceRelationsMenu;
 use Orchid\Crud\Requests\ViewRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
@@ -84,6 +85,7 @@ class ViewScreen extends CrudScreen
     {
         return [
             Layout::legend(ResourceFields::PREFIX, $this->resource->legend()),
+            ResourceRelationsMenu::make($this->resource->relations()),
         ];
     }
 }
