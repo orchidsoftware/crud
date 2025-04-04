@@ -20,7 +20,7 @@ Route::screen('/crud/create/{resource?}', CreateScreen::class)
             ->push($resource::createBreadcrumbsMessage());
     });
 
-Route::screen('/crud/view/{resource?}/{id}', ViewScreen::class)
+Route::screen('/crud/view/{resource?}/{id}/{relation?}', ViewScreen::class)
     ->name('resource.view')
     ->breadcrumbs(function (Trail $trail) {
         $resource = app(ResourceRequest::class)->resource();
