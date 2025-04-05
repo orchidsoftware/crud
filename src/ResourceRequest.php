@@ -153,7 +153,7 @@ class ResourceRequest extends FormRequest
 
         $relationValue = $relations->get($relationKey);
 
-        return [
+        return (object) [
             'key' => $relationKey,
             'value' => $relationValue,
             'data' => $this->getResourcePaginationList($relationValue, $relationValue->getModel())
