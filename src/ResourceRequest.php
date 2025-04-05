@@ -139,30 +139,24 @@ class ResourceRequest extends FormRequest
     public function findRelation()
     {
         $relations = collect($this->resource()->relations());
-
-        $relation = $this->route('relation');
+        $relationKey = $this->route('relation');
 
         if ($relations->isEmpty()) {
             return null;
         }
 
-        if ($relation === null) {
-            $firstKey = $relations->keys()->first();
-            return [
-                'key' => $firstKey,
-                'value' => $relations->get($firstKey),
-                'data' => $this->getResourcePaginationList($relations->get($firstKey))
-            ];
-        }
+        $relationKey = $relationKey ?? $relations->keys()->first();
 
-        if (!$relations->has($relation)) {
+        if (!$relations->has($relationKey)) {
             abort(404);
         }
 
+        $relationValue = $relations->get($relationKey);
+
         return [
-            'key' => $relation,
-            'value' => $relations->get($relation),
-            'data' => $this->getResourcePaginationList($relations->get($relation))
+            'key' => $relationKey,
+            'value' => $relationValue,
+            'data' => $this->getResourcePaginationList($relationValue, $relationValue->getModel())
         ];
     }
 
@@ -171,7 +165,7 @@ class ResourceRequest extends FormRequest
      */
     public function getModelPaginationList()
     {
-        return $this->getResourcePaginationList($this->resource());
+        return $this->getResourcePaginationList($this->resource(), $this->model());
     }
 
     /**
@@ -218,9 +212,9 @@ class ResourceRequest extends FormRequest
         return $this->user()->can($abilities, $model);
     }
 
-    private function getResourcePaginationList($resource)
+    private function getResourcePaginationList($resource, $model)
     {
-        $query = $resource->paginationQuery($this, $this->model());
+        $query = $resource->paginationQuery($this, $model);
 
         return $query
             ->with($resource->with())
