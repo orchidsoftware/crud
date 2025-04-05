@@ -1,63 +1,29 @@
 <?php
 
-namespace Orchid\Crud\Screens;
+namespace Orchid\Crud\Layouts;
 
 use Illuminate\Database\Eloquent\Model;
-use Orchid\Crud\CrudScreen;
-use Orchid\Crud\Layouts\ResourceTable;
-use Orchid\Crud\Requests\IndexRequest;
-use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
+use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
-use Orchid\Support\Facades\Layout;
 
-class ListScreen extends CrudScreen
-{
-    /**
-     * Query data.
-     *
-     * @param IndexRequest $request
-     *
-     * @return array
-     */
-    public function query(IndexRequest $request): array
-    {
-        return [
-            'model' => $request->getModelPaginationList(),
-        ];
-    }
+class ResourceTable extends Table {
 
-    /**
-     * Button commands.
-     *
-     * @return Action[]
-     */
-    public function commandBar(): array
-    {
-        return [
-            $this->actionsButtons(),
-            Link::make($this->resource::createButtonLabel())
-                ->route('platform.resource.create', $this->resource::uriKey())
-                ->canSee($this->can('create'))
-                ->icon('bs.plus-circle'),
-        ];
-    }
+    public function __construct(
+        protected $target,
+        private $resource,
+        private $request,
+    ) {}
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]
-     */
-    public function layout(): array
+    protected function columns(): iterable
     {
         $grid = collect($this->resource->columns());
 
         $grid->prepend(TD::make()
             ->width(50)
             ->cantHide()
-            ->canSee($this->availableActions()->isNotEmpty())
             ->render(function (Model $model) {
                 return CheckBox::make('_models[]')
                     ->value($model->getKey())
@@ -76,10 +42,7 @@ class ListScreen extends CrudScreen
                 }));
         }
 
-        return [
-            Layout::selection($this->resource->filters()),
-            new ResourceTable('model', $this->resource, $this->request),
-        ];
+        return $grid->toArray();
     }
 
     /**
@@ -92,7 +55,7 @@ class ListScreen extends CrudScreen
         return Group::make([
             Link::make(__('View'))
                 ->icon('bs.eye')
-                ->canSee($this->can('view', $model))
+                ->canSee($this->request->can('view', $model))
                 ->route('platform.resource.view', [
                     $this->resource::uriKey(),
                     $model->getAttribute($model->getKeyName()),
@@ -100,11 +63,12 @@ class ListScreen extends CrudScreen
 
             Link::make(__('Edit'))
                 ->icon('bs.pencil')
-                ->canSee($this->can('update', $model))
+                ->canSee($this->request->can('update', $model))
                 ->route('platform.resource.edit', [
                     $this->resource::uriKey(),
                     $model->getAttribute($model->getKeyName()),
                 ]),
         ]);
     }
+
 }
