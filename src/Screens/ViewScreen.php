@@ -93,12 +93,16 @@ class ViewScreen extends CrudScreen
      */
     public function layout(): array
     {
-        return [
+        $layout = [
             Layout::legend(ResourceFields::PREFIX, $this->resource->legend()),
-            ResourceRelationsMenu::make($this->resource->relations()),
-            $this->relation
-                ? new ResourceTable('relationData', $this->relation->value, $this->request)
-                : [],
         ];
+
+        if ($this->relation) {
+            $layout[] = ResourceRelationsMenu::make($this->resource->relations());
+            $layout[] = Layout::selection($this->relation->value->filters());
+            $layout[] = new ResourceTable('relationData', $this->relation->value, $this->request);
+        }
+
+        return $layout;
     }
 }
