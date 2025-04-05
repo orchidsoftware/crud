@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Orchid\Crud\CrudScreen;
 use Orchid\Crud\Layouts\ResourceFields;
 use Orchid\Crud\Layouts\ResourceRelationsMenu;
+use Orchid\Crud\Layouts\ResourceTable;
 use Orchid\Crud\Requests\ViewRequest;
+use Orchid\Crud\Resource;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
@@ -20,6 +22,11 @@ class ViewScreen extends CrudScreen
     protected $model;
 
     /**
+     * @var null|Resource
+     */
+    protected $relation;
+
+    /**
      * Query data.
      *
      * @param ViewRequest $request
@@ -30,8 +37,11 @@ class ViewScreen extends CrudScreen
     {
         $this->model = $request->findModelOrFail();
 
+        $this->relation = $request->findRelation();
+
         return [
             ResourceFields::PREFIX => $this->model,
+            'relationData' => $this->relation?->data,
         ];
     }
 
@@ -86,6 +96,9 @@ class ViewScreen extends CrudScreen
         return [
             Layout::legend(ResourceFields::PREFIX, $this->resource->legend()),
             ResourceRelationsMenu::make($this->resource->relations()),
+            $this->relation
+                ? new ResourceTable('relationData', $this->relation->value, $this->request)
+                : [],
         ];
     }
 }
