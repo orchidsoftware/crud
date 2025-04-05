@@ -4,6 +4,7 @@ namespace Orchid\Crud\Screens;
 
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Crud\CrudScreen;
+use Orchid\Crud\Layouts\ResourceTable;
 use Orchid\Crud\Requests\IndexRequest;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
@@ -77,7 +78,7 @@ class ListScreen extends CrudScreen
 
         return [
             Layout::selection($this->resource->filters()),
-            Layout::table('model', $grid->toArray()),
+            new ResourceTable('model', $this->resource, $this->request),
         ];
     }
 
