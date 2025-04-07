@@ -136,36 +136,19 @@ class ResourceRequest extends FormRequest
         return $this->getModelQuery()->findOrFail($this->route('id'));
     }
 
-    public function findRelation()
-    {
-        $relations = collect($this->resource()->relations());
-        $relationKey = $this->route('relation');
-
-        if ($relations->isEmpty()) {
-            return null;
-        }
-
-        $relationKey = $relationKey ?? $relations->keys()->first();
-
-        if (!$relations->has($relationKey)) {
-            abort(404);
-        }
-
-        $relationValue = $relations->get($relationKey);
-
-        return (object) [
-            'key' => $relationKey,
-            'value' => $relationValue,
-            'data' => $this->getResourcePaginationList($relationValue, $relationValue->getModel())
-        ];
-    }
-
     /**
      * @return Paginator
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function getModelPaginationList()
     {
-        return $this->getResourcePaginationList($this->resource(), $this->model());
+        $query = $this->resource()->paginationQuery($this, $this->model());
+
+        return $query
+            ->with($this->resource()->with())
+            ->filters()
+            ->filtersApply($this->resource()->filters())
+            ->paginate($this->resource()->perPage());
     }
 
     /**
@@ -210,16 +193,5 @@ class ResourceRequest extends FormRequest
         }
 
         return $this->user()->can($abilities, $model);
-    }
-
-    private function getResourcePaginationList($resource, $model)
-    {
-        $query = $resource->paginationQuery($this, $model);
-
-        return $query
-            ->with($resource->with())
-            ->filters()
-            ->filtersApply($resource->filters())
-            ->paginate($resource->perPage());
     }
 }

@@ -32,16 +32,18 @@ class ViewScreen extends CrudScreen
      * @param ViewRequest $request
      *
      * @return array
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function query(ViewRequest $request): array
     {
         $this->model = $request->findModelOrFail();
 
-        $this->relation = $request->findRelation();
+        $this->relation = $request->resource()->relation()->findRelationResource();
+        $relationPaginate = $request->resource()->relation()->getRelationPaginationList($this->model);
 
         return [
             ResourceFields::PREFIX => $this->model,
-            'relationData' => $this->relation?->data,
+            '_relation' => $relationPaginate,
         ];
     }
 
@@ -98,9 +100,13 @@ class ViewScreen extends CrudScreen
         ];
 
         if ($this->relation) {
-            $layout[] = ResourceRelationsMenu::make($this->resource->relations());
-            $layout[] = Layout::selection($this->relation->value->filters());
-            $layout[] = new ResourceTable('relationData', $this->relation->value, $this->request);
+            // Show the relation resource
+            $layout[] = new ResourceRelationsMenu($this->resource);
+
+
+            // Show the relation resource table
+            $layout[] = Layout::selection($this->relation->filters());
+            $layout[] = new ResourceTable('_relation', $this->relation, $this->request);
         }
 
         return $layout;

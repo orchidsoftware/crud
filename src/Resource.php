@@ -498,4 +498,12 @@ abstract class Resource
     {
         return true;
     }
+
+    /**
+     * @return \Orchid\Crud\ResourceRelation
+     */
+    public function relation()
+    {
+        return new ResourceRelation($this);
+    }
 }

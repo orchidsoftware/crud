@@ -24,6 +24,7 @@ class ResourceTable extends Table {
         $grid->prepend(TD::make()
             ->width(50)
             ->cantHide()
+            ->canSee(count($this->resource->actions()) > 0)
             ->render(function (Model $model) {
                 return CheckBox::make('_models[]')
                     ->value($model->getKey())
