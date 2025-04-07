@@ -31,8 +31,9 @@ class ViewScreen extends CrudScreen
      *
      * @param ViewRequest $request
      *
-     * @return array
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     *
+     * @return array
      */
     public function query(ViewRequest $request): array
     {
@@ -43,7 +44,7 @@ class ViewScreen extends CrudScreen
 
         return [
             ResourceFields::PREFIX => $this->model,
-            '_relation' => $relationPaginate,
+            '_relation'            => $relationPaginate,
         ];
     }
 

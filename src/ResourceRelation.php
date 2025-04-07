@@ -20,10 +20,9 @@ class ResourceRelation
     public function __construct(protected Resource $resource)
     {
         $this->relations = collect($this->resource->relations())
-            ->map(fn(string $resource) => app($resource))
-            ->filter(fn(Resource $resource) => $this->can('viewAll', $resource->getModel()));
+            ->map(fn (string $resource) => app($resource))
+            ->filter(fn (Resource $resource) => $this->can('viewAll', $resource->getModel()));
     }
-
 
     /**
      * Check if the user has the given ability on the model.
@@ -62,8 +61,9 @@ class ResourceRelation
     /**
      * Find the corresponding relation resource.
      *
-     * @return \Orchid\Crud\Resource|null
      * @throws ResourceNotFoundException
+     *
+     * @return \Orchid\Crud\Resource|null
      */
     public function findRelationResource(): ?Resource
     {
@@ -80,6 +80,7 @@ class ResourceRelation
      * Get the relation pagination list.
      *
      * @param Model $model
+     *
      * @return \Illuminate\Pagination\LengthAwarePaginator|array
      */
     public function getRelationPaginationList(Model $model)

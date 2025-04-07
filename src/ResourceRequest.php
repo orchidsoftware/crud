@@ -137,8 +137,9 @@ class ResourceRequest extends FormRequest
     }
 
     /**
-     * @return Paginator
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     *
+     * @return Paginator
      */
     public function getModelPaginationList()
     {

@@ -9,13 +9,14 @@ use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class ResourceTable extends Table {
-
+class ResourceTable extends Table
+{
     public function __construct(
         protected $target,
         private $resource,
         private $request,
-    ) {}
+    ) {
+    }
 
     protected function columns(): iterable
     {
@@ -71,5 +72,4 @@ class ResourceTable extends Table {
                 ]),
         ]);
     }
-
 }

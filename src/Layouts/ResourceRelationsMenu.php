@@ -7,7 +7,8 @@ use Orchid\Crud\Resource;
 use Orchid\Screen\Actions\Menu;
 use Orchid\Screen\Layouts\TabMenu;
 
-class ResourceRelationsMenu extends TabMenu {
+class ResourceRelationsMenu extends TabMenu
+{
 
     private Collection $relations;
 
@@ -22,10 +23,10 @@ class ResourceRelationsMenu extends TabMenu {
      *
      * @return bool
      */
-     public function isSee(): bool
-     {
-         return $this->relations->count() > 1;
-     }
+    public function isSee(): bool
+    {
+        return $this->relations->count() > 1;
+    }
 
     /**
      * Generate the navigational menu for the relations.
@@ -35,14 +36,15 @@ class ResourceRelationsMenu extends TabMenu {
     protected function navigations(): iterable
     {
         return $this->relations
-            ->map(fn(Resource $resource, string $relation) => $this->createMenuItem($resource, $relation));
+            ->map(fn (Resource $resource, string $relation) => $this->createMenuItem($resource, $relation));
     }
 
     /**
      * Create a Menu item for a given relation.
      *
      * @param Resource $resource
-     * @param string $relation
+     * @param string   $relation
+     *
      * @return Menu
      */
     private function createMenuItem(Resource $resource, string $relation): Menu
@@ -62,6 +64,7 @@ class ResourceRelationsMenu extends TabMenu {
      * Check if a given relation is active.
      *
      * @param string $relation
+     *
      * @return bool
      */
     private function isActive(string $relation): bool
