@@ -37,7 +37,6 @@ class ListScreen extends CrudScreen
     public function commandBar(): array
     {
         return [
-            //$this->actionsButtons(),
             Link::make($this->resource::createButtonLabel())
                 ->route('platform.resource.create', $this->resource::uriKey())
                 ->canSee($this->can('create'))
