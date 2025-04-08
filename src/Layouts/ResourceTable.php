@@ -4,6 +4,7 @@ namespace Orchid\Crud\Layouts;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Crypt;
 use Orchid\Crud\Action;
 use Orchid\Screen\Action as ActionButton;
 use Orchid\Screen\Actions\DropDown;
@@ -31,7 +32,7 @@ class ResourceTable extends Table
             ->cantHide()
             ->canSee(count($this->resource->actions()) > 0)
             ->render(function (Model $model) {
-                return CheckBox::make('_models[]')
+                return CheckBox::make($this->actionKey())
                     ->value($model->getKey())
                     ->checked(false);
             }));
@@ -95,10 +96,10 @@ class ResourceTable extends Table
         return $this->actions()
             ->map(function (Action $action) {
                 return $action->button()
-                    ->method('action')
+                    ->method($this->actionMethod())
                     ->parameters(array_merge(
                         $action->button()->get('parameters', []),
-                        ['_action' => $action->name()]
+                        ['_action' => $this->actionParameter($action)],
                     ));
             })
             ->filter(function (ActionButton $action) {
@@ -112,4 +113,22 @@ class ResourceTable extends Table
             return is_string($action) ? resolve($action) : $action;
         });
     }
+
+    private function actionKey (): string
+    {
+        return $this->request->isViewScreen() ? '_relation_models[]' : '_models[]';
+    }
+
+    private function actionMethod(): string
+    {
+        return $this->request->isViewScreen() ? 'relation' : 'action';
+    }
+
+    private function actionParameter(Action $action): string
+    {
+        return $this->request->isViewScreen()
+            ? Crypt::encryptString(get_class($action))
+            : $action->name();
+    }
+
 }
