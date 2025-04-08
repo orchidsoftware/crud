@@ -195,4 +195,10 @@ class ResourceRequest extends FormRequest
 
         return $this->user()->can($abilities, $model);
     }
+
+    public function isViewScreen(): bool
+    {
+        return $this->route()->getName() === 'platform.resource.view';
+    }
+
 }
