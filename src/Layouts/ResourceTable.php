@@ -3,6 +3,10 @@
 namespace Orchid\Crud\Layouts;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use Orchid\Crud\Action;
+use Orchid\Screen\Action as ActionButton;
+use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
@@ -33,7 +37,8 @@ class ResourceTable extends Table
             }));
 
         if ($this->resource->canShowTableActions()) {
-            $grid->push(TD::make(__('Actions'))
+            $grid->push(
+                TD::make(__('Actions'), $this->getActionsTitle())
                 ->alignRight()
                 ->cantHide()
                 ->render(function (Model $model) {
@@ -41,7 +46,8 @@ class ResourceTable extends Table
                         ->set('align', 'justify-content-end align-items-center')
                         ->autoWidth()
                         ->render();
-                }));
+                }),
+            );
         }
 
         return $grid->toArray();
@@ -71,5 +77,39 @@ class ResourceTable extends Table
                     $model->getAttribute($model->getKeyName()),
                 ]),
         ]);
+    }
+
+    private function getActionsTitle(): ?DropDown
+    {
+        if ($this->availableActions()->isEmpty()) {
+            return null;
+        }
+
+        return DropDown::make('Actions')
+            ->icon('bs.three-dots-vertical')
+            ->list($this->availableActions()->toArray());
+    }
+
+    private function availableActions(): Collection
+    {
+        return $this->actions()
+            ->map(function (Action $action) {
+                return $action->button()
+                    ->method('action')
+                    ->parameters(array_merge(
+                        $action->button()->get('parameters', []),
+                        ['_action' => $action->name()]
+                    ));
+            })
+            ->filter(function (ActionButton $action) {
+                return $action->isSee();
+            });
+    }
+
+    private function actions(): Collection
+    {
+        return collect($this->resource->actions())->map(function ($action) {
+            return is_string($action) ? resolve($action) : $action;
+        });
     }
 }
