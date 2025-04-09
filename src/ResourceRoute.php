@@ -13,4 +13,9 @@ enum ResourceRoute: string
 
     case EDIT = 'platform.resource.edit';
 
+    public static  function is(ResourceRoute $route): bool
+    {
+        return request()->route()->getName() === $route->value;
+    }
+
 }
