@@ -117,17 +117,17 @@ class ResourceTable extends Table
 
     private function actionKey (): string
     {
-        return $this->request->isViewScreen() ? '_relation_models[]' : '_models[]';
+        return ResourceRoute::is(ResourceRoute::VIEW) ? '_relation_models[]' : '_models[]';
     }
 
     private function actionMethod(): string
     {
-        return $this->request->isViewScreen() ? 'relation' : 'action';
+        return ResourceRoute::is(ResourceRoute::VIEW) ? 'relation' : 'action';
     }
 
     private function actionParameter(Action $action): string
     {
-        return $this->request->isViewScreen()
+        return ResourceRoute::is(ResourceRoute::VIEW)
             ? Crypt::encryptString(get_class($action))
             : $action->name();
     }
