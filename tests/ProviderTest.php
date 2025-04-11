@@ -11,7 +11,7 @@ class ProviderTest extends TestCase
 {
     public function testRouteRegister(): void
     {
-        $this->assertTrue(Route::has('platform.resource.create'));
+        $this->assertTrue(Route::has(ResourceRoute::CREATE->name()));
         $this->assertTrue(Route::has('platform.resource.edit'));
         $this->assertTrue(Route::has(ResourceRoute::LIST->name()));
     }

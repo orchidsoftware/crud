@@ -55,7 +55,7 @@ class CrudPolicyTest extends TestCase
      */
     public function testCreateResource(): void
     {
-        $this->get(route('platform.resource.create', [
+        $this->get(route(ResourceRoute::CREATE->name(), [
             'resource' => PostResource::uriKey(),
         ]))->assertForbidden();
     }

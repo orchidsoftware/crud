@@ -45,7 +45,7 @@ class CrudTest extends TestCase
      */
     public function testCreateResource(): void
     {
-        $this->get(route('platform.resource.create', [
+        $this->get(route(ResourceRoute::CREATE->name(), [
             'resource' => PostResource::uriKey(),
         ]))
             ->assertSee(PostResource::createButtonLabel())
@@ -63,7 +63,7 @@ class CrudTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->post(route('platform.resource.create', [
+            ->post(route(ResourceRoute::CREATE->name(), [
                 'resource' => PostResource::uriKey(),
                 'method'   => 'save',
             ]), [
@@ -94,7 +94,7 @@ class CrudTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->post(route('platform.resource.create', [
+            ->post(route(ResourceRoute::CREATE->name(), [
                 'resource' => PostResource::uriKey(),
                 'method'   => 'save',
             ]), [
@@ -109,7 +109,7 @@ class CrudTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->post(route('platform.resource.create', [
+            ->post(route(ResourceRoute::CREATE->name(), [
                 'resource' => PostResource::uriKey(),
                 'method'   => 'save',
             ]), [

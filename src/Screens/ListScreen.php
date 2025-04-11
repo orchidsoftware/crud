@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Orchid\Crud\CrudScreen;
 use Orchid\Crud\Layouts\ResourceTable;
 use Orchid\Crud\Requests\IndexRequest;
+use Orchid\Crud\ResourceRoute;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\CheckBox;
@@ -38,7 +39,7 @@ class ListScreen extends CrudScreen
     {
         return [
             Link::make($this->resource::createButtonLabel())
-                ->route('platform.resource.create', $this->resource::uriKey())
+                ->route(ResourceRoute::CREATE->name(), $this->resource::uriKey())
                 ->canSee($this->can('create'))
                 ->icon('bs.plus-circle'),
         ];
