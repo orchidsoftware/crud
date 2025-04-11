@@ -203,7 +203,7 @@ abstract class CrudScreen extends Screen
 
         Toast::info($this->resource::updateToastMessage());
 
-        return redirect()->route('platform.resource.list', $request->resource);
+        return redirect()->route(ResourceRoute::LIST->name(), $request->resource);
     }
 
     /**
@@ -221,7 +221,7 @@ abstract class CrudScreen extends Screen
 
         Toast::info($this->resource::deleteToastMessage());
 
-        return redirect()->route('platform.resource.list', $request->resource);
+        return redirect()->route(ResourceRoute::LIST->name(), $request->resource);
     }
 
     /**
@@ -239,7 +239,7 @@ abstract class CrudScreen extends Screen
 
         Toast::info($this->resource::deleteToastMessage());
 
-        return redirect()->route('platform.resource.list', $request->resource);
+        return redirect()->route(ResourceRoute::LIST->name(), $request->resource);
     }
 
     /**
@@ -255,7 +255,7 @@ abstract class CrudScreen extends Screen
 
         Toast::info($this->resource::restoreToastMessage());
 
-        return redirect()->route('platform.resource.list', $request->resource);
+        return redirect()->route(ResourceRoute::LIST->name(), $request->resource);
     }
 
     /**

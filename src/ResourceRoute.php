@@ -2,20 +2,35 @@
 
 namespace Orchid\Crud;
 
-enum ResourceRoute: string
+enum ResourceRoute
 {
 
-    case LIST = 'platform.resource.list';
+    case LIST;
 
-    case CREATE = 'platform.resource.create';
+    case CREATE;
 
-    case VIEW = 'platform.resource.view';
+    case VIEW;
 
-    case EDIT = 'platform.resource.edit';
+    case EDIT;
+
+    /**
+     * Use for route('...')->name('') method.;
+     *
+     * @return string
+     */
+    public function name(): string
+    {
+        return match ($this) {
+            ResourceRoute::LIST => 'platform.resource.list',
+            ResourceRoute::CREATE => 'platform.resource.create',
+            ResourceRoute::VIEW => 'platform.resource.view',
+            ResourceRoute::EDIT => 'platform.resource.edit',
+        };
+    }
 
     public static  function is(ResourceRoute $route): bool
     {
-        return request()->route()->getName() === $route->value;
+        return request()->route()->getName() === $route->name();
     }
 
 }

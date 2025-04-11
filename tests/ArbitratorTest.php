@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Orchid\Crud\Arbitrator;
+use Orchid\Crud\ResourceRoute;
 use Orchid\Crud\Tests\Fixtures\PostResource;
 use Orchid\Crud\Tests\Fixtures\PrivateResource;
 use Orchid\Crud\Tests\FixturesBad\WithoutModel;
@@ -73,7 +74,7 @@ class ArbitratorTest extends TestCase
         $this->assertTrue($existName);
 
         $existUri = $menu->filter(function (Menu $menu) {
-            return $menu->get('href') === \route('platform.resource.list', [
+            return $menu->get('href') === \route(ResourceRoute::LIST->name(), [
                     'resource' => PostResource::uriKey(),
                 ]);
         })->isNotEmpty();

@@ -3,6 +3,7 @@
 namespace Orchid\Crud\Tests;
 
 use Illuminate\Support\Str;
+use Orchid\Crud\ResourceRoute;
 use Orchid\Crud\Tests\Fixtures\PostResource;
 use Orchid\Crud\Tests\Models\Post;
 
@@ -28,7 +29,7 @@ class CrudTest extends TestCase
      */
     public function testListResource(): void
     {
-        $this->get(route('platform.resource.list', [
+        $this->get(route(ResourceRoute::LIST->name(), [
             'resource' => PostResource::uriKey(),
         ]))
             ->assertSee(PostResource::singularLabel())

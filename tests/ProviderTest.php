@@ -5,6 +5,7 @@ namespace Orchid\Crud\Tests;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Orchid\Crud\ResourceRoute;
 
 class ProviderTest extends TestCase
 {
@@ -12,7 +13,7 @@ class ProviderTest extends TestCase
     {
         $this->assertTrue(Route::has('platform.resource.create'));
         $this->assertTrue(Route::has('platform.resource.edit'));
-        $this->assertTrue(Route::has('platform.resource.list'));
+        $this->assertTrue(Route::has(ResourceRoute::LIST->name()));
     }
 
     public function testArtisanMakeResource(): void

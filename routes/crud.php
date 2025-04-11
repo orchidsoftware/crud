@@ -9,6 +9,7 @@ use Orchid\Crud\Screens\ViewScreen;
 use Orchid\Crud\Screens\EditScreen;
 use Orchid\Crud\Screens\ListScreen;
 use Tabuna\Breadcrumbs\Trail;
+use Orchid\Crud\ResourceRoute;
 
 Route::screen('/crud/create/{resource?}', CreateScreen::class)
     ->name('resource.create')
@@ -16,7 +17,7 @@ Route::screen('/crud/create/{resource?}', CreateScreen::class)
         $resource = app(ResourceRequest::class)->resource();
 
         return $trail
-            ->parent('platform.resource.list')
+            ->parent(ResourceRoute::LIST->name())
             ->push($resource::createBreadcrumbsMessage());
     });
 
@@ -27,7 +28,7 @@ Route::screen('/crud/view/{resource?}/{id}/{relation?}', ViewScreen::class)
         $id = request()->route('id');
 
         return $trail
-            ->parent('platform.resource.list')
+            ->parent(ResourceRoute::LIST->name())
             ->push(request()->route('id'), \route('platform.resource.view', [$resource::uriKey(), $id]));
     });
 
@@ -47,5 +48,5 @@ Route::screen('/crud/list/{resource?}', ListScreen::class)
         $resource = app(ResourceRequest::class)->resource();
 
         return $trail->parent('platform.index')
-            ->push($resource::listBreadcrumbsMessage(), \route('platform.resource.list', [$resource::uriKey()]));
+            ->push($resource::listBreadcrumbsMessage(), \route(ResourceRoute::LIST->name(), [$resource::uriKey()]));
     });

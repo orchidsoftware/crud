@@ -135,7 +135,7 @@ class Arbitrator
 
             $menu = Menu::make($resource::label())
                 ->icon($resource::icon())
-                ->route('platform.resource.list', [$resource::uriKey()])
+                ->route(ResourceRoute::LIST->name(), [$resource::uriKey()])
                 ->active($this->activeMenu($resource))
                 ->permission($resource::permission())
                 ->sort($resource::sort());
@@ -182,10 +182,10 @@ class Arbitrator
     private function activeMenu(Resource $resource): array
     {
         return [
-            route('platform.resource.list', [
+            route(ResourceRoute::LIST->name(), [
                 'resource' => $resource::uriKey(),
             ]),
-            route('platform.resource.list', [
+            route(ResourceRoute::LIST->name(), [
                 'resource' => $resource::uriKey() . '?*',
             ]),
             route('platform.resource.create', [
