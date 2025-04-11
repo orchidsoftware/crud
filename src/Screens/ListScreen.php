@@ -93,7 +93,7 @@ class ListScreen extends CrudScreen
             Link::make(__('View'))
                 ->icon('bs.eye')
                 ->canSee($this->can('view', $model))
-                ->route('platform.resource.view', [
+                ->route(ResourceRoute::VIEW->name(), [
                     $this->resource::uriKey(),
                     $model->getAttribute($model->getKeyName()),
                 ]),

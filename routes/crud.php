@@ -29,7 +29,7 @@ Route::screen('/crud/view/{resource?}/{id}/{relation?}', ViewScreen::class)
 
         return $trail
             ->parent(ResourceRoute::LIST->name())
-            ->push(request()->route('id'), \route('platform.resource.view', [$resource::uriKey(), $id]));
+            ->push(request()->route('id'), \route(ResourceRoute::VIEW->name(), [$resource::uriKey(), $id]));
     });
 
 Route::screen('/crud/edit/{resource?}/{id}', EditScreen::class)
@@ -38,7 +38,7 @@ Route::screen('/crud/edit/{resource?}/{id}', EditScreen::class)
         $resource = app(ResourceRequest::class)->resource();
 
         return $trail
-            ->parent('platform.resource.view', [$name, $id])
+            ->parent(ResourceRoute::VIEW->name(), [$name, $id])
             ->push($resource::editBreadcrumbsMessage());
     });
 

@@ -191,11 +191,11 @@ class Arbitrator
             route(ResourceRoute::CREATE->name(), [
                 'resource' => $resource::uriKey(),
             ]),
-            route('platform.resource.view', [
+            route(ResourceRoute::VIEW->name(), [
                 'resource' => $resource::uriKey(),
                 'id'       => '*',
             ]),
-            route('platform.resource.edit', [
+            route(ResourceRoute::VIEW->name(), [
                 'resource' => $resource::uriKey(),
                 'id'       => '*',
             ]),

@@ -146,7 +146,7 @@ class CrudTest extends TestCase
     {
         $post = $this->posts->first();
 
-        $this->get(route('platform.resource.view', [
+        $this->get(route(ResourceRoute::VIEW->name(), [
             'resource' => PostResource::uriKey(),
             'id'       => $post,
         ]))

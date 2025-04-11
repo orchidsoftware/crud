@@ -198,7 +198,7 @@ class ResourceRequest extends FormRequest
 
     public function isViewScreen(): bool
     {
-        return $this->route()->getName() === 'platform.resource.view';
+        return $this->route()->getName() === ResourceRoute::VIEW->name();
     }
 
 }

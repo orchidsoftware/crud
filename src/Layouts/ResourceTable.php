@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Crypt;
 use Orchid\Crud\Action;
+use Orchid\Crud\ResourceRoute;
 use Orchid\Screen\Action as ActionButton;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -65,7 +66,7 @@ class ResourceTable extends Table
             Link::make(__('View'))
                 ->icon('bs.eye')
                 ->canSee($this->request->can('view', $model))
-                ->route('platform.resource.view', [
+                ->route(ResourceRoute::VIEW->name(), [
                     $this->resource::uriKey(),
                     $model->getAttribute($model->getKeyName()),
                 ]),
@@ -73,7 +74,7 @@ class ResourceTable extends Table
             Link::make(__('Edit'))
                 ->icon('bs.pencil')
                 ->canSee($this->request->can('update', $model))
-                ->route('platform.resource.edit', [
+                ->route(ResourceRoute::VIEW->name(), [
                     $this->resource::uriKey(),
                     $model->getAttribute($model->getKeyName()),
                 ]),
