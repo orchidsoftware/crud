@@ -9,6 +9,7 @@ use Orchid\Crud\Layouts\ResourceRelationsMenu;
 use Orchid\Crud\Layouts\ResourceTable;
 use Orchid\Crud\Requests\ViewRequest;
 use Orchid\Crud\Resource;
+use Orchid\Crud\ResourceRoute;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
@@ -61,7 +62,7 @@ class ViewScreen extends CrudScreen
             Link::make(__('Edit'))
                 ->icon('bs.pencil')
                 ->canSee($this->can('update'))
-                ->route('platform.resource.edit', [
+                ->route(ResourceRoute::EDIT->name(), [
                     $this->resource::uriKey(),
                     $this->model->getKey(),
                 ]),

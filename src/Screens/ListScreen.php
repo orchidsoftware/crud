@@ -101,7 +101,7 @@ class ListScreen extends CrudScreen
             Link::make(__('Edit'))
                 ->icon('bs.pencil')
                 ->canSee($this->can('update', $model))
-                ->route('platform.resource.edit', [
+                ->route(ResourceRoute::EDIT->name(), [
                     $this->resource::uriKey(),
                     $model->getAttribute($model->getKeyName()),
                 ]),

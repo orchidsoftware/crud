@@ -72,7 +72,7 @@ class CrudTest extends TestCase
             ->assertSee(PostResource::createToastMessage())
             ->assertOk();
 
-        $this->get(route('platform.resource.edit', [
+        $this->get(route(ResourceRoute::EDIT->name(), [
             'resource' => PostResource::uriKey(),
             'id'       => Post::orderBy('id', 'desc')->first(),
         ]))
@@ -127,7 +127,7 @@ class CrudTest extends TestCase
     {
         $post = $this->posts->first();
 
-        $this->get(route('platform.resource.edit', [
+        $this->get(route(ResourceRoute::EDIT->name(), [
             'resource' => PostResource::uriKey(),
             'id'       => $post,
         ]))
@@ -167,7 +167,7 @@ class CrudTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->post(route('platform.resource.edit', [
+            ->post(route(ResourceRoute::EDIT->name(), [
                 'resource' => PostResource::uriKey(),
                 'id'       => $post,
                 'method'   => 'update',
@@ -177,7 +177,7 @@ class CrudTest extends TestCase
             ->assertSee(PostResource::updateToastMessage())
             ->assertOk();
 
-        $this->get(route('platform.resource.edit', [
+        $this->get(route(ResourceRoute::EDIT->name(), [
             'resource' => PostResource::uriKey(),
             'id'       => $post,
         ]))
@@ -194,7 +194,7 @@ class CrudTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->post(route('platform.resource.edit', [
+            ->post(route(ResourceRoute::EDIT->name(), [
                 'resource' => PostResource::uriKey(),
                 'id'       => $post,
                 'method'   => 'delete',
@@ -202,7 +202,7 @@ class CrudTest extends TestCase
             ->assertSee(PostResource::deleteToastMessage())
             ->assertOk();
 
-        $this->get(route('platform.resource.edit', [
+        $this->get(route(ResourceRoute::EDIT->name(), [
             'resource' => PostResource::uriKey(),
             'id'       => $post,
         ]))
