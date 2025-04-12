@@ -34,9 +34,11 @@ class ActionRequest extends ResourceRequest
     {
         $models = collect();
 
-        if ($this->has('_models')) {
+        $modelsKey = $this->modelsKey();
+
+        if ($this->has($modelsKey)) {
             $models = $this->getModelQuery()->findMany(
-                $this->get('_models')
+                $this->get($modelsKey),
             );
         }
 
@@ -48,4 +50,15 @@ class ActionRequest extends ResourceRequest
 
         return $models;
     }
+
+    public function isRelationAction (): bool
+    {
+        return $this->has('_relation_models');
+    }
+
+    private function modelsKey(): string
+    {
+        return $this->isRelationAction() ? '_relation_models' : '_models';
+    }
+
 }

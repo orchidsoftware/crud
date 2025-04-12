@@ -4,6 +4,7 @@ namespace Orchid\Crud\Tests;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Orchid\Crud\ResourceRoute;
 use Orchid\Crud\Tests\Fixtures\PostResource;
 use Orchid\Crud\Tests\Models\Post;
 use Orchid\Crud\Tests\Policies\PostProtectedPolicy;
@@ -44,7 +45,7 @@ class CrudPolicyTest extends TestCase
      */
     public function testListResource(): void
     {
-        $this->get(route('platform.resource.list', [
+        $this->get(route(ResourceRoute::LIST->name(), [
             'resource' => PostResource::uriKey(),
         ]))->assertForbidden();
     }
@@ -54,7 +55,7 @@ class CrudPolicyTest extends TestCase
      */
     public function testCreateResource(): void
     {
-        $this->get(route('platform.resource.create', [
+        $this->get(route(ResourceRoute::CREATE->name(), [
             'resource' => PostResource::uriKey(),
         ]))->assertForbidden();
     }

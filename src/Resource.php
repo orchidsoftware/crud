@@ -304,6 +304,17 @@ abstract class Resource
     }
 
     /**
+     * Get the text when relationships cannot be passed to model actions.
+     *
+     * @return string
+     */
+    public static function relationshipsNotAllowedForAction(): string
+    {
+        return __('Relationships cannot be passed to actions on ":model"', ['model' => static::label()]);
+    }
+
+
+    /**
      * Get the validation rules that apply to save/update.
      *
      * @param Model $model

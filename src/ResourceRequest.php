@@ -195,4 +195,5 @@ class ResourceRequest extends FormRequest
 
         return $this->user()->can($abilities, $model);
     }
+
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Orchid\Crud\CrudScreen;
 use Orchid\Crud\Layouts\ResourceFields;
 use Orchid\Crud\Requests\CreateRequest;
+use Orchid\Crud\ResourceRoute;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Support\Facades\Toast;
@@ -65,6 +66,6 @@ class CreateScreen extends CrudScreen
 
         Toast::info($this->resource::createToastMessage());
 
-        return redirect()->route('platform.resource.list', $request->resource);
+        return redirect()->route(ResourceRoute::LIST->name(), $request->resource);
     }
 }

@@ -3,6 +3,7 @@
 namespace Orchid\Crud\Tests;
 
 use Illuminate\Support\Str;
+use Orchid\Crud\ResourceRoute;
 use Orchid\Crud\Tests\Fixtures\PostResource;
 use Orchid\Crud\Tests\Models\Post;
 
@@ -28,7 +29,7 @@ class CrudTest extends TestCase
      */
     public function testListResource(): void
     {
-        $this->get(route('platform.resource.list', [
+        $this->get(route(ResourceRoute::LIST->name(), [
             'resource' => PostResource::uriKey(),
         ]))
             ->assertSee(PostResource::singularLabel())
@@ -44,7 +45,7 @@ class CrudTest extends TestCase
      */
     public function testCreateResource(): void
     {
-        $this->get(route('platform.resource.create', [
+        $this->get(route(ResourceRoute::CREATE->name(), [
             'resource' => PostResource::uriKey(),
         ]))
             ->assertSee(PostResource::createButtonLabel())
@@ -62,7 +63,7 @@ class CrudTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->post(route('platform.resource.create', [
+            ->post(route(ResourceRoute::CREATE->name(), [
                 'resource' => PostResource::uriKey(),
                 'method'   => 'save',
             ]), [
@@ -71,7 +72,7 @@ class CrudTest extends TestCase
             ->assertSee(PostResource::createToastMessage())
             ->assertOk();
 
-        $this->get(route('platform.resource.edit', [
+        $this->get(route(ResourceRoute::EDIT->name(), [
             'resource' => PostResource::uriKey(),
             'id'       => Post::orderBy('id', 'desc')->first(),
         ]))
@@ -93,7 +94,7 @@ class CrudTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->post(route('platform.resource.create', [
+            ->post(route(ResourceRoute::CREATE->name(), [
                 'resource' => PostResource::uriKey(),
                 'method'   => 'save',
             ]), [
@@ -108,7 +109,7 @@ class CrudTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->post(route('platform.resource.create', [
+            ->post(route(ResourceRoute::CREATE->name(), [
                 'resource' => PostResource::uriKey(),
                 'method'   => 'save',
             ]), [
@@ -126,7 +127,7 @@ class CrudTest extends TestCase
     {
         $post = $this->posts->first();
 
-        $this->get(route('platform.resource.edit', [
+        $this->get(route(ResourceRoute::EDIT->name(), [
             'resource' => PostResource::uriKey(),
             'id'       => $post,
         ]))
@@ -145,7 +146,7 @@ class CrudTest extends TestCase
     {
         $post = $this->posts->first();
 
-        $this->get(route('platform.resource.view', [
+        $this->get(route(ResourceRoute::VIEW->name(), [
             'resource' => PostResource::uriKey(),
             'id'       => $post,
         ]))
@@ -166,7 +167,7 @@ class CrudTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->post(route('platform.resource.edit', [
+            ->post(route(ResourceRoute::EDIT->name(), [
                 'resource' => PostResource::uriKey(),
                 'id'       => $post,
                 'method'   => 'update',
@@ -176,7 +177,7 @@ class CrudTest extends TestCase
             ->assertSee(PostResource::updateToastMessage())
             ->assertOk();
 
-        $this->get(route('platform.resource.edit', [
+        $this->get(route(ResourceRoute::EDIT->name(), [
             'resource' => PostResource::uriKey(),
             'id'       => $post,
         ]))
@@ -193,7 +194,7 @@ class CrudTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->post(route('platform.resource.edit', [
+            ->post(route(ResourceRoute::EDIT->name(), [
                 'resource' => PostResource::uriKey(),
                 'id'       => $post,
                 'method'   => 'delete',
@@ -201,7 +202,7 @@ class CrudTest extends TestCase
             ->assertSee(PostResource::deleteToastMessage())
             ->assertOk();
 
-        $this->get(route('platform.resource.edit', [
+        $this->get(route(ResourceRoute::EDIT->name(), [
             'resource' => PostResource::uriKey(),
             'id'       => $post,
         ]))

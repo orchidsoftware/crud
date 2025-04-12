@@ -5,14 +5,15 @@ namespace Orchid\Crud\Tests;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Orchid\Crud\ResourceRoute;
 
 class ProviderTest extends TestCase
 {
     public function testRouteRegister(): void
     {
-        $this->assertTrue(Route::has('platform.resource.create'));
-        $this->assertTrue(Route::has('platform.resource.edit'));
-        $this->assertTrue(Route::has('platform.resource.list'));
+        $this->assertTrue(Route::has(ResourceRoute::CREATE->name()));
+        $this->assertTrue(Route::has(ResourceRoute::EDIT->name()));
+        $this->assertTrue(Route::has(ResourceRoute::LIST->name()));
     }
 
     public function testArtisanMakeResource(): void

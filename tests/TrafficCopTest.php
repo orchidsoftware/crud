@@ -2,6 +2,7 @@
 
 namespace Orchid\Crud\Tests;
 
+use Orchid\Crud\ResourceRoute;
 use Orchid\Crud\Tests\Fixtures\PostResource;
 use Orchid\Crud\Tests\Models\Post;
 
@@ -15,11 +16,11 @@ class TrafficCopTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->from(route('platform.resource.edit', [
+            ->from(route(ResourceRoute::EDIT->name(), [
                 'resource' => PostResource::uriKey(),
                 'id'       => $post,
             ]))
-            ->post(route('platform.resource.edit', [
+            ->post(route(ResourceRoute::EDIT->name(), [
                 'resource'      => PostResource::uriKey(),
                 'id'            => $post,
                 'method'        => 'update',
@@ -39,7 +40,7 @@ class TrafficCopTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->post(route('platform.resource.edit', [
+            ->post(route(ResourceRoute::EDIT->name(), [
                 'resource'      => PostResource::uriKey(),
                 'id'            => $post,
                 'method'        => 'update',

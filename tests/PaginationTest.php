@@ -2,6 +2,7 @@
 
 namespace Orchid\Crud\Tests;
 
+use Orchid\Crud\ResourceRoute;
 use Orchid\Crud\Tests\Fixtures\PaginationResource;
 use Orchid\Crud\Tests\Models\Post;
 
@@ -27,7 +28,7 @@ class PaginationTest extends TestCase
      */
     public function testListResource(): void
     {
-        $response = $this->get(route('platform.resource.list', [
+        $response = $this->get(route(ResourceRoute::LIST->name(), [
             'resource' => PaginationResource::uriKey(),
         ]));
 

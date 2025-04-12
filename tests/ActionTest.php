@@ -2,6 +2,7 @@
 
 namespace Orchid\Crud\Tests;
 
+use Orchid\Crud\ResourceRoute;
 use Orchid\Crud\Tests\Fixtures\CustomAction;
 use Orchid\Crud\Tests\Fixtures\PostActionResource;
 use Orchid\Crud\Tests\Fixtures\PostNoActionResource;
@@ -36,7 +37,7 @@ class ActionTest extends TestCase
 
     public function testShowActionOnListResource(): void
     {
-        $this->get(route('platform.resource.list', [
+        $this->get(route(ResourceRoute::LIST->name(), [
             'resource' => PostActionResource::uriKey(),
         ]))
             ->assertSee('Run Action')
@@ -46,7 +47,7 @@ class ActionTest extends TestCase
 
     public function testDontShowActionOnListResource(): void
     {
-        $this->get(route('platform.resource.list', [
+        $this->get(route(ResourceRoute::LIST->name(), [
             'resource' => PostNoActionResource::uriKey(),
         ]))
             ->assertDontSee('Run Action')
@@ -57,11 +58,11 @@ class ActionTest extends TestCase
     public function testRunActionWithEmptyResource():void
     {
         $this
-            ->from(route('platform.resource.list', [
+            ->from(route(ResourceRoute::LIST->name(), [
                 'resource' => PostActionResource::uriKey(),
             ]))
             ->followingRedirects()
-            ->post(route('platform.resource.list', [
+            ->post(route(ResourceRoute::LIST->name(), [
                 'resource'  => PostActionResource::uriKey(),
                 'method'    => 'action',
                 '_action'   => CustomAction::name(),
@@ -73,11 +74,11 @@ class ActionTest extends TestCase
     public function testRunActionWithResource():void
     {
         $this
-            ->from(route('platform.resource.list', [
+            ->from(route(ResourceRoute::LIST->name(), [
                 'resource' => PostActionResource::uriKey(),
             ]))
             ->followingRedirects()
-            ->post(route('platform.resource.list', [
+            ->post(route(ResourceRoute::LIST->name(), [
                 'resource' => PostActionResource::uriKey(),
                 'method'   => 'action',
                 '_action'  => CustomAction::name(),
@@ -89,7 +90,7 @@ class ActionTest extends TestCase
 
     public function testActionButtonPreservesParameters():void
     {
-        $this->get(route('platform.resource.list', [
+        $this->get(route(ResourceRoute::LIST->name(), [
             'resource' => PostActionResource::uriKey(),
         ]))
             ->assertSee('_action='.CustomAction::name())

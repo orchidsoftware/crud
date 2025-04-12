@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Crypt;
 use Orchid\Crud\Requests\ActionRequest;
 use Orchid\Crud\Requests\DeleteRequest;
 use Orchid\Crud\Requests\ForceDeleteRequest;
@@ -92,7 +93,7 @@ abstract class CrudScreen extends Screen
                     ->method('action')
                     ->parameters(array_merge(
                         $action->button()->get('parameters', []),
-                        ['_action' => $action->name()]
+                        ['_action' => $action->name()],
                     ));
             })
             ->filter(function (ActionButton $action) {
@@ -140,6 +141,12 @@ abstract class CrudScreen extends Screen
      */
     public function action(ActionRequest $request)
     {
+        if ($request->isRelationAction()) {
+            Toast::warning($request->resource()->relationshipsNotAllowedForAction());
+
+            return back();
+        }
+
         $models = $request->models();
 
         if ($models->isEmpty()) {
@@ -156,7 +163,33 @@ abstract class CrudScreen extends Screen
                 abort(405);
             })->first();
 
-        return $action->handle($request->models());
+        return $action->handle($models);
+    }
+
+    /**
+     * @param  ActionRequest  $request
+     * @return RedirectResponse
+     */
+    public function relation(ActionRequest $request)
+    {
+        if (!$request->isRelationAction()) {
+            Toast::warning($request->resource()->relationshipsNotAllowedForAction());
+
+            return back();
+        }
+
+        $models = $request->models();
+
+        if ($models->isEmpty()) {
+            Toast::warning($request->resource()->emptyResourceForAction());
+
+            return back();
+        }
+
+        /** @var Action $action */
+        $action = resolve(Crypt::decryptString($request->query('_action')));
+
+        return $action->handle($models);
     }
 
     /**
@@ -170,7 +203,7 @@ abstract class CrudScreen extends Screen
 
         Toast::info($this->resource::updateToastMessage());
 
-        return redirect()->route('platform.resource.list', $request->resource);
+        return redirect()->route(ResourceRoute::LIST->name(), $request->resource);
     }
 
     /**
@@ -183,12 +216,12 @@ abstract class CrudScreen extends Screen
     public function delete(DeleteRequest $request)
     {
         $request->resource()->delete(
-            $request->findModelOrFail()
+            $request->findModelOrFail(),
         );
 
         Toast::info($this->resource::deleteToastMessage());
 
-        return redirect()->route('platform.resource.list', $request->resource);
+        return redirect()->route(ResourceRoute::LIST->name(), $request->resource);
     }
 
     /**
@@ -201,12 +234,12 @@ abstract class CrudScreen extends Screen
     public function forceDelete(ForceDeleteRequest $request)
     {
         $request->resource()->forceDelete(
-            $request->findModelOrFail()
+            $request->findModelOrFail(),
         );
 
         Toast::info($this->resource::deleteToastMessage());
 
-        return redirect()->route('platform.resource.list', $request->resource);
+        return redirect()->route(ResourceRoute::LIST->name(), $request->resource);
     }
 
     /**
@@ -217,12 +250,12 @@ abstract class CrudScreen extends Screen
     public function restore(RestoreRequest $request)
     {
         $request->resource()->restore(
-            $request->findModelOrFail()
+            $request->findModelOrFail(),
         );
 
         Toast::info($this->resource::restoreToastMessage());
 
-        return redirect()->route('platform.resource.list', $request->resource);
+        return redirect()->route(ResourceRoute::LIST->name(), $request->resource);
     }
 
     /**

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Orchid\Crud\CrudScreen;
 use Orchid\Crud\Layouts\ResourceTable;
 use Orchid\Crud\Requests\IndexRequest;
+use Orchid\Crud\ResourceRoute;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\CheckBox;
@@ -37,9 +38,8 @@ class ListScreen extends CrudScreen
     public function commandBar(): array
     {
         return [
-            $this->actionsButtons(),
             Link::make($this->resource::createButtonLabel())
-                ->route('platform.resource.create', $this->resource::uriKey())
+                ->route(ResourceRoute::CREATE->name(), $this->resource::uriKey())
                 ->canSee($this->can('create'))
                 ->icon('bs.plus-circle'),
         ];
@@ -93,7 +93,7 @@ class ListScreen extends CrudScreen
             Link::make(__('View'))
                 ->icon('bs.eye')
                 ->canSee($this->can('view', $model))
-                ->route('platform.resource.view', [
+                ->route(ResourceRoute::VIEW->name(), [
                     $this->resource::uriKey(),
                     $model->getAttribute($model->getKeyName()),
                 ]),
@@ -101,7 +101,7 @@ class ListScreen extends CrudScreen
             Link::make(__('Edit'))
                 ->icon('bs.pencil')
                 ->canSee($this->can('update', $model))
-                ->route('platform.resource.edit', [
+                ->route(ResourceRoute::EDIT->name(), [
                     $this->resource::uriKey(),
                     $model->getAttribute($model->getKeyName()),
                 ]),

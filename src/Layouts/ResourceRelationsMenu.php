@@ -4,6 +4,7 @@ namespace Orchid\Crud\Layouts;
 
 use Illuminate\Support\Collection;
 use Orchid\Crud\Resource;
+use Orchid\Crud\ResourceRoute;
 use Orchid\Screen\Actions\Menu;
 use Orchid\Screen\Layouts\TabMenu;
 
@@ -50,7 +51,7 @@ class ResourceRelationsMenu extends TabMenu
     private function createMenuItem(Resource $resource, string $relation): Menu
     {
         return Menu::make($resource->label())
-            ->route('platform.resource.view', [
+            ->route(ResourceRoute::VIEW->name(), [
                 'resource' => $this->resource::uriKey(),
                 'id'       => $this->query->get('model')->getKey(),
                 'relation' => $relation,

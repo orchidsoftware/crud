@@ -2,6 +2,7 @@
 
 namespace Orchid\Crud\Tests;
 
+use Orchid\Crud\ResourceRoute;
 use Orchid\Crud\Tests\Fixtures\PostCustomErrorMessageResource;
 use Orchid\Crud\Tests\Models\Post;
 
@@ -15,10 +16,10 @@ class CustomMessageValidationTest extends TestCase
 
         $this
             ->followingRedirects()
-            ->from(route('platform.resource.create', [
+            ->from(route(ResourceRoute::CREATE->name(), [
                 'resource' => PostCustomErrorMessageResource::uriKey(),
             ]))
-            ->post(route('platform.resource.create', [
+            ->post(route(ResourceRoute::CREATE->name(), [
                 'resource' => PostCustomErrorMessageResource::uriKey(),
                 'method'   => 'save',
             ]), [
