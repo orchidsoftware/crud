@@ -313,7 +313,6 @@ abstract class Resource
         return __('Relationships cannot be passed to actions on ":model"', ['model' => static::label()]);
     }
 
-
     /**
      * Get the validation rules that apply to save/update.
      *

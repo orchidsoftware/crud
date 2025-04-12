@@ -115,7 +115,7 @@ class ResourceTable extends Table
         });
     }
 
-    private function actionKey (): string
+    private function actionKey(): string
     {
         return ResourceRoute::is(ResourceRoute::VIEW) ? '_relation_models[]' : '_models[]';
     }
@@ -131,5 +131,4 @@ class ResourceTable extends Table
             ? Crypt::encryptString(get_class($action))
             : $action->name();
     }
-
 }

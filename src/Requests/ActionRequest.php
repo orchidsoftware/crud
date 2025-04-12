@@ -51,7 +51,7 @@ class ActionRequest extends ResourceRequest
         return $models;
     }
 
-    public function isRelationAction (): bool
+    public function isRelationAction(): bool
     {
         return $this->has('_relation_models');
     }
@@ -60,5 +60,4 @@ class ActionRequest extends ResourceRequest
     {
         return $this->isRelationAction() ? '_relation_models' : '_models';
     }
-
 }

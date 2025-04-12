@@ -167,12 +167,13 @@ abstract class CrudScreen extends Screen
     }
 
     /**
-     * @param  ActionRequest  $request
+     * @param ActionRequest $request
+     *
      * @return RedirectResponse
      */
     public function relation(ActionRequest $request)
     {
-        if (!$request->isRelationAction()) {
+        if (! $request->isRelationAction()) {
             Toast::warning($request->resource()->relationshipsNotAllowedForAction());
 
             return back();
