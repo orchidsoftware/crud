@@ -15,6 +15,11 @@ class {{ class }} extends Resource
     public static $model = {{ namespacedModel }};
 
     /**
+     * If true it will redirect to the Crud View Resource page after saving the resource (create/update/restoring)
+     */
+    public static bool $redirectToViewAfterSaving = false;
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @return array

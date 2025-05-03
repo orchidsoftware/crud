@@ -1,13 +1,16 @@
 <?php
 
-
 namespace Orchid\Crud;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Orchid\Crud\Exceptions\BehaviourChangers\ErrorHandledMessage;
+use Orchid\Crud\Exceptions\BehaviourChangers\InfoMessageChanger;
+use Orchid\Crud\Exceptions\BehaviourChangers\RedirectTo;
 use Orchid\Crud\Requests\ActionRequest;
 use Orchid\Crud\Requests\DeleteRequest;
 use Orchid\Crud\Requests\ForceDeleteRequest;
@@ -45,6 +48,16 @@ abstract class CrudScreen extends Screen
     }
 
     /**
+     * The Resource Request instance.
+     *
+     * @return ResourceRequest
+     */
+    public function request(): ResourceRequest
+    {
+        return $this->request;
+    }
+
+    /**
      * The name of the screen to be displayed in the header.
      */
     public function name(): ?string
@@ -76,7 +89,7 @@ abstract class CrudScreen extends Screen
      *
      * @return bool
      */
-    protected function can(string $abilities, Model $model = null): bool
+    protected function can(string $abilities, ?Model $model = null): bool
     {
         return $this->request->can($abilities, $model);
     }
@@ -128,7 +141,7 @@ abstract class CrudScreen extends Screen
      */
     protected function actions(): Collection
     {
-        return collect($this->resource->actions())->map(function ($action) {
+        return collect($this->resource->actions($this))->map(function ($action) {
             return is_string($action) ? resolve($action) : $action;
         });
     }
@@ -160,17 +173,50 @@ abstract class CrudScreen extends Screen
     }
 
     /**
+     * Overrides the Screen handle method so it can catch ErrorHandledMessage and RedirectTo behaviour changers.
+     */
+    public function handle(Request $request, ...$arguments)
+    {
+        try {
+            return parent::handle($request, ...$arguments);
+        } catch (ErrorHandledMessage $e) {
+            Toast::error($e->getMessage());
+
+            return redirect()->back();
+        } catch (RedirectTo $e) {
+            if ($e->getToastMessage()) {
+                Toast::{$e->getToastLevel()}($e->getToastMessage());
+            }
+
+            return redirect($e->getRedirectUrl());
+        }
+    }
+
+    /**
      * @param UpdateRequest $request
      *
      * @return RedirectResponse
      */
     public function update(UpdateRequest $request)
     {
-        $request->resource()->save($request, $request->findModelOrFail());
+        $model = $request->findModelOrFail();
 
-        Toast::info($this->resource::updateToastMessage());
+        try {
+            $request->resource()->save($request, $model);
 
-        return redirect()->route('platform.resource.list', $request->resource);
+            Toast::info($this->resource::updateToastMessage());
+        } catch (InfoMessageChanger $e) {
+            Toast::info($e->getMessage());
+        }
+
+        if ($request->resource()::$redirectToViewAfterSaving) {
+            return redirect()->route('platform.resource.view', [
+                'resource' => $request->resource,
+                'id'       => $model->getKey(),
+            ]);
+        } else {
+            return redirect()->route('platform.resource.list', $request->resource);
+        }
     }
 
     /**
@@ -217,12 +263,19 @@ abstract class CrudScreen extends Screen
     public function restore(RestoreRequest $request)
     {
         $request->resource()->restore(
-            $request->findModelOrFail()
+            $model = $request->findModelOrFail()
         );
 
         Toast::info($this->resource::restoreToastMessage());
 
-        return redirect()->route('platform.resource.list', $request->resource);
+        if ($request->resource()::$redirectToViewAfterSaving) {
+            return redirect()->route('platform.resource.view', [
+                'resource' => $request->resource,
+                'id'       => $model->getKey(),
+            ]);
+        } else {
+            return redirect()->route('platform.resource.list', $request->resource);
+        }
     }
 
     /**
@@ -232,6 +285,10 @@ abstract class CrudScreen extends Screen
      */
     protected function isSoftDeleted(): bool
     {
-        return $this->resource::softDeletes() && $this->model->trashed();
+        if (property_exists($this, 'model')) {
+            return $this->resource::softDeletes() && ((object) $this)->model->trashed();
+        }
+
+        return false;
     }
 }

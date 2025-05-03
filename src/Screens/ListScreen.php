@@ -25,6 +25,11 @@ class ListScreen extends CrudScreen
     {
         return [
             'model' => $request->getModelPaginationList(),
+            ...(
+                method_exists($this->resource, 'customListQuery') ?
+                    $this->resource->customListQuery($request) :
+                    []
+            ),
         ];
     }
 
@@ -33,8 +38,12 @@ class ListScreen extends CrudScreen
      *
      * @return Action[]
      */
-    public function commandBar(): array
+    public function commandBar(bool $skipCustomCommandBar = false): array
     {
+        if (method_exists($this->resource, 'customListCommandBar') && ! $skipCustomCommandBar) {
+            return $this->resource->customListCommandBar($this);
+        }
+
         return [
             $this->actionsButtons(),
             Link::make($this->resource::createButtonLabel())
@@ -49,8 +58,16 @@ class ListScreen extends CrudScreen
      *
      * @return \Orchid\Screen\Layout[]
      */
-    public function layout(): array
+    public function layout(bool $skipCustomLayout = false): array
     {
+        /*
+        * We check if the `customListLayout` method exists,
+        * and allow you to recursively call this method passing the skipCustomLayout parameter.
+        */
+        if (method_exists($this->resource, 'customListLayout') && ! $skipCustomLayout) {
+            return $this->resource->customViewLayout($this);
+        }
+
         $grid = collect($this->resource->columns());
 
         $grid->prepend(TD::make()

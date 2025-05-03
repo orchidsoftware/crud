@@ -11,6 +11,29 @@ use Orchid\Screen\Field;
 use Orchid\Screen\Sight;
 use Orchid\Screen\TD;
 
+/**
+ * Resource is the basic representation of your model and custom logic for chosen screens.
+ *
+ * @method \Orchid\Screen\Layout[] customCreateLayout(\Orchid\Crud\Screens\CreateScreen $screen)                                               Overrides the default crud layout at the create screen. Use it when you only need to replace one part of the crud screens.
+ * @method \Orchid\Screen\Layout[] customEditLayout(\Orchid\Crud\Screens\EditScreen $screen)                                                   Overrides the default crud layout at the edit screen. Use it when you only need to replace one part of the crud screens.
+ * @method \Orchid\Screen\Layout[] customListLayout(\Orchid\Crud\Screens\ListScreen $screen)                                                   Overrides the default crud layout at the list screen. Use it when you only need to replace one part of the crud screens.
+ * @method \Orchid\Screen\Layout[] customViewLayout(\Orchid\Crud\Screens\ViewScreen $screen)                                                   Overrides the default crud layout at the view screen. Use it when you only need to replace one part of the crud screens.
+ * @method \Orchid\Screen\Action[] customCreateCommandBar(\Orchid\Crud\Screens\CreateScreen $screen)                                           Overrides the default command bar at the create screen
+ * @method \Orchid\Screen\Action[] customEditCommandBar(\Orchid\Crud\Screens\EditScreen $screen)                                               Overrides the default command bar at the edit screen
+ * @method \Orchid\Screen\Action[] customListCommandBar(\Orchid\Crud\Screens\ListScreen $screen)                                               Overrides the default command bar at the list screen
+ * @method \Orchid\Screen\Action[] customViewCommandBar(\Orchid\Crud\Screens\ViewScreen $screen)                                               Overrides the default command bar at the view screen
+ * @method array                   customViewQuery(\Orchid\Crud\Requests\ViewRequest $request, \Illuminate\Database\Eloquent\Model $model)     Use it to add extra data to the view screen. Acts like orchid Screen query method, merging the returned array to the CRUD query.
+ * @method array                   customListQuery(\Orchid\Crud\Requests\IndexRequest $request)                                                Use it to add extra data to the list screen. Acts like orchid Screen query method, merging the returned array to the CRUD query.
+ * @method array                   customCreateQuery(\Orchid\Crud\Requests\CreateRequest $request, \Illuminate\Database\Eloquent\Model $model) Use it to add extra data to the create screen. Acts like orchid Screen query method, merging the returned array to the CRUD query.
+ * @method array                   customEditQuery(\Orchid\Crud\Requests\UpdateRequest $request, \Illuminate\Database\Eloquent\Model $model)   Use it to add extra data to the edit screen. Acts like orchid Screen query method, merging the returned array to the CRUD query.
+ * @method string                  formRowTitle()                                                                                              Customize the form title at the Edit and Create screens
+ * @method \Orchid\Screen\Layout[] preFormLayout()                                                                                             Allows you to prepend extra form elements at the Edit and Create screens
+ * @method \Orchid\Screen\Layout[] postFormLayout()                                                                                            Allows you to append extra form elements at the Edit and Create screens
+ * @method void                    onSave(\Orchid\Crud\ResourceRequest $request, \Illuminate\Database\Eloquent\Model $model)
+ * @method void                    onDelete(\Illuminate\Database\Eloquent\Model $model)
+ * @method void                    onForceDelete(\Illuminate\Database\Eloquent\Model $model)
+ * @method void                    onRestore(\Illuminate\Database\Eloquent\Model $model)
+ */
 abstract class Resource
 {
     /**
@@ -19,6 +42,11 @@ abstract class Resource
      * @var string
      */
     public static $model = '';
+
+    /**
+     * If true it will redirect to the Crud View Resource page after saving the resource (create/update/restoring)
+     */
+    public static bool $redirectToViewAfterSaving = false;
 
     /**
      * Get the displayable label of the resource.

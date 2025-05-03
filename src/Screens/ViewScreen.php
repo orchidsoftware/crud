@@ -31,6 +31,11 @@ class ViewScreen extends CrudScreen
 
         return [
             ResourceFields::PREFIX => $this->model,
+            ...(
+                method_exists($this->resource, 'customViewQuery') ?
+                    $this->resource->customViewQuery($request, $this->model) :
+                    []
+            ),
         ];
     }
 
@@ -39,8 +44,12 @@ class ViewScreen extends CrudScreen
      *
      * @return Action[]
      */
-    public function commandBar(): array
+    public function commandBar(bool $skipCustomCommandBar = false): array
     {
+        if (method_exists($this->resource, 'customViewCommandBar') && ! $skipCustomCommandBar) {
+            return $this->resource->customViewCommandBar($this);
+        }
+
         return [
             $this->actionsButtons(),
 
@@ -80,8 +89,16 @@ class ViewScreen extends CrudScreen
      *
      * @return \Orchid\Screen\Layout[]
      */
-    public function layout(): array
+    public function layout(bool $skipCustomLayout = false): array
     {
+        /*
+        * We check if the `customCreateLayout` method exists,
+        * and allow you to recursively call this method passing the skipCustomLayout parameter.
+        */
+        if (method_exists($this->resource, 'customViewLayout') && ! $skipCustomLayout) {
+            return $this->resource->customViewLayout($this);
+        }
+
         return [
             Layout::legend(ResourceFields::PREFIX, $this->resource->legend()),
         ];

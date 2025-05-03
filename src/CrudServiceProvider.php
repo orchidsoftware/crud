@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Orchid\Crud\Commands\ActionCommand;
 use Orchid\Crud\Commands\ResourceCommand;
+use Orchid\Crud\Screens\CreateScreen;
+use Orchid\Crud\Screens\EditScreen;
+use Orchid\Crud\Screens\ListScreen;
+use Orchid\Crud\Screens\ViewScreen;
+use Orchid\Platform\Dashboard as PlatformDashboard;
 use Orchid\Platform\Providers\FoundationServiceProvider;
 use Orchid\Support\Facades\Dashboard;
 
@@ -35,6 +40,22 @@ class CrudServiceProvider extends ServiceProvider
      */
     public function boot(ResourceFinder $finder, Arbitrator $arbitrator): void
     {
+        PlatformDashboard::macro('getCrudScreenOperation', function (): string {
+            $currentScreen = Dashboard::getCurrentScreen();
+
+            if ($currentScreen) {
+                return match(true) {
+                    $currentScreen instanceof CreateScreen => 'create',
+                    $currentScreen instanceof EditScreen   => 'edit',
+                    $currentScreen instanceof ViewScreen   => 'view',
+                    $currentScreen instanceof ListScreen   => 'list',
+                    default                                => ''
+                };
+            } else {
+                return '';
+            }
+        });
+
         $resources = $finder
             ->setNamespace(app()->getNamespace() . 'Orchid\\Resources')
             ->find(app_path('Orchid/Resources'));

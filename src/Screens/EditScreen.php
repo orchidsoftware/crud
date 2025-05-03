@@ -29,6 +29,11 @@ class EditScreen extends CrudScreen
 
         return [
             ResourceFields::PREFIX => $this->model,
+            ...(
+                method_exists($this->resource, 'customEditQuery') ?
+                    $this->resource->customEditQuery($request, $this->model) :
+                    []
+            ),
         ];
     }
 
@@ -37,8 +42,12 @@ class EditScreen extends CrudScreen
      *
      * @return Action[]
      */
-    public function commandBar(): array
+    public function commandBar(bool $skipCustomCommandBar = false): array
     {
+        if (method_exists($this->resource, 'customEditCommandBar') && ! $skipCustomCommandBar) {
+            return $this->resource->customEditCommandBar($this);
+        }
+
         return [
             Button::make($this->resource::updateButtonLabel())
                 ->canSee($this->request->can('update'))
@@ -76,10 +85,37 @@ class EditScreen extends CrudScreen
      *
      * @return \Orchid\Screen\Layout[]
      */
-    public function layout(): array
+    public function layout(bool $skipCustomLayout = false): array
     {
-        return [
-            new ResourceFields($this->resource->fields()),
-        ];
+        /*
+        * We check if the `customEditLayout` method exists,
+        * and allow you to recursively call this method passing the skipCustomLayout parameter.
+        */
+        if (method_exists($this->resource, 'customEditLayout') && ! $skipCustomLayout) {
+            return $this->resource->customEditLayout($this);
+        }
+
+        $computedLayout = collect();
+        if (method_exists($this->resource, 'preFormLayout')) {
+            $computedLayout->merge(
+                $this->resource->preFormLayout($this)
+            );
+        }
+
+        $computedLayout->add(
+            (new ResourceFields($this->resource->fields()))
+                ->title(
+                    method_exists($this->resource, 'formRowTitle') ?
+                        $this->resource->formRowTitle($this) : null
+                )
+        );
+
+        if (method_exists($this->resource, 'postFormLayout')) {
+            $computedLayout->merge(
+                $this->resource->postFormLayout($this)
+            );
+        }
+
+        return $computedLayout->toArray();
     }
 }
