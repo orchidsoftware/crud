@@ -1,0 +1,14 @@
+{
+    "Create :resource": "Créer :resource",
+    "Update :resource": "Modifier :resource",
+    "Delete :resource": "Supprimer :resource",
+    "Save :resource": "Enregistrer :resource",
+    "You have successfully updated the :resource.": "Vous avez mis à jour :resource avec succès.",
+    "You have successfully saved the :resource.": "Vous avez enregistré :resource avec succès.",
+    "You have successfully deleted the :resource.": "Vous avez supprimé :resource avec succès.",
+    "An error has occurred": "Une erreur est survenue",
+    "Are you sure you want to delete this resource?": "Êtes-vous sûr de vouloir supprimer cette ressource ?",
+    "Are you sure you want to force delete this resource?": "Êtes-vous sûr de vouloir forcer la suppression de cette ressource ?",
+    "Since the :resource was edited, its values have changed. Refresh the page to see them or click \":button\" again to replace them.": "Depuis que :resource a été modifié, ses valeurs ont changé. Actualisez la page pour les voir ou cliquez à nouveau sur \":button\" pour les remplacer.",
+    "Resources": "Ressources"
+}

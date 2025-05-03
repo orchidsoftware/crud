@@ -1,0 +1,14 @@
+{
+    "Create :resource": "创建 :resource",
+    "Update :resource": "更新 :resource",
+    "Delete :resource": "删除 :resource",
+    "Save :resource": "保存 :resource",
+    "You have successfully updated the :resource.": "您已成功更新 :resource。",
+    "You have successfully saved the :resource.": "您已成功保存 :resource。",
+    "You have successfully deleted the :resource.": "您已成功删除 :resource。",
+    "An error has occurred": "发生错误",
+    "Are you sure you want to delete this resource?": "您确定要删除此资源吗？",
+    "Are you sure you want to force delete this resource?": "您确定要强制删除此资源吗？",
+    "Since the :resource was edited, its values have changed. Refresh the page to see them or click \":button\" again to replace them.": "自 :resource 被编辑以来，其值已更改。请刷新页面查看新值，或再次单击“:button”以替换它们。",
+    "Resources": "资源"
+}
