@@ -1,0 +1,14 @@
+{
+    "Create :resource": "สร้าง :resource",
+    "Update :resource": "แก้ไข :resource",
+    "Delete :resource": "ลบ :resource",
+    "Save :resource": "บันทึก :resource",
+    "You have successfully updated the :resource.": "คุณได้อัปเดต :resource เรียบร้อยแล้ว",
+    "You have successfully saved the :resource.": "คุณได้บันทึก :resource เรียบร้อยแล้ว",
+    "You have successfully deleted the :resource.": "คุณได้ลบ :resource เรียบร้อยแล้ว",
+    "An error has occurred": "เกิดข้อผิดพลาด",
+    "Are you sure you want to delete this resource?": "คุณแน่ใจหรือไม่ว่าต้องการลบรีซอร์สนี้?",
+    "Are you sure you want to force delete this resource?": "คุณแน่ใจหรือไม่ว่าต้องการบังคับลบรีซอร์สนี้?",
+    "Since the :resource was edited, its values have changed. Refresh the page to see them or click \":button\" again to replace them.": "ตั้งแต่คุณเปิด :resource เพื่อแก้ไข ค่าต่างๆ ได้เปลี่ยนไป รีเฟรชหน้าเพื่อดูค่าใหม่ หรือคลิก \":button\" อีกครั้งเพื่อแทนที่ค่าเหล่านั้น",
+    "Resources": "รีซอร์ส"
+}
