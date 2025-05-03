@@ -65,7 +65,7 @@ class ListScreen extends CrudScreen
         * and allow you to recursively call this method passing the skipCustomLayout parameter.
         */
         if (method_exists($this->resource, 'customListLayout') && ! $skipCustomLayout) {
-            return $this->resource->customViewLayout($this);
+            return $this->resource->customListLayout($this);
         }
 
         $grid = collect($this->resource->columns());

@@ -56,6 +56,28 @@ class CrudServiceProvider extends ServiceProvider
             }
         });
 
+        PlatformDashboard::macro('isCrudScreen', function (string $crudMethod, ?string $resourceName = null): bool {
+            return request()->routeIs('platform.resource.'.$crudMethod) && (
+                $resourceName ? request()->route('resource') === $resourceName : true
+            );
+        });
+
+        PlatformDashboard::macro('isCrudListScreen', function (?string $resourceName = null): bool {
+            return PlatformDashboard::isCrudScreen('list', $resourceName);
+        });
+
+        PlatformDashboard::macro('isCrudCreateScreen', function (?string $resourceName = null): bool {
+            return PlatformDashboard::isCrudScreen('create', $resourceName);
+        });
+
+        PlatformDashboard::macro('isCrudEditScreen', function (?string $resourceName = null): bool {
+            return PlatformDashboard::isCrudScreen('edit', $resourceName);
+        });
+
+        PlatformDashboard::macro('isCrudViewScreen', function (?string $resourceName = null): bool {
+            return PlatformDashboard::isCrudScreen('view', $resourceName);
+        });
+
         $resources = $finder
             ->setNamespace(app()->getNamespace() . 'Orchid\\Resources')
             ->find(app_path('Orchid/Resources'));
