@@ -76,7 +76,7 @@ abstract class CrudScreen extends Screen
      *
      * @return bool
      */
-    protected function can(string $abilities, Model $model = null): bool
+    protected function can(string $abilities, ?Model $model = null): bool
     {
         return $this->request->can($abilities, $model);
     }

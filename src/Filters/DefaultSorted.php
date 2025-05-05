@@ -34,7 +34,7 @@ class DefaultSorted extends Filter
      * @param string      $sortOrder
      * @param string|null $sortColumn
      */
-    public function __construct(string $sortColumn = null, string $sortOrder = 'asc')
+    public function __construct(?string $sortColumn = null, string $sortOrder = 'asc')
     {
         parent::__construct();
 
